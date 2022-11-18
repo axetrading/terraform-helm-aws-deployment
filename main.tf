@@ -19,7 +19,12 @@ resource "helm_release" "main" {
   values = [
     file("${path.module}/helm/axetrading-api/values.yaml")
   ]
-
+  
+  set {
+    name = "fullnameOverride"
+    value = var.name
+  }
+  
   dynamic "set" {
     for_each = local.helm_chart_values
     content {
