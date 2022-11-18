@@ -9,7 +9,7 @@ locals {
 
 resource "helm_release" "main" {
   name             = var.name
-  chart            = "./helm/axetrading-api"
+  chart            = "${path.module}/helm/axetrading-api"
   atomic           = var.atomic
   create_namespace = var.create_namespace
   namespace        = var.namespace
