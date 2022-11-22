@@ -27,12 +27,27 @@ spec:
       serviceAccountName: {{ include "axetrading-api.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.secretsStore.enabled }}
+      volumes:
+      - name: {{ include "axetrading-api.fullname" . }}-secrets-store
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: {{ include "axetrading-api.fullname" . }}-secrets
+      {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ include "axetrading-api.fullname" . }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.secretsStore.enabled }}
+          volumeMounts:
+            - name: {{ include "axetrading-api.fullname" . }}-secrets-store
+              mountPath: /mnt/secrets
+              readOnly: true
+          {{- end }}
           ports:
             - name: appport
               containerPort: {{ .Values.service.appport }}

@@ -48,13 +48,24 @@ resources: {}
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
+targetGroupBinding: 
+  enabled: true
+  port: 80
+  targetGroupARN: TARGET_GROUP_ARN_PLACEHOLDER
 
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 2
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+secretsStore:
+  enabled: true
+  provider: aws
+  awsSecrets: {}
+
+
 
 nodeSelector: {}
 
