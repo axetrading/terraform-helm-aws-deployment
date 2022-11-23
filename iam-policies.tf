@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "secrets" {
 }
 
 resource "aws_iam_policy" "secrets" {
-  count = var.create_role && var._secrets_policy ? 1 : 0
+  count = var.create_role && var.attach_secrets_policy ? 1 : 0
 
   name_prefix = "${var.policy_name_prefix}Secrets_Policy-"
   path        = var.role_path
