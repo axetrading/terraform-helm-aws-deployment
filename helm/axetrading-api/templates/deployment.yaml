@@ -45,7 +45,7 @@ spec:
           {{- if .Values.secretsStore.enabled }}
           volumeMounts:
             - name: {{ include "axetrading-api.fullname" . }}-secrets-store
-              mountPath: /mnt/secrets
+              mountPath: /mnt/secrets/
               readOnly: true
           {{- end }}
           ports:
