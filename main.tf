@@ -28,5 +28,14 @@ resource "helm_release" "main" {
     }
   }
 
+  dynamic "set" {
+    for_each = var.create_role ? [aws_iam_role.this[0].arn] : []
+    content {
+      name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+      value = set.value
+      type  = "string"
+    }
+
+  }
 }
  

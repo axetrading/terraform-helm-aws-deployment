@@ -52,4 +52,13 @@
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add the the IAM role | `map(any)` | `{}` | no |
 | <a name="input_timeout"></a> [timeout](#input\_timeout) | n/a | `any` | n/a | yes |
 | <a name="input_wait"></a> [wait](#input\_wait) | n/a | `any` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_helm_release_id"></a> [helm\_release\_id](#output\_helm\_release\_id) | n/a |
+| <a name="output_helm_release_name"></a> [helm\_release\_name](#output\_helm\_release\_name) | n/a |
+| <a name="output_helm_release_namespace"></a> [helm\_release\_namespace](#output\_helm\_release\_namespace) | n/a |
+| <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | ARN of IAM role |
 <!-- END_TF_DOCS -->
