@@ -65,7 +65,7 @@ variable "policy_name_prefix" {
 
 variable "role_policy_arns" {
   description = "ARNs of any policies to attach to the IAM role"
-  type        = list(string)
+  type        = set(string)
   default     = []
 }
 
