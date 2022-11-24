@@ -106,7 +106,7 @@ variable "attach_secrets_policy" {
 }
 
 variable "additional_value_files" {
-  type = list
+  type        = list(any)
   description = "A list of additional value files. It will work in the same way as helm -f value1.yaml -f value2.yaml"
-  default = []
+  default     = []
 }
