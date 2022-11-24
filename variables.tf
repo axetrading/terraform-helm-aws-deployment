@@ -104,3 +104,9 @@ variable "attach_secrets_policy" {
   description = "Attach a policy that will allow the role to get secrets from AWS Secrets Manager or AWS SSM"
   default     = false
 }
+
+variable "additional_value_files" {
+  type = list
+  description = "A list of additional value files. It will work in the same way as helm -f value1.yaml -f value2.yaml"
+  default = []
+}

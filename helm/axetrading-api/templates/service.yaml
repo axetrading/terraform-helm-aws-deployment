@@ -11,9 +11,5 @@ spec:
       targetPort: {{ .Values.service.appport }}
       protocol: TCP
       name: appport
-    - port: {{ .Values.service.adminport }}
-      targetPort: adminport
-      protocol: TCP
-      name: adminport
   selector:
     {{- include "axetrading-api.selectorLabels" . | nindent 4 }}

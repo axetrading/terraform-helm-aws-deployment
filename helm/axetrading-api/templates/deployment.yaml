@@ -52,20 +52,17 @@ spec:
             - name: appport
               containerPort: {{ .Values.service.appport }}
               protocol: TCP
-            - name: adminport
-              containerPort: {{ .Values.service.adminport }}
-              protocol: TCP
           livenessProbe:
             tcpSocket:
               port: {{ .Values.service.appport }}
-            initialDelaySeconds: 60
+            initialDelaySeconds: 30
             failureThreshold: 30
             periodSeconds: 1
           readinessProbe:
             httpGet:
-              path: "/actuator/health"
-              port: {{ .Values.service.adminport }}
-            initialDelaySeconds: 60
+              path: "/healthcheck"
+              port: {{ .Values.service.appport }}
+            initialDelaySeconds: 30
             periodSeconds: 1
             timeoutSeconds: 10
           resources:

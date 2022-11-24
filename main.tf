@@ -16,9 +16,7 @@ resource "helm_release" "main" {
   timeout          = var.timeout
   wait             = var.wait
 
-  values = [
-    file("${path.module}/helm/axetrading-api/values.yaml")
-  ]
+  values = var.additional_value_files
 
   dynamic "set" {
     for_each = local.helm_chart_values
