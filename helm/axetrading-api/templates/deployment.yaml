@@ -59,9 +59,15 @@ spec:
             failureThreshold: 3
             periodSeconds: 1
           readinessProbe:
+            {{- if .Values.readiness.httpCheck.enabled }}
             httpGet:
               path: "/healthcheck"
               port: {{ .Values.service.appport }}
+            {{- end }}
+            {{- if .Values.readiness.tpcCheck.enabled }}
+            tcpSocket:
+              port: {{ .Values.service.appport }}
+            {{- end }}
             initialDelaySeconds: 30
             periodSeconds: 1
             timeoutSeconds: 10

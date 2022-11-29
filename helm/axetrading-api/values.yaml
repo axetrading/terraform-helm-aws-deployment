@@ -59,7 +59,11 @@ secretsStore:
   provider: aws
   awsSecrets: {}
 
-
+readiness:
+  httpCheck:
+    enabled: false
+  tpcCheck:
+    enabled: true
 
 nodeSelector: {}
 
