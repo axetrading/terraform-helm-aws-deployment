@@ -80,8 +80,12 @@ readiness:
   %{~ if readinessCheckType == "http" ~}
   httpCheck:
     enabled: true
+  tpcCheck:
+    enabled: false
   %{~ endif ~}
   %{~ if readinessCheckType == "tcp" ~}
+  httpCheck:
+    enabled: false
   tpcCheck:
     enabled: true
   %{~ endif ~}
