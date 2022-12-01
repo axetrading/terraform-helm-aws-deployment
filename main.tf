@@ -17,7 +17,7 @@ resource "helm_release" "main" {
   wait             = var.wait
 
   values = [
-    templatefile("${path.module}/helm/axetrading-api/values.yaml.tpl", {
+    templatefile("${path.module}/helm/axetrading-api/values.yaml", {
       imageRepository         = var.image_repository
       imagePullPolicy         = var.image_pull_policy
       imageTag                = var.image_tag
