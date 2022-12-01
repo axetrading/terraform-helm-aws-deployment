@@ -1,16 +1,16 @@
 replicaCount: 1
 
 image:
-  repository: IMAGE_PLACEHOLDER
-  pullPolicy: Always
-  tag: ""
+  repository: ${imageRepository}
+  pullPolicy: ${imagePullPolicy}
+  tag: ${imageTag}
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: ${fullNameOverride}
 
 serviceAccount:
-  create: true
+  create: ${createServiceAccount}
   annotations: {}
   name: ""
 
@@ -20,19 +20,21 @@ podSecurityContext: {}
 
 securityContext: {}
 service:
-  type: NodePort
-  port: 80
-  appport: 80
+  type: ${serviceType}
+  port: ${servicePort}
+  appport: ${serviceAppPort}
 
 ingress:
-  enabled: false
+  enabled: ${ingressEnabled}
   className: ""
   annotations: {}
   hosts:
-    - host: HOST_PLACEHOLDER
+    %{~ if ingressEnabled ~}
+    - host: ${ingressHost}
       paths:
-        - path: /
-          pathType: Prefix
+        - path: ${ingressPath}
+          pathType: ${ingressPathType}
+    %{~ endif ~}
   tls: []
 
 resources: {}
@@ -42,28 +44,47 @@ resources: {}
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
-targetGroupBinding: 
+targetGroupBinding:
+  %{~ if targetGroupARN != null ~} 
   enabled: true
-  port: 80
-  targetGroupARN: TARGET_GROUP_ARN_PLACEHOLDER
+  port: ${targetGroupPort}
+  targetGroupARN: ${targetGroupARN}
+  %{~ endif ~}
+  %{~ if targetGroupARN == null ~}
+  enabled: false
+  %{~ endif ~}
 
 autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 2
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
+  enabled: ${autoscalingEnabled}
+  %{~ if autoscalingEnabled ~}
+  minReplicas: ${minReplicas}
+  maxReplicas: ${maxReplicas}
+  targetCPUUtilizationPercentage: ${targetCPUUtilization}
+  targetMemoryUtilizationPercentage: ${targetMemoryUtilization}
+  %{~ endif ~}
 
 secretsStore:
+  %{~ if awsSecrets != null ~}
   enabled: true
   provider: aws
-  awsSecrets: {}
+  awsSecrets:
+    %{~ for secret in awsSecrets ~}
+    - ${secret}
+    %{~ endfor ~}
+  %{~ endif ~}
+  %{~ if awsSecrets == null ~}
+  enabled: false
+  %{~ endif ~}
 
 readiness:
+  %{~ if readinessCheckType == "http" ~}
   httpCheck:
-    enabled: false
+    enabled: true
+  %{~ endif ~}
+  %{~ if readinessCheckType == "tcp" ~}
   tpcCheck:
     enabled: true
+  %{~ endif ~}
 
 nodeSelector: {}
 
