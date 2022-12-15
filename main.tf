@@ -33,6 +33,7 @@ resource "helm_release" "main" {
       targetGroupARN          = var.target_group_arn
       targetGroupPort         = var.target_group_port
       autoscalingEnabled      = var.autoscaling_enabled
+      replicaSetCount         = var.replica_set
       minReplicas             = var.min_replicas
       maxReplicas             = var.max_replicas
       targetCPUUtilization    = var.target_cpu_utilization

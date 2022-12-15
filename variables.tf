@@ -217,6 +217,12 @@ variable "max_replicas" {
   default     = 1
 }
 
+variable "replica_set" {
+  type        = number
+  description = "The number of replica set for the helm deployment"
+  default     = 1
+}
+
 variable "target_cpu_utilization" {
   type        = number
   description = "Target CPU utilization in percentage. "
