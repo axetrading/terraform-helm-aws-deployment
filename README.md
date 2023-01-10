@@ -15,6 +15,12 @@
 | <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.36 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | ~> 2.7.0 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_short-name"></a> [short-name](#module\_short-name) | axetrading/short-name/null | 1.0.0 |
+
 ## Resources
 
 | Name | Type |
