@@ -32,7 +32,7 @@ resource "aws_iam_role" "this" {
   count = var.create_role ? 1 : 0
 
   name        = var.role_name
-  name_prefix = var.role_name_prefix
+  name_prefix = module.short-name[0].result
   path        = var.role_path
   description = var.role_description
 
@@ -49,4 +49,12 @@ resource "aws_iam_role_policy_attachment" "this" {
 
   role       = aws_iam_role.this[0].name
   policy_arn = each.value
+}
+
+module "short-name" {
+  count = var.role_name_prefix != null ? 1 : 0 
+  source     = "axetrading/short-name/null"
+  version    = "1.0.0"
+  max_length = 38
+  value      = var.role_name_prefix
 }
