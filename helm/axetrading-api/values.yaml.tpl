@@ -37,13 +37,13 @@ ingress:
     %{~ endif ~}
   tls: []
 
-resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+resources: 
+   limits:
+     cpu: ${resources.limits.cpu}
+     memory: ${resources.limits.memory}
+   requests:
+     cpu: ${resources.requests.cpu}
+     memory: ${resources.requests.memory}
 targetGroupBinding:
   %{~ if targetGroupARN != null ~} 
   enabled: true
@@ -89,6 +89,14 @@ readiness:
   tpcCheck:
     enabled: true
   %{~ endif ~}
+
+logFetcher:
+  enabled: ${logFetcherEnabled}
+  image: ${logFetcherImage}
+  imagePullPolicy: IfNotPresent
+  logsPath: ${logFetcherLogsPath}
+
+
 
 nodeSelector: {}
 
