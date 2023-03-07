@@ -27,14 +27,18 @@ spec:
       serviceAccountName: {{ include "axetrading-api.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if .Values.secretsStore.enabled }}
       volumes:
+      {{- if .Values.secretsStore.enabled }}
       - name: {{ include "axetrading-api.fullname" . }}-secrets-store
         csi:
           driver: secrets-store.csi.k8s.io
           readOnly: true
           volumeAttributes:
             secretProviderClass: {{ include "axetrading-api.fullname" . }}-secrets
+      {{- end }}
+      {{- if .Values.logFetcher.enabled }}
+      - name: {{ include "axetrading-api.fullname" .}}-app-logs
+        emptyDir: {}
       {{- end }}
       containers:
         - name: {{ include "axetrading-api.fullname" . }}
@@ -44,10 +48,15 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.secretsStore.enabled }}
           volumeMounts:
+           {{- if .Values.secretsStore.enabled }}
             - name: {{ include "axetrading-api.fullname" . }}-secrets-store
               mountPath: /mnt/secrets/
               readOnly: true
-          {{- end }}
+           {{- end }}
+           {{- if .Values.logFetcher.enabled }}
+            - name: {{ include "axetrading-api.fullname" .}}-app-logs
+              mountPath: /mnt/logs/
+           {{- end }}
           ports:
             - name: appport
               containerPort: {{ .Values.service.appport }}
@@ -73,6 +82,26 @@ spec:
             timeoutSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        {{- if .Values.logFetcher.enabled }}
+        - name: {{ include "axetrading-api.fullname" . }}-log-fetcher
+          image: {{ .Values.logFetcher.image }}
+          imagePullPolicy: {{ .Values.logFetcher.imagePullPolicy }}
+          env:
+            - name: LOGS_PATH
+              value: {{ .Values.logFetcher.logsPath }}
+          resources:
+            limits:
+              cpu: 100m
+              memory: "64Mi"
+            request:
+              cpu: 100m
+              memory: "32Mi"
+            volumeMounts:
+             {{- if .Values.logFetcher.enabled }}
+              - name: {{ include "axetrading-api.fullname" .}}-app-logs
+                mountPath: {{ .Values.logFetcher.logsPath }}
+             {{- end }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

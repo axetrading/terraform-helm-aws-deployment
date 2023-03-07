@@ -1,31 +1,38 @@
 variable "atomic" {
   type        = bool
-  description = "If set, installation process purges chart on fail. The wait flag will be set automatically if atomic is used."
+  description = "If set, the installation process purges the chart on failure. The wait flag will be set automatically if atomic is used."
   default     = false
 }
+
 variable "create_namespace" {
   type        = bool
-  description = "Create the namespace if it does not yet exist."
+  description = "If set, Terraform will create the namespace if it does not yet exist."
   default     = false
 }
+
 variable "name" {
   type        = string
-  description = "Name of the helm deployment"
+  description = "The name of the Helm deployment."
 }
+
 variable "namespace" {
   type        = string
   description = "The namespace to install the release into."
   default     = "default"
 }
+
 variable "timeout" {
-  default     = 150
   type        = number
-  description = "Time that terraform is waiting for a helm release to create resources"
+  description = "The time, in seconds, that Terraform will wait for a Helm release to create resources."
+  default     = 150
 }
+
 variable "wait" {
-  type    = bool
-  default = true
+  type        = bool
+  description = "If set, Terraform will wait for the Helm release to complete before continuing."
+  default     = true
 }
+
 
 variable "create_role" {
   description = "Whether to create a role"
@@ -246,3 +253,46 @@ variable "health_check_type" {
   description = "Readiness Probe health check type : Valid values: http or tcp"
   default     = "http"
 }
+
+variable "log_fetcher_enabled" {
+  type        = bool
+  description = "Wheter to enable the log-fetcher sidecar container or not"
+  default     = false
+}
+
+variable "log_fetcher_image" {
+  type        = string
+  description = "The container image for the log-fetcher sidecar container."
+  default     = ""
+}
+
+variable "log_fetcher_logs_path" {
+  type        = string
+  description = "The path on the host where the logs will be stored, to be mounted as a volume for the log-fetcher container."
+  default     = ""
+}
+
+variable "resources" {
+  type = object({
+    limits = object({
+      cpu    = string
+      memory = string
+    })
+    requests = object({
+      cpu    = string
+      memory = string
+    })
+  })
+  default = {
+    limits = {
+      cpu = "500m"
+      memory = "512Mi"
+    }
+    requests = {
+      cpu = "125m"
+      memory = "128Mi"
+    }
+  }
+  description = "A map of resource requests and limits for the main app container, with keys 'limits' and 'requests' each containing keys 'cpu' and 'memory'"
+}
+
