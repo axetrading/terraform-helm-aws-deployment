@@ -46,7 +46,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.secretsStore.enabled }}
           volumeMounts:
            {{- if .Values.secretsStore.enabled }}
             - name: {{ include "axetrading-api.fullname" . }}-secrets-store
