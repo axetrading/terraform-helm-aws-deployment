@@ -95,11 +95,9 @@ spec:
             request:
               cpu: 100m
               memory: "32Mi"
-            volumeMounts:
-             {{- if .Values.logFetcher.enabled }}
-              - name: {{ include "axetrading-api.fullname" .}}-app-logs
-                mountPath: {{ .Values.logFetcher.logsPath }}
-             {{- end }}
+          volumeMounts:
+            - name: {{ include "axetrading-api.fullname" .}}-app-logs
+              mountPath: {{ .Values.logFetcher.logsPath }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
