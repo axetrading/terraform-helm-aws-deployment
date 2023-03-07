@@ -54,7 +54,7 @@ spec:
            {{- end }}
            {{- if .Values.logFetcher.enabled }}
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
-              mountPath: /mnt/logs/
+              mountPath: {{ .Values.logFetcher.logsPath }}
            {{- end }}
           ports:
             - name: appport
