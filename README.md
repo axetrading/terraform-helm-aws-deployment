@@ -12,8 +12,8 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.36 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | ~> 2.7.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.57.1 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.7.1 |
 
 ## Modules
 
@@ -39,10 +39,10 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_value_files"></a> [additional\_value\_files](#input\_additional\_value\_files) | A list of additional value files. It will work in the same way as helm -f value1.yaml -f value2.yaml | `list(any)` | `[]` | no |
 | <a name="input_assume_role_condition_test"></a> [assume\_role\_condition\_test](#input\_assume\_role\_condition\_test) | Name of the [IAM condition operator](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) to evaluate when assuming the role | `string` | `"StringEquals"` | no |
-| <a name="input_atomic"></a> [atomic](#input\_atomic) | If set, installation process purges chart on fail. The wait flag will be set automatically if atomic is used. | `bool` | `false` | no |
+| <a name="input_atomic"></a> [atomic](#input\_atomic) | If set, the installation process purges the chart on failure. The wait flag will be set automatically if atomic is used. | `bool` | `false` | no |
 | <a name="input_attach_secrets_policy"></a> [attach\_secrets\_policy](#input\_attach\_secrets\_policy) | Attach a policy that will allow the role to get secrets from AWS Secrets Manager or AWS SSM | `bool` | `true` | no |
 | <a name="input_autoscaling_enabled"></a> [autoscaling\_enabled](#input\_autoscaling\_enabled) | When this is set to true, the deployment will include the horizontalPodAutoscaler resource. | `bool` | `false` | no |
-| <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | Create the namespace if it does not yet exist. | `bool` | `false` | no |
+| <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | If set, Terraform will create the namespace if it does not yet exist. | `bool` | `false` | no |
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role | `bool` | `true` | no |
 | <a name="input_create_service_account"></a> [create\_service\_account](#input\_create\_service\_account) | Whether to create a service account for Kubernetes Deployment | `bool` | `true` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `true` | no |
@@ -54,14 +54,18 @@
 | <a name="input_ingress_host"></a> [ingress\_host](#input\_ingress\_host) | Kubernetes Ingress Host | `string` | `null` | no |
 | <a name="input_ingress_path"></a> [ingress\_path](#input\_ingress\_path) | Kubernetes Ingress Path | `string` | `"/"` | no |
 | <a name="input_ingress_path_type"></a> [ingress\_path\_type](#input\_ingress\_path\_type) | Each path in an Ingress is required to have a corresponding path type. Paths that do not include an explicit pathType will fail validation | `string` | `"Prefix"` | no |
+| <a name="input_log_fetcher_enabled"></a> [log\_fetcher\_enabled](#input\_log\_fetcher\_enabled) | Wheter to enable the log-fetcher sidecar container or not | `bool` | `false` | no |
+| <a name="input_log_fetcher_image"></a> [log\_fetcher\_image](#input\_log\_fetcher\_image) | The container image for the log-fetcher sidecar container. | `string` | `""` | no |
+| <a name="input_log_fetcher_logs_path"></a> [log\_fetcher\_logs\_path](#input\_log\_fetcher\_logs\_path) | The path on the host where the logs will be stored, to be mounted as a volume for the log-fetcher container. | `string` | `""` | no |
 | <a name="input_max_replicas"></a> [max\_replicas](#input\_max\_replicas) | The maximum number of replicas that will be used by the HPA resource | `number` | `1` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `null` | no |
 | <a name="input_min_replicas"></a> [min\_replicas](#input\_min\_replicas) | The minimim number of replicas that will be used by the HPA resource | `number` | `1` | no |
-| <a name="input_name"></a> [name](#input\_name) | Name of the helm deployment | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the Helm deployment. | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to install the release into. | `string` | `"default"` | no |
 | <a name="input_oidc_providers"></a> [oidc\_providers](#input\_oidc\_providers) | Map of OIDC providers where each provider map should contain the `provider`, `provider_arn`, and `namespace_service_accounts` | `any` | `{}` | no |
 | <a name="input_policy_name_prefix"></a> [policy\_name\_prefix](#input\_policy\_name\_prefix) | IAM policy name prefix | `string` | `"eks-policy"` | no |
 | <a name="input_replica_set"></a> [replica\_set](#input\_replica\_set) | The number of replica set for the helm deployment | `number` | `1` | no |
+| <a name="input_resources"></a> [resources](#input\_resources) | A map of resource requests and limits for the main app container, with keys 'limits' and 'requests' each containing keys 'cpu' and 'memory' | <pre>object({<br>    limits = object({<br>      cpu    = string<br>      memory = string<br>    })<br>    requests = object({<br>      cpu    = string<br>      memory = string<br>    })<br>  })</pre> | <pre>{<br>  "limits": {<br>    "cpu": "500m",<br>    "memory": "512Mi"<br>  },<br>  "requests": {<br>    "cpu": "125m",<br>    "memory": "128Mi"<br>  }<br>}</pre> | no |
 | <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | Existing role ARN | `string` | `null` | no |
 | <a name="input_role_description"></a> [role\_description](#input\_role\_description) | IAM Role description | `string` | `null` | no |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | Name of IAM role | `string` | `null` | no |
@@ -78,8 +82,8 @@
 | <a name="input_target_group_arn"></a> [target\_group\_arn](#input\_target\_group\_arn) | The ARN of the target group with which to register targets - this is used by the targetGroupBinding CRD | `string` | `null` | no |
 | <a name="input_target_group_port"></a> [target\_group\_port](#input\_target\_group\_port) | AWS Target Group port | `number` | `80` | no |
 | <a name="input_target_memory_utilization"></a> [target\_memory\_utilization](#input\_target\_memory\_utilization) | Target Memory utilization in percentage | `number` | `80` | no |
-| <a name="input_timeout"></a> [timeout](#input\_timeout) | Time that terraform is waiting for a helm release to create resources | `number` | `150` | no |
-| <a name="input_wait"></a> [wait](#input\_wait) | n/a | `bool` | `true` | no |
+| <a name="input_timeout"></a> [timeout](#input\_timeout) | The time, in seconds, that Terraform will wait for a Helm release to create resources. | `number` | `150` | no |
+| <a name="input_wait"></a> [wait](#input\_wait) | If set, Terraform will wait for the Helm release to complete before continuing. | `bool` | `true` | no |
 
 ## Outputs
 
