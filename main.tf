@@ -1,12 +1,3 @@
-locals {
-  #helm_chart_values = flatten([
-  #  for k, v in var.helm_chart_values : {
-  #    name  = k
-  #    value = v
-  #  }
-  #])
-}
-
 resource "helm_release" "main" {
   name             = var.name
   chart            = "${path.module}/helm/axetrading-api"

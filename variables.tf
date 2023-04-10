@@ -274,25 +274,17 @@ variable "log_fetcher_logs_path" {
 
 variable "resources" {
   type = object({
-    limits = object({
-      cpu    = string
-      memory = string
-    })
-    requests = object({
-      cpu    = string
-      memory = string
-    })
+    memory = string
+    cpu = string
   })
   default = {
-    limits = {
-      cpu    = "500m"
-      memory = "512Mi"
-    }
-    requests = {
-      cpu    = "125m"
-      memory = "128Mi"
-    }
+    cpu = "250m"
+    memory = "512Mi"
   }
-  description = "A map of resource requests and limits for the main app container, with keys 'limits' and 'requests' each containing keys 'cpu' and 'memory'"
+  description = <<EOT
+  "A map of resource for the main app container, containing keys 'cpu' and 'memory'. 
+  This is following the Kubernetes resource best practices, which states that no limits for the CPU should be set and the memory limit should always be equal with memory request.
+  In this way, we can prevent OOMKill (talk with the devs about cpu/memory requirements)."
+  EOT
 }
 

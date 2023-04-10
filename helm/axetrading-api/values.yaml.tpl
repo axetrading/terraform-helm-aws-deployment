@@ -39,11 +39,10 @@ ingress:
 
 resources: 
    limits:
-     cpu: ${resources.limits.cpu}
-     memory: ${resources.limits.memory}
+     memory: ${resources.memory}
    requests:
-     cpu: ${resources.requests.cpu}
-     memory: ${resources.requests.memory}
+     cpu: ${resources.cpu}
+     memory: ${resources.memory}
 targetGroupBinding:
   %{~ if targetGroupARN != null ~} 
   enabled: true
