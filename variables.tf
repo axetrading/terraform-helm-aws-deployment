@@ -275,10 +275,10 @@ variable "log_fetcher_logs_path" {
 variable "resources" {
   type = object({
     memory = string
-    cpu = string
+    cpu    = string
   })
   default = {
-    cpu = "250m"
+    cpu    = "250m"
     memory = "512Mi"
   }
   description = <<EOT
