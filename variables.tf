@@ -206,12 +206,6 @@ variable "target_group_port" {
   default     = 80
 }
 
-variable "autoscaling_enabled" {
-  type        = bool
-  description = "When this is set to true, the deployment will include the horizontalPodAutoscaler resource."
-  default     = false
-}
-
 variable "min_replicas" {
   type        = number
   description = "The minimim number of replicas that will be used by the HPA resource"
@@ -285,6 +279,20 @@ variable "resources" {
   "A map of resource for the main app container, containing keys 'cpu' and 'memory'. 
   This is following the Kubernetes resource best practices, which states that no limits for the CPU should be set and the memory limit should always be equal with memory request.
   In this way, we can prevent OOMKill (talk with the devs about cpu/memory requirements)."
+  EOT
+}
+
+variable "autoscaling" {
+  type = object({
+    min_replicas              = number
+    max_replicas              = number
+    target_cpu_utilization    = number
+    target_memory_utilization = number
+  })
+  default     = null
+  description = <<EOT
+  "A map of autoscaling configuration, containing keys 'min_replicas', 
+  'max_replicas', 'target_cpu_utilization' and 'target_memory_utilization'.
   EOT
 }
 

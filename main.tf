@@ -11,7 +11,7 @@ resource "helm_release" "main" {
     templatefile("${path.module}/helm/axetrading-api/values.yaml.tpl", {
       imageRepository         = var.image_repository
       imagePullPolicy         = var.image_pull_policy
-      autoscalingEnabled      = var.autoscaling_enabled
+      autoscaling             = var.autoscaling
       awsSecrets              = var.secrets
       createServiceAccount    = var.create_service_account
       fullNameOverride        = var.name

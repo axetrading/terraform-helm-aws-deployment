@@ -54,12 +54,15 @@ targetGroupBinding:
   %{~ endif ~}
 
 autoscaling:
-  enabled: ${autoscalingEnabled}
-  %{~ if autoscalingEnabled ~}
-  minReplicas: ${minReplicas}
-  maxReplicas: ${maxReplicas}
-  targetCPUUtilizationPercentage: ${targetCPUUtilization}
-  targetMemoryUtilizationPercentage: ${targetMemoryUtilization}
+  %{~ if autoscaling != null ~}
+  enabled: true
+  minReplicas: ${autoscaling.minReplicas}
+  maxReplicas: ${autoscaling.maxReplicas}
+  targetCPUUtilizationPercentage: ${autoscaling.targetCPUUtilization}
+  targetMemoryUtilizationPercentage: ${autoscaling.targetMemoryUtilization}
+  %{~ endif ~}
+  %{~ if autoscaling == null ~}
+  enabled: false
   %{~ endif ~}
 
 secretsStore:
