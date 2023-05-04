@@ -23,8 +23,6 @@ resource "helm_release" "main" {
       logFetcherEnabled       = var.log_fetcher_enabled
       logFetcherImage         = var.log_fetcher_enabled ? var.log_fetcher_image : ""
       logFetcherLogsPath      = var.log_fetcher_enabled ? var.log_fetcher_logs_path : ""
-      maxReplicas             = var.max_replicas
-      minReplicas             = var.min_replicas
       readinessCheckType      = var.health_check_type
       replicaSetCount         = var.replica_set
       resources               = var.resources

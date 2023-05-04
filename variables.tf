@@ -206,18 +206,6 @@ variable "target_group_port" {
   default     = 80
 }
 
-variable "min_replicas" {
-  type        = number
-  description = "The minimim number of replicas that will be used by the HPA resource"
-  default     = 1
-}
-
-variable "max_replicas" {
-  type        = number
-  description = "The maximum number of replicas that will be used by the HPA resource"
-  default     = 1
-}
-
 variable "replica_set" {
   type        = number
   description = "The number of replica set for the helm deployment"
@@ -286,8 +274,8 @@ variable "autoscaling" {
   type = object({
     min_replicas              = number
     max_replicas              = number
-    target_cpu_utilization    = number
-    target_memory_utilization = number
+    target_cpu_utilization    = optional(number, 75)
+    target_memory_utilization = optional(number, 75)
   })
   default     = null
   description = <<EOT

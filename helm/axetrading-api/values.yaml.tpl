@@ -56,10 +56,10 @@ targetGroupBinding:
 autoscaling:
   %{~ if autoscaling != null ~}
   enabled: true
-  minReplicas: ${autoscaling.minReplicas}
-  maxReplicas: ${autoscaling.maxReplicas}
-  targetCPUUtilizationPercentage: ${autoscaling.targetCPUUtilization}
-  targetMemoryUtilizationPercentage: ${autoscaling.targetMemoryUtilization}
+  minReplicas: ${autoscaling.min_replicas}
+  maxReplicas: ${autoscaling.max_replicas}
+  targetCPUUtilizationPercentage: ${autoscaling.target_cpu_utilization}
+  targetMemoryUtilizationPercentage: ${autoscaling.target_memory_utilization}
   %{~ endif ~}
   %{~ if autoscaling == null ~}
   enabled: false
