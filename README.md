@@ -54,6 +54,7 @@
 | <a name="input_ingress_host"></a> [ingress\_host](#input\_ingress\_host) | Kubernetes Ingress Host | `string` | `null` | no |
 | <a name="input_ingress_path"></a> [ingress\_path](#input\_ingress\_path) | Kubernetes Ingress Path | `string` | `"/"` | no |
 | <a name="input_ingress_path_type"></a> [ingress\_path\_type](#input\_ingress\_path\_type) | Each path in an Ingress is required to have a corresponding path type. Paths that do not include an explicit pathType will fail validation | `string` | `"Prefix"` | no |
+| <a name="input_initial_delay_seconds"></a> [initial\_delay\_seconds](#input\_initial\_delay\_seconds) | Number of seconds after the container has started before liveness probes are initiated. | `number` | `30` | no |
 | <a name="input_log_fetcher_enabled"></a> [log\_fetcher\_enabled](#input\_log\_fetcher\_enabled) | Wheter to enable the log-fetcher sidecar container or not | `bool` | `false` | no |
 | <a name="input_log_fetcher_image"></a> [log\_fetcher\_image](#input\_log\_fetcher\_image) | The container image for the log-fetcher sidecar container. | `string` | `""` | no |
 | <a name="input_log_fetcher_logs_path"></a> [log\_fetcher\_logs\_path](#input\_log\_fetcher\_logs\_path) | The path on the host where the logs will be stored, to be mounted as a volume for the log-fetcher container. | `string` | `""` | no |
