@@ -284,7 +284,7 @@ variable "autoscaling" {
   EOT
 }
 
-variable "initial_delay_seconds" {
+variable "health_check_initial_delay_seconds" {
   type        = number
   description = "Number of seconds after the container has started before liveness probes are initiated."
   default     = 30
