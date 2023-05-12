@@ -20,6 +20,7 @@ resource "helm_release" "main" {
       ingressHost             = var.ingress_host
       ingressPath             = var.ingress_path
       ingressPathType         = var.ingress_path_type
+      initialDelaySeconds     = var.health_check_initial_delay_seconds
       logFetcherEnabled       = var.log_fetcher_enabled
       logFetcherImage         = var.log_fetcher_enabled ? var.log_fetcher_image : ""
       logFetcherLogsPath      = var.log_fetcher_enabled ? var.log_fetcher_logs_path : ""

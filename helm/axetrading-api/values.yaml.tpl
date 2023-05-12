@@ -37,6 +37,8 @@ ingress:
     %{~ endif ~}
   tls: []
 
+initialDelaySeconds: ${initialDelaySeconds}
+
 resources: 
    limits:
      memory: ${resources.memory}

@@ -63,7 +63,7 @@ spec:
           livenessProbe:
             tcpSocket:
               port: {{ .Values.service.appport }}
-            initialDelaySeconds: 30
+            initialDelaySeconds: {{ .Values.initialDelaySeconds}}
             failureThreshold: 3
             periodSeconds: 1
           readinessProbe:
@@ -76,7 +76,7 @@ spec:
             tcpSocket:
               port: {{ .Values.service.appport }}
             {{- end }}
-            initialDelaySeconds: 30
+            initialDelaySeconds: {{ .Values.initialDelaySeconds }}
             periodSeconds: 1
             timeoutSeconds: 10
           resources:
