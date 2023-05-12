@@ -46,6 +46,7 @@
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role | `bool` | `true` | no |
 | <a name="input_create_service_account"></a> [create\_service\_account](#input\_create\_service\_account) | Whether to create a service account for Kubernetes Deployment | `bool` | `true` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `true` | no |
+| <a name="input_health_check_initial_delay_seconds"></a> [health\_check\_initial\_delay\_seconds](#input\_health\_check\_initial\_delay\_seconds) | Number of seconds after the container has started before liveness probes are initiated. | `number` | `30` | no |
 | <a name="input_health_check_type"></a> [health\_check\_type](#input\_health\_check\_type) | Readiness Probe health check type : Valid values: http or tcp | `string` | `"http"` | no |
 | <a name="input_image_pull_policy"></a> [image\_pull\_policy](#input\_image\_pull\_policy) | The imagePullPolicy for a container and the tag of the image affect when the kubelet attempts to pull (download) the specified image. | `string` | `"IfNotPresent"` | no |
 | <a name="input_image_repository"></a> [image\_repository](#input\_image\_repository) | Kubernetes Deploymet image for pod's container | `string` | n/a | yes |
@@ -54,7 +55,6 @@
 | <a name="input_ingress_host"></a> [ingress\_host](#input\_ingress\_host) | Kubernetes Ingress Host | `string` | `null` | no |
 | <a name="input_ingress_path"></a> [ingress\_path](#input\_ingress\_path) | Kubernetes Ingress Path | `string` | `"/"` | no |
 | <a name="input_ingress_path_type"></a> [ingress\_path\_type](#input\_ingress\_path\_type) | Each path in an Ingress is required to have a corresponding path type. Paths that do not include an explicit pathType will fail validation | `string` | `"Prefix"` | no |
-| <a name="input_initial_delay_seconds"></a> [initial\_delay\_seconds](#input\_initial\_delay\_seconds) | Number of seconds after the container has started before liveness probes are initiated. | `number` | `30` | no |
 | <a name="input_log_fetcher_enabled"></a> [log\_fetcher\_enabled](#input\_log\_fetcher\_enabled) | Wheter to enable the log-fetcher sidecar container or not | `bool` | `false` | no |
 | <a name="input_log_fetcher_image"></a> [log\_fetcher\_image](#input\_log\_fetcher\_image) | The container image for the log-fetcher sidecar container. | `string` | `""` | no |
 | <a name="input_log_fetcher_logs_path"></a> [log\_fetcher\_logs\_path](#input\_log\_fetcher\_logs\_path) | The path on the host where the logs will be stored, to be mounted as a volume for the log-fetcher container. | `string` | `""` | no |
