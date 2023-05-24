@@ -4,9 +4,9 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.5 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.36 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.7.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.9.0 |
 
 ## Providers
 
@@ -72,6 +72,7 @@
 | <a name="input_role_path"></a> [role\_path](#input\_role\_path) | Path of IAM role | `string` | `"/"` | no |
 | <a name="input_role_permissions_boundary_arn"></a> [role\_permissions\_boundary\_arn](#input\_role\_permissions\_boundary\_arn) | Permissions boundary ARN to use for IAM role | `string` | `null` | no |
 | <a name="input_role_policy_arns"></a> [role\_policy\_arns](#input\_role\_policy\_arns) | ARNs of any policies to attach to the IAM role | `set(string)` | `[]` | no |
+| <a name="input_safe_to_evict_enabled"></a> [safe\_to\_evict\_enabled](#input\_safe\_to\_evict\_enabled) | Whether to enable the safe-to-evict annotation for the pod - this is required by Cluster Autoscaler to be able to evict pods when scaling down | `bool` | `true` | no |
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | A list of AWS Secret Manager Secrets that will be mounted as volumes on your containers | `list(any)` | `null` | no |
 | <a name="input_service_app_port"></a> [service\_app\_port](#input\_service\_app\_port) | Kubernetes Container Port | `number` | `80` | no |
 | <a name="input_service_port"></a> [service\_port](#input\_service\_port) | Kubernetes Service Port | `number` | `80` | no |

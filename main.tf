@@ -38,7 +38,7 @@ resource "helm_release" "main" {
     )
   ]
   set {
-    name = "podAnnotations.cluster\\.autoscaler\\.kubernetes\\.io/safe-to-evict"
+    name  = "podAnnotations.cluster\\.autoscaler\\.kubernetes\\.io/safe-to-evict"
     value = var.safe_to_evict_enabled
   }
   #dynamic "set" {
