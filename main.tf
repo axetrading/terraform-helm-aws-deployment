@@ -34,11 +34,13 @@ resource "helm_release" "main" {
       targetGroupARN          = var.target_group_arn
       targetGroupPort         = var.target_group_port
       targetMemoryUtilization = var.target_memory_utilization
-      safeToEvictEnabled      = var.safe_to_evict_enabled
       }
     )
   ]
-
+  set {
+    name = "podAnnotations.cluster\\.autoscaler\\.kubernetes\\.io/safe-to-evict"
+    value = var.safe_to_evict_enabled
+  }
   #dynamic "set" {
   #  for_each = local.helm_chart_values
   #  content {
