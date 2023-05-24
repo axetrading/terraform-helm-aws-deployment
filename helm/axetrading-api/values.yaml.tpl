@@ -1,8 +1,5 @@
 replicaCount: ${replicaSetCount}
 
-safeToEvict: 
-  enabled: ${safeToEvictEnabled}
-
 image:
   repository: ${imageRepository}
   pullPolicy: ${imagePullPolicy}
