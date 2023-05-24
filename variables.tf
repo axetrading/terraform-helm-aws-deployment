@@ -289,3 +289,9 @@ variable "health_check_initial_delay_seconds" {
   description = "Number of seconds after the container has started before liveness probes are initiated."
   default     = 30
 }
+
+variable "safe_to_evict_enabled" {
+  type        = bool
+  description = "Whether to enable the safe-to-evict annotation for the pod - this is required by Cluster Autoscaler to be able to evict pods when scaling down"
+  default     = true
+}
