@@ -1,9 +1,9 @@
 replicaCount: ${replicaSetCount}
 
 image:
-  repository: ${imageRepository}
+  repository: ""
   pullPolicy: ${imagePullPolicy}
-  tag: ${imageTag}
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -101,7 +101,7 @@ logFetcher:
   logsPath: ${logFetcherLogsPath}
 
 healthcheck:
-  path: ${healthcheckPath}
+  path: ${healthCheckPath}
 
 nodeSelector: {}
 

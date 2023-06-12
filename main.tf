@@ -15,7 +15,7 @@ resource "helm_release" "main" {
       awsSecrets              = var.secrets
       createServiceAccount    = var.create_service_account
       fullNameOverride        = var.name
-      healthcheckpath         = var.health_check_path
+      healthCheckPath         = var.health_check_path
       imageTag                = var.image_tag
       ingressEnabled          = var.ingress_enabled
       ingressHost             = var.ingress_host
@@ -43,13 +43,6 @@ resource "helm_release" "main" {
     value = var.safe_to_evict_enabled
     type  = "string"
   }
-  #dynamic "set" {
-  #  for_each = local.helm_chart_values
-  #  content {
-  #    name  = set.value.name
-  #    value = set.value.value
-  #  }
-  #}
 
   dynamic "set" {
     for_each = var.create_role && var.create_service_account ? [aws_iam_role.this[0].arn] : [var.role_arn]
@@ -58,6 +51,18 @@ resource "helm_release" "main" {
       value = set.value
       type  = "string"
     }
+  }
+
+  set {
+    name  = "image.repository"
+    value = var.image_repository
+    type  = "string"
+  }
+
+  set {
+    name  = "image.tag"
+    value = var.image_tag
+    type  = "string"
   }
 }
  
