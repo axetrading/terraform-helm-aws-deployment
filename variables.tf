@@ -295,3 +295,10 @@ variable "safe_to_evict_enabled" {
   description = "Whether to enable the safe-to-evict annotation for the pod - this is required by Cluster Autoscaler to be able to evict pods when scaling down"
   default     = true
 }
+
+variable "health_check_path" {
+  type        = string
+  description = "Readiness Probe health check path"
+  default     = "/healthcheck"
+}
+  

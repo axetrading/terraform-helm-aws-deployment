@@ -69,7 +69,7 @@ spec:
           readinessProbe:
             {{- if .Values.readiness.httpCheck.enabled }}
             httpGet:
-              path: "/healthcheck"
+              path: {{ .Values.healthcheck.path }}
               port: {{ .Values.service.appport }}
             {{- end }}
             {{- if .Values.readiness.tpcCheck.enabled }}

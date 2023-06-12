@@ -100,7 +100,8 @@ logFetcher:
   imagePullPolicy: IfNotPresent
   logsPath: ${logFetcherLogsPath}
 
-
+healthcheck:
+  path: ${healthcheckPath}
 
 nodeSelector: {}
 

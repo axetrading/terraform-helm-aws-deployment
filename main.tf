@@ -15,6 +15,7 @@ resource "helm_release" "main" {
       awsSecrets              = var.secrets
       createServiceAccount    = var.create_service_account
       fullNameOverride        = var.name
+      healthcheckpath         = var.health_check_path
       imageTag                = var.image_tag
       ingressEnabled          = var.ingress_enabled
       ingressHost             = var.ingress_host
