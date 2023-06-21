@@ -46,6 +46,15 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: POD_ID
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: ENVIRONMENT
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
           volumeMounts:
            {{- if .Values.secretsStore.enabled }}
             - name: {{ include "axetrading-api.fullname" . }}-secrets-store
@@ -88,6 +97,14 @@ spec:
           env:
             - name: LOGS_PATH
               value: {{ .Values.logFetcher.logsPath }}
+            - name: POD_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: ENVIRONMENT
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           resources:
             limits:
               memory: "64Mi"
