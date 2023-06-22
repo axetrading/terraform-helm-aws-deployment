@@ -8,6 +8,10 @@ spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
+  {{- if .Values.strategy.type }}
+  strategy:
+    type: {{ .Values.strategy.type }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "axetrading-api.selectorLabels" . | nindent 6 }}

@@ -5,6 +5,8 @@ image:
   pullPolicy: ${imagePullPolicy}
   tag: ""
 
+strategy:
+  type: ""
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ${fullNameOverride}

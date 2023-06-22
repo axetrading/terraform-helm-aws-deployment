@@ -64,5 +64,11 @@ resource "helm_release" "main" {
     value = var.image_tag
     type  = "string"
   }
+  
+  set {
+    name = "strategy.type"
+    value = var.deployment_strategy_type
+    type = "string"
+  }
 }
  

@@ -301,4 +301,9 @@ variable "health_check_path" {
   description = "Readiness Probe health check path"
   default     = "/healthcheck"
 }
-  
+
+variable "deployment_strategy_type" {
+  type = string
+  description = "Deployment strategy type. Valid values: RollingUpdate, Recreate"
+  default = "RollingUpdate"
+}
