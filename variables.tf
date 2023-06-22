@@ -303,7 +303,7 @@ variable "health_check_path" {
 }
 
 variable "deployment_strategy_type" {
-  type = string
+  type        = string
   description = "Deployment strategy type. Valid values: RollingUpdate, Recreate"
-  default = "RollingUpdate"
+  default     = "RollingUpdate"
 }
