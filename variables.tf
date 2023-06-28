@@ -307,3 +307,9 @@ variable "deployment_strategy_type" {
   description = "Deployment strategy type. Valid values: RollingUpdate, Recreate"
   default     = "RollingUpdate"
 }
+
+variable "statsd_enabled" {
+  type        = bool
+  description = "Whether to create statsd host environment variables"
+  default     = false
+}
