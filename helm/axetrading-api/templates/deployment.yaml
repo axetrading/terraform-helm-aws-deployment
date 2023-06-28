@@ -57,6 +57,13 @@ spec:
                 fieldPath: metadata.name
           - name: METRIC_PREFIX
             value: {{ .Release.Namespace }}.{{ include "axetrading-api.fullname" . }}
+          ## if statsd is enabled, set the env vars
+          {{- if .Values.statsd.enabled }}
+          - name: STATSD_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          {{- end }}
           volumeMounts:
            {{- if .Values.secretsStore.enabled }}
             - name: {{ include "axetrading-api.fullname" . }}-secrets-store

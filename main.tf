@@ -70,5 +70,14 @@ resource "helm_release" "main" {
     value = var.deployment_strategy_type
     type  = "string"
   }
+
+  dynamic "set" {
+    for_each = var.statsd_enabled ? [var.statsd_enabled] : []
+    content {
+      name  = "statsd.enabled"
+      value = set.value
+      type  = "string"
+    }
+  }
+
 }
- 

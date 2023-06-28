@@ -105,6 +105,9 @@ logFetcher:
 healthcheck:
   path: ${healthCheckPath}
 
+statsd:
+  enabled: false
+
 nodeSelector: {}
 
 tolerations: []
