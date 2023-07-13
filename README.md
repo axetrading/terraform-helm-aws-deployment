@@ -32,6 +32,7 @@
 | [helm_release.main](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 | [aws_iam_policy_document.secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [helm_template.main](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/data-sources/template) | data source |
 
 ## Inputs
 
@@ -97,5 +98,6 @@
 | <a name="output_helm_release_id"></a> [helm\_release\_id](#output\_helm\_release\_id) | Helm Release ID |
 | <a name="output_helm_release_name"></a> [helm\_release\_name](#output\_helm\_release\_name) | Helm Release Name |
 | <a name="output_helm_release_namespace"></a> [helm\_release\_namespace](#output\_helm\_release\_namespace) | Helm Release Namespace |
+| <a name="output_helm_template_manifest"></a> [helm\_template\_manifest](#output\_helm\_template\_manifest) | Helm Release Manifest |
 | <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | ARN of IAM role |
 <!-- END_TF_DOCS -->
