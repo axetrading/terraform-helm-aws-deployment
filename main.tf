@@ -1,13 +1,7 @@
-resource "helm_release" "main" {
-  name             = var.name
-  chart            = "${path.module}/helm/axetrading-api"
-  atomic           = var.atomic
-  create_namespace = var.create_namespace
-  namespace        = var.namespace
-  timeout          = var.timeout
-  wait             = var.wait
 
+locals {
   values = [
+    var.prometheus_rule_enabled ? file(var.prometheus_rules_file_path) : null,
     templatefile("${path.module}/helm/axetrading-api/values.yaml.tpl", {
       imageRepository         = var.image_repository
       imagePullPolicy         = var.image_pull_policy
@@ -38,6 +32,19 @@ resource "helm_release" "main" {
       }
     )
   ]
+  deplyoment_values = compact(local.values)
+}
+resource "helm_release" "main" {
+  name             = var.name
+  chart            = "${path.module}/helm/axetrading-api"
+  atomic           = var.atomic
+  create_namespace = var.create_namespace
+  namespace        = var.namespace
+  timeout          = var.timeout
+  wait             = var.wait
+
+  values = [local.deplyoment_values]
+
   set {
     name  = "podAnnotations.cluster-autoscaler\\.kubernetes\\.io/safe-to-evict"
     value = var.safe_to_evict_enabled
@@ -84,13 +91,4 @@ resource "helm_release" "main" {
     name  = "prometheusRule.enabled"
     value = var.prometheus_rule_enabled
   }
-
-  dynamic "set_list" {
-    for_each = var.prometheus_rule_enabled ? [var.prometheus_rule_enabled] : []
-    content {
-      name  = "prometheusRule.rules"
-      value = [yamldecode(file(var.prometheus_rules_file_path))]
-    }
-  }
-
 }

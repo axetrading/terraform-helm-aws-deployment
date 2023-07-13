@@ -117,4 +117,4 @@ affinity: {}
 prometheusRule:
   enabled: false
   additionalLabels: {}
-  rules: []
+  # rules: []
