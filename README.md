@@ -95,9 +95,9 @@
 
 | Name | Description |
 |------|-------------|
+| <a name="output_helm_manifests"></a> [helm\_manifests](#output\_helm\_manifests) | Helm Release Manifest |
 | <a name="output_helm_release_id"></a> [helm\_release\_id](#output\_helm\_release\_id) | Helm Release ID |
 | <a name="output_helm_release_name"></a> [helm\_release\_name](#output\_helm\_release\_name) | Helm Release Name |
 | <a name="output_helm_release_namespace"></a> [helm\_release\_namespace](#output\_helm\_release\_namespace) | Helm Release Namespace |
-| <a name="output_helm_template_manifest"></a> [helm\_template\_manifest](#output\_helm\_template\_manifest) | Helm Release Manifest |
 | <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | ARN of IAM role |
 <!-- END_TF_DOCS -->
