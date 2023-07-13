@@ -43,7 +43,7 @@ resource "helm_release" "main" {
   timeout          = var.timeout
   wait             = var.wait
 
-  values = [local.deplyoment_values]
+  values = local.deplyoment_values
 
   set {
     name  = "podAnnotations.cluster-autoscaler\\.kubernetes\\.io/safe-to-evict"
