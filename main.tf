@@ -85,11 +85,12 @@ resource "helm_release" "main" {
     value = var.prometheus_rule_enabled
   }
 
-  dynamic "set_list" {
+  dynamic "set" {
     for_each = var.prometheus_rule_enabled ? [var.prometheus_rule_enabled] : []
     content {
       name  = "prometheusRule.rules"
-      value = [file(var.prometheus_rules_file_path)]
+      value = file(var.prometheus_rules_file_path)
     }
   }
+
 }

@@ -12,6 +12,10 @@ spec:
   {{- with .Values.prometheusRule.rules }}
   groups:
     - name: {{ template "axetrading-api.fullname" $ }}
-      rules: {{ toYaml . | nindent 8 }}
+      rules: |
+        {{- . | nindent 8 }}
+        {{- with .Values.prometheusRule.ruleFile }}
+        {{- file . | nindent 8 }}
+        {{- end }}
   {{- end }}
 {{- end }}
