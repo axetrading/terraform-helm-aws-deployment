@@ -18,3 +18,8 @@ output "helm_release_namespace" {
   value       = helm_release.main.namespace
   description = "Helm Release Namespace"
 }
+
+output "helm_template_manifest" {
+  value       = data.helm_template.main.manifests
+  description = "Helm Release Manifest"
+}
