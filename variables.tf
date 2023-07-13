@@ -313,3 +313,15 @@ variable "statsd_enabled" {
   description = "Whether to create statsd host environment variables"
   default     = false
 }
+
+variable "prometheus_rule_enabled" {
+  type        = bool
+  description = "Whether to create prometheus rule"
+  default     = false
+}
+
+variable "prometheus_rules_file_path" {
+  type        = string
+  description = "Prometheus rules file path"
+  default     = "prometheus-rules.yml"
+}
