@@ -89,7 +89,7 @@ resource "helm_release" "main" {
     for_each = var.prometheus_rule_enabled ? [var.prometheus_rule_enabled] : []
     content {
       name  = "prometheusRule.rules"
-      value = [file(var.prometheus_rules_file_path)]
+      value = [yamldecode(file(var.prometheus_rules_file_path))]
     }
   }
 
