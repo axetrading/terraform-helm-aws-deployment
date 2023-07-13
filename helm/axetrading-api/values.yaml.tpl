@@ -114,7 +114,7 @@ tolerations: []
 
 affinity: {}
 
-prometheusRule: {}
+prometheusRule:
   enabled: false
   additionalLabels: {}
   rules: []
