@@ -32,7 +32,7 @@ locals {
       }
     )
   ]
-  deplyoment_values = compact(local.values)
+  deployment_values = compact(local.values)
 }
 resource "helm_release" "main" {
   name             = var.name
@@ -43,7 +43,7 @@ resource "helm_release" "main" {
   timeout          = var.timeout
   wait             = var.wait
 
-  values = local.deplyoment_values
+  values = local.deployment_values
 
   set {
     name  = "podAnnotations.cluster-autoscaler\\.kubernetes\\.io/safe-to-evict"
