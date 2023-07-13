@@ -5,15 +5,15 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.5 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.36 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.9.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.36 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.9.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.57.1 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.7.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.7.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.10.1 |
 
 ## Modules
 
@@ -65,6 +65,8 @@
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to install the release into. | `string` | `"default"` | no |
 | <a name="input_oidc_providers"></a> [oidc\_providers](#input\_oidc\_providers) | Map of OIDC providers where each provider map should contain the `provider`, `provider_arn`, and `namespace_service_accounts` | `any` | `{}` | no |
 | <a name="input_policy_name_prefix"></a> [policy\_name\_prefix](#input\_policy\_name\_prefix) | IAM policy name prefix | `string` | `"eks-policy"` | no |
+| <a name="input_prometheus_rule_enabled"></a> [prometheus\_rule\_enabled](#input\_prometheus\_rule\_enabled) | Whether to create prometheus rule | `bool` | `false` | no |
+| <a name="input_prometheus_rules_file_path"></a> [prometheus\_rules\_file\_path](#input\_prometheus\_rules\_file\_path) | Prometheus rules file path | `string` | `"prometheus-rules.yml"` | no |
 | <a name="input_replica_set"></a> [replica\_set](#input\_replica\_set) | The number of replica set for the helm deployment | `number` | `1` | no |
 | <a name="input_resources"></a> [resources](#input\_resources) | "A map of resource for the main app container, containing keys 'cpu' and 'memory'. <br>  This is following the Kubernetes resource best practices, which states that no limits for the CPU should be set and the memory limit should always be equal with memory request.<br>  In this way, we can prevent OOMKill (talk with the devs about cpu/memory requirements)." | <pre>object({<br>    memory = string<br>    cpu    = string<br>  })</pre> | <pre>{<br>  "cpu": "250m",<br>  "memory": "512Mi"<br>}</pre> | no |
 | <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | Existing role ARN | `string` | `null` | no |
