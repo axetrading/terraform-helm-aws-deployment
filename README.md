@@ -95,7 +95,7 @@
 
 | Name | Description |
 |------|-------------|
-| <a name="output_helm_manifests_output"></a> [helm\_manifests\_output](#output\_helm\_manifests\_output) | Helm Release Manifest |
+| <a name="output_helm_manifests"></a> [helm\_manifests](#output\_helm\_manifests) | Helm Release Manifest |
 | <a name="output_helm_release_id"></a> [helm\_release\_id](#output\_helm\_release\_id) | Helm Release ID |
 | <a name="output_helm_release_name"></a> [helm\_release\_name](#output\_helm\_release\_name) | Helm Release Name |
 | <a name="output_helm_release_namespace"></a> [helm\_release\_namespace](#output\_helm\_release\_namespace) | Helm Release Namespace |
