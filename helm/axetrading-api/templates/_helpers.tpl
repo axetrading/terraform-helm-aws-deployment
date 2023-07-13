@@ -43,7 +43,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 heritage: {{ "Helm" | quote }}
 release: {{ .Values.prometheusLabelSelector | default "prometheus" }}
 {{- if .Values.image.tag }}
-app.kubernetes.io/version: {{ .Values.image.tag | quote }}
+app.kubernetes.io/version: {{ .Values.image.tag | default .Chart.AppVersion | quote }}
 {{- end }}
 {{- end }}
 
