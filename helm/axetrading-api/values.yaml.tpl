@@ -28,7 +28,7 @@ service:
   %{~ if additionalPorts != null ~}
   additionalPorts: 
     %{~ for port in additionalPorts ~}
-    - name: svc_${port}
+    - name: svc-${port}
       port: ${port}
     %{~ endfor ~}
   %{~ endif ~}
