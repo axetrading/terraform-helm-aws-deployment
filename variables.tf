@@ -233,7 +233,7 @@ variable "secrets" {
 variable "additional_ports" {
   type        = list(any)
   description = "A list of additional ports to expose on the container and service"
-  default     = []
+  default     = null
 }
 
 variable "health_check_type" {
