@@ -25,6 +25,7 @@ locals {
       serviceAppPort          = var.service_app_port
       servicePort             = var.service_port
       serviceType             = var.service_type
+      additionalPorts         = var.additional_ports
       targetCPUUtilization    = var.target_cpu_utilization
       targetGroupARN          = var.target_group_arn
       targetGroupPort         = var.target_group_port

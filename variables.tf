@@ -230,6 +230,12 @@ variable "secrets" {
   default     = null
 }
 
+variable "additional_ports" {
+  type        = list(any)
+  description = "A list of additional ports to expose on the container and service"
+  default     = []
+}
+
 variable "health_check_type" {
   type        = string
   description = "Readiness Probe health check type : Valid values: http or tcp"

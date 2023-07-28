@@ -25,6 +25,13 @@ service:
   type: ${serviceType}
   port: ${servicePort}
   appport: ${serviceAppPort}
+  %{~ if additionalPorts != null ~}
+  additionalPorts: 
+    %{~ for port in additionalPorts ~}
+    - name: svc_${port}
+      port: ${port}
+    %{~ endfor ~}
+  %{~ endif ~}
 
 ingress:
   enabled: ${ingressEnabled}
