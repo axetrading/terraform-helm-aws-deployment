@@ -12,7 +12,7 @@ spec:
       protocol: TCP
       name: appport
     {{- if .Values.service.additionalPorts }}
-    {{ range .Value.service.additionalPorts }}
+    {{- range .Value.service.additionalPorts }}
     - port: {{ .port }}
       targetPort: {{ .port }}
       protocol: TCP
