@@ -11,11 +11,13 @@ spec:
       targetPort: {{ .Values.service.appport }}
       protocol: TCP
       name: appport
-    {{range .Value.service.additionalPorts }}
+    {{- if .Values.service.additionalPorts }}
+    {{ range .Value.service.additionalPorts }}
     - port: {{ .port }}
       targetPort: {{ .port }}
       protocol: TCP
       name: {{ .name }}
-    {{end}}
+    {{- end }}
+    {{- end }}
   selector:
     {{- include "axetrading-api.selectorLabels" . | nindent 4 }}

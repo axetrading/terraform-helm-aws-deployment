@@ -78,6 +78,13 @@ spec:
             - name: appport
               containerPort: {{ .Values.service.appport }}
               protocol: TCP
+            {{- if .Values.service.additionalPorts }}
+            {{- range .Values.service.additionalPorts }}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
+              protocol: TCP
+            {{- end }}
+            {{- end }}
           livenessProbe:
             tcpSocket:
               port: {{ .Values.service.appport }}
