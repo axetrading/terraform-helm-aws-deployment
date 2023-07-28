@@ -38,6 +38,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_additional_ports"></a> [additional\_ports](#input\_additional\_ports) | A list of additional ports to expose on the container and service | `list(any)` | `[]` | no |
 | <a name="input_additional_value_files"></a> [additional\_value\_files](#input\_additional\_value\_files) | A list of additional value files. It will work in the same way as helm -f value1.yaml -f value2.yaml | `list(any)` | `[]` | no |
 | <a name="input_assume_role_condition_test"></a> [assume\_role\_condition\_test](#input\_assume\_role\_condition\_test) | Name of the [IAM condition operator](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) to evaluate when assuming the role | `string` | `"StringEquals"` | no |
 | <a name="input_atomic"></a> [atomic](#input\_atomic) | If set, the installation process purges the chart on failure. The wait flag will be set automatically if atomic is used. | `bool` | `false` | no |
