@@ -92,4 +92,13 @@ resource "helm_release" "main" {
     name  = "prometheusRule.enabled"
     value = var.prometheus_rule_enabled
   }
+
+  dynamic "set" {
+    for_each = ingress_enabled ? [var.ingress_enabled] : []
+    content {
+      name  = "ingress.annotations.kubernetes\\.io/ingress\\.class"
+      value = "nginx"
+      type  = "string"
+    }
+  }
 }
