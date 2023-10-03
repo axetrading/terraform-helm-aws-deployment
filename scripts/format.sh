@@ -2,4 +2,4 @@
 
 set -eo pipefail
 
-docker run --rm -i -v "$PWD:$PWD" -w "$PWD" hashicorp/terraform:1.4.6 fmt
+docker run --rm -i -v "$PWD:$PWD" -w "$PWD" hashicorp/terraform:1.4.2 fmt
