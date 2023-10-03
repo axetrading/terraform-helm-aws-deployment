@@ -94,7 +94,7 @@ resource "helm_release" "main" {
   }
 
   dynamic "set" {
-    for_each = ingress_enabled ? [var.ingress_enabled] : []
+    for_each = var.ingress_enabled ? [var.ingress_enabled] : []
     content {
       name  = "ingress.annotations.kubernetes\\.io/ingress\\.class"
       value = "nginx"
