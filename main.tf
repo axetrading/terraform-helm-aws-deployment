@@ -93,6 +93,26 @@ resource "helm_release" "main" {
     value = var.prometheus_rule_enabled
   }
 
+  set {
+    name  = "statefulset.enabled"
+    value = var.statefulset_enabled
+  }
+
+  set {
+    name  = "persistence.enabled"
+    value = var.persistence_enabled
+  }
+
+  set {
+    name  = "persistence.accessMode"
+    value = var.persistence_accessMode
+  }
+
+  set {
+    name  = "persistence.storageSize"
+    value = var.persistence_storageSize
+  }
+
   dynamic "set" {
     for_each = var.ingress_enabled ? [var.ingress_enabled] : []
     content {

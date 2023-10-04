@@ -1,5 +1,10 @@
+{{- if .Values.statefulset.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+{{- else }}
 apiVersion: apps/v1
 kind: Deployment
+{{- end }}
 metadata:
   name: {{ include "axetrading-api.fullname" . }}
   labels:
@@ -74,6 +79,33 @@ spec:
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}
            {{- end }}
+            ## create pvc in case of statefulsets
+            { { - if .Values.statefulset.enabled } }
+          volumeClaimTemplates:
+              { { - if .Values.persistence.enabled } }
+              - metadata:
+                  name: { { include "axetrading-api.fullname" . } }-data
+                  labels:
+          { { - include "axetrading-api.labels" . | nindent 4 } }
+          { { - if .Values.persistence.annotations } }
+          annotations:
+          { { toYaml .Values.persistence.annotations | indent 10 } }
+          { { - end } }
+          spec:
+            accessModes:
+              - { { .Values.persistence.accessMode | quote } }
+            resources:
+              requests:
+                storage: { { .Values.persistence.storageSize | quote } }
+            { { - if .Values.persistence.storageClass } }
+            { { - if (eq "-" .Values.persistence.storageClass) } }
+            storageClassName: ""
+            { { - else } }
+            storageClassName: "{{ .Values.persistence.storageClass }}"
+            { { - end } }
+            { { - end } }
+          { { - end } }
+          { { - end } }
           ports:
             - name: appport
               containerPort: {{ .Values.service.appport }}
@@ -85,6 +117,7 @@ spec:
               protocol: TCP
             {{- end }}
             {{- end }}
+
           livenessProbe:
             tcpSocket:
               port: {{ .Values.service.appport }}

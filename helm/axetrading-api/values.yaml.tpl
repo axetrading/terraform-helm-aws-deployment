@@ -125,3 +125,11 @@ prometheusRule:
   enabled: false
   additionalLabels: {}
   # rules: []
+
+statefulset:
+  enabled: false
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  storageSize: 2Gi

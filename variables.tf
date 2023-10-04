@@ -326,6 +326,30 @@ variable "prometheus_rule_enabled" {
   default     = false
 }
 
+variable "statefulset_enabled" {
+  type        = bool
+  description = "Whether to create statefulset"
+  default     = false
+}
+
+variable "persistence_enabled" {
+  type        = bool
+  description = "Whether to create persistent storage"
+  default     = false
+}
+
+variable "persistence_accessMode" {
+  type        = string
+  description = "Accessmode for persistent storage"
+  default     = "ReadWriteOnce"
+}
+
+variable "persistence_storageSize" {
+  type        = string
+  description = "Storage size for persistent storage"
+  default     = "2Gi"
+}
+
 variable "prometheus_rules_file_path" {
   type        = string
   description = "Prometheus rules file path"
