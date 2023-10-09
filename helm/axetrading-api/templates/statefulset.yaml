@@ -1,10 +1,10 @@
-{{- if not .Values.statefulset.enabled }}
+{{- if .Values.statefulset.enabled }}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: {{ include "axetrading-api.fullname" . }}
+  name: {{ include "axetrading-interface.fullname" . }}
   labels:
-    {{- include "axetrading-api.labels" . | nindent 4 }}
+    {{- include "axetrading-interface.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -15,15 +15,15 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "axetrading-api.selectorLabels" . | nindent 6 }}
+      {{- include "axetrading-interface.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- with .Values.podAnnotationsstatefulset }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "axetrading-api.selectorLabels" . | nindent 8 }}
+        {{- include "axetrading-interface.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -34,19 +34,19 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
       {{- if .Values.secretsStore.enabled }}
-      - name: {{ include "axetrading-api.fullname" . }}-secrets-store
+      - name: {{ include "axetrading-interface.fullname" . }}-secrets-store
         csi:
           driver: secrets-store.csi.k8s.io
           readOnly: true
           volumeAttributes:
-            secretProviderClass: {{ include "axetrading-api.fullname" . }}-secrets
+            secretProviderClass: {{ include "axetrading-interface.fullname" . }}-secrets
       {{- end }}
       {{- if .Values.logFetcher.enabled }}
-      - name: {{ include "axetrading-api.fullname" .}}-app-logs
+      - name: {{ include "axetrading-interface.fullname" .}}-app-logs
         emptyDir: {}
       {{- end }}
       containers:
-        - name: {{ include "axetrading-api.fullname" . }}
+        - name: {{ include "axetrading-interface.fullname" . }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -57,7 +57,7 @@ spec:
               fieldRef:
                 fieldPath: metadata.name
           - name: METRIC_PREFIX
-            value: {{ .Release.Namespace }}.{{ include "axetrading-api.fullname" . }}
+            value: {{ .Release.Namespace }}.{{ include "axetrading-interface.fullname" . }}
           ## if statsd is enabled, set the env vars
           {{- if .Values.statsd.enabled }}
           - name: STATSD_HOST
@@ -67,12 +67,12 @@ spec:
           {{- end }}
           volumeMounts:
            {{- if .Values.secretsStore.enabled }}
-            - name: {{ include "axetrading-api.fullname" . }}-secrets-store
+            - name: {{ include "axetrading-interface.fullname" . }}-secrets-store
               mountPath: /mnt/secrets/
               readOnly: true
            {{- end }}
            {{- if .Values.logFetcher.enabled }}
-            - name: {{ include "axetrading-api.fullname" .}}-app-logs
+            - name: {{ include "axetrading-interface.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}
            {{- end }}
           ports:
@@ -108,7 +108,7 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
         {{- if .Values.logFetcher.enabled }}
-        - name: {{ include "axetrading-api.fullname" . }}-log-fetcher
+        - name: {{ include "axetrading-interface.fullname" . }}-log-fetcher
           image: {{ .Values.logFetcher.image }}
           imagePullPolicy: {{ .Values.logFetcher.imagePullPolicy }}
           env:
@@ -129,7 +129,7 @@ spec:
               cpu: 100m
               memory: "32Mi"
           volumeMounts:
-            - name: {{ include "axetrading-api.fullname" .}}-app-logs
+            - name: {{ include "axetrading-interface.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}
         {{- end }}
       {{- with .Values.nodeSelector }}
@@ -144,4 +144,31 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+            ## create pvc in case of statefulsets
+{{ - if .Values.statefulset.enabled }}
+volumeClaimTemplates:
+    {{ - if .Values.persistence.enabled }}
+    - metadata:
+        name: {{ include "axetrading-interface.fullname" . }}-data
+        labels:
+            {{ - include "axetrading-interface.labels" . | nindent 4 }}
+        {{ - if .Values.persistence.annotations }}
+        annotations:
+            {{ toYaml .Values.persistence.annotations | indent 10 }}
+        {{ - end }}
+    spec:
+        accessModes:
+            - { { .Values.persistence.accessMode | quote } }
+        resources:
+            requests:
+                storage: { { .Values.persistence.storageSize | quote } }
+        {{ - if .Values.persistence.storageClass }}
+        {{ - if (eq "-" .Values.persistence.storageClass) }}
+        storageClassName: ""
+        {{ - else }}
+        storageClassName: "{{ .Values.persistence.storageClass }}"
+        {{ - end }}
+        {{ - end }}
+    {{ - end }}
+  {{ - end }}
 {{- end }}

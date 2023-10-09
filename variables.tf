@@ -355,3 +355,30 @@ variable "prometheus_rules_file_path" {
   description = "Prometheus rules file path"
   default     = "prometheus-rules.yml"
 }
+
+variable "attach_amazoneks_efs_csi_driver_policy" {
+  type        = bool
+  description = "Attach a policy that allows the CSI driver’s service account to make calls to AWS APIs on your behalf"
+  default     = false
+}
+
+variable "efs_filesystem_id" {
+  type        = string
+  description = "EFS File System Id"
+}
+
+variable "aws_region" {
+  type        = string
+  description = "EFS Region"
+}
+
+variable "efs_provisioner_domain_name" {
+  type        = string
+  description = "EFS Domain Name "
+}
+
+variable "efs_role" {
+  type        = string
+  description = "EFS IAM Role for Pods"
+  default = aws_iam_policy.amazoneks_efs_csi_driver.arn
+}

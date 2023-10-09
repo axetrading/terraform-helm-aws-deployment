@@ -42,3 +42,24 @@ resource "aws_iam_role_policy_attachment" "secrets" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.secrets[0].arn
 }
+
+resource "aws_iam_policy" "amazoneks_efs_csi_driver" {
+  count       = var.create_role && var.attach_amazoneks_efs_csi_driver_policy ? 1 : 0
+  name_prefix = "${var.policy_name_prefix}EKS_EFS_CSI_Drive_Policy-"
+  path        = var.role_path
+  policy      = data.aws_iam_policy_document.amazoneks_efs_csi_driver_policy_document[0].json
+  description = "Provides policy that allows the CSI driver’s service account to make calls to AWS APIs on your behalf"
+  tags        = var.tags
+}
+
+resource "aws_iam_policy" "amazoneks_efs_csi_driver_policy" {
+  count  = var.create_role && var.attach_amazoneks_efs_csi_driver_policy ? 1 : 0
+  role   = aws_iam_role.this[0].name
+  policy = data.aws_iam_policy_document.amazoneks_efs_csi_driver_policy_document[0].json
+}
+
+resource "aws_iam_role_policy_attachment" "amazoneks_efs_csi_driver_policy_attachment" {
+  count      = var.create_role && var.attach_amazoneks_efs_csi_driver_policy ? 1 : 0
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.amazoneks_efs_csi_driver_policy[0].arn
+}
