@@ -380,5 +380,4 @@ variable "efs_provisioner_domain_name" {
 variable "efs_role" {
   type        = string
   description = "EFS IAM Role for Pods"
-  default = aws_iam_policy.amazoneks_efs_csi_driver.arn
 }

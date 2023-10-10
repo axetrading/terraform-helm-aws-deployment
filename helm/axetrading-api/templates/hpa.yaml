@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "axetrading.fullname" . }}
+  name: {{ include "axetrading-api.fullname" . }}
   labels:
-    {{- include "axetrading.labels" . | nindent 4 }}
+    {{- include "axetrading-api.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "axetrading.fullname" . }}
+    name: {{ include "axetrading-api.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

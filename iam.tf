@@ -32,7 +32,7 @@ resource "aws_iam_role" "this" {
   count = var.create_role ? 1 : 0
 
   name        = var.role_name
-  name_prefix = module.short-name[0].result
+  name_prefix = var.role_name_prefix != null ? module.short-name[0].result : null
   path        = var.role_path
   description = var.role_description
 

@@ -23,42 +23,11 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 {{- end }}
 
-{{- define "axetrading-interface.fullname" -}}
-{{- if .Values.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- $name := default .Chart.Name .Values.nameOverride }}
-{{- if contains $name .Release.Name }}
-{{- .Release.Name | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
-{{- end }}
-{{- end }}
-{{- end }}
-
-{{- define "axetrading.fullname" -}}
-{{- if .Values.statefulset.enabled }}
-{{- template "axetrading-interface.fullname" }}
-{{- else }}
-{{- template "axetrading-api.fullname" }}
-{{- end }}
-
 {{/*
 Create chart name and version as used by the chart label.
 */}}
 {{- define "axetrading-api.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
-{{- end }}
-
-{{- define "axetrading-interface.chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
-{{- end }}
-
-{{- define "axetrading.chart" -}}
-{{- if .Values.statefulset.enabled }}
-{{- template "axetrading-interface.chart" }}
-{{- else }}
-{{- template "axetrading-api.chart" }}
 {{- end }}
 
 {{/*
@@ -78,45 +47,12 @@ app.kubernetes.io/deployment-version: {{ .Values.image.tag | default .Chart.AppV
 {{- end }}
 {{- end }}
 
-{{- define "axetrading-interface.labels" -}}
-helm.sh/chart: {{ include "axetrading-interface.chart" . }}
-{{ include "axetrading-interface.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-heritage: {{ "Helm" | quote }}
-release: {{ .Values.prometheusLabelSelector | default "prometheus" }}
-{{- if .Values.image.tag }}
-app.kubernetes.io/deployment-version: {{ .Values.image.tag | default .Chart.AppVersion | quote }}
-{{- end }}
-{{- end }}
-
-{{- define "axetrading.labels" -}}
-{{- if .Values.statefulset.enabled }}
-{{- template "axetrading-interface.labels" }}
-{{- else }}
-{{- template "axetrading-api.labels" }}
-{{- end }}
-
 {{/*
 Selector labels
 */}}
 {{- define "axetrading-api.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "axetrading-api.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{- define "axetrading-interface.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "axetrading-interface.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{- define "axetrading.selectorLabels" -}}
-{{- if .Values.statefulset.enabled }}
-{{- template "axetrading-interface.selectorLabels" }}
-{{- else }}
-{{- template "axetrading-api.selectorLabels" }}
 {{- end }}
 
 {{/*
@@ -128,19 +64,4 @@ Create the name of the service account to use
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
-{{- end }}
-
-{{- define "axetrading-interface.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "axetrading-interface.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
-
-{{- define "axetrading.serviceAccountName" -}}
-{{- if .Values.statefulset.enabled }}
-{{- template "axetrading-interface.serviceAccountName" }}
-{{- else }}
-{{- template "axetrading-api.serviceAccountName" }}
 {{- end }}

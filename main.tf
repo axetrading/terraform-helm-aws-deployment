@@ -106,11 +106,13 @@ resource "helm_release" "main" {
   set {
     name  = "persistence.accessMode"
     value = var.persistence_accessMode
+    type  = "string"
   }
 
   set {
     name  = "persistence.storageSize"
     value = var.persistence_storageSize
+    type  = "string"
   }
 
   dynamic "set" {
