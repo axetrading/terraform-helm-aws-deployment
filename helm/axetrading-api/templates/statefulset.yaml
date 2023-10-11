@@ -1,6 +1,6 @@
-{{- if not .Values.statefulset.enabled }}
+{{- if .Values.statefulset.enabled }}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "axetrading-api.fullname" . }}
   labels:
@@ -18,7 +18,7 @@ spec:
       {{- include "axetrading-api.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- with .Values.podAnnotationsstatefulset }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -144,4 +144,31 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+## create pvc in case of statefulsets
+{{- if .Values.statefulset.enabled }}
+volumeClaimTemplates:
+    {{- if .Values.persistence.enabled }}
+    - metadata:
+        name: {{ include "axetrading-api.fullname" . }}-data
+        labels:
+            {{- include "axetrading-api.labels" . | nindent 4 }}
+        {{- if .Values.persistence.annotations }}
+        annotations:
+            {{ toYaml .Values.persistence.annotations | indent 10 }}
+        {{- end }}
+    spec:
+        accessModes:
+            - { { .Values.persistence.accessMode | quote } }
+        resources:
+            requests:
+                storage: { { .Values.persistence.storageSize | quote } }
+        {{- if .Values.persistence.storageClass }}
+        {{- if (eq "-" .Values.persistence.storageClass) }}
+        storageClassName: ""
+        {{- else }}
+        storageClassName: "{{ .Values.persistence.storageClass }}"
+        {{- end }}
+        {{- end }}
+    {{- end }}
+  {{- end }}
 {{- end }}
