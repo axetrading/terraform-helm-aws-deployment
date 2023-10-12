@@ -1,5 +1,5 @@
 data "aws_iam_policy_document" "amazoneks_efs_csi_driver_policy_document" {
-  count  = var.create_role && var.attach_amazoneks_efs_csi_driver_policy ? 1 : 0
+  count = var.create_role && var.attach_amazoneks_efs_csi_driver_policy ? 1 : 0
   statement {
     effect = "Allow"
     actions = [
@@ -21,8 +21,8 @@ data "aws_iam_policy_document" "amazoneks_efs_csi_driver_policy_document" {
     }
   }
   statement {
-    effect    = "Allow"
-    actions   = [
+    effect = "Allow"
+    actions = [
       "elasticfilesystem:DeleteAccessPoint"
     ]
     resources = ["*"]
