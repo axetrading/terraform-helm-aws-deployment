@@ -111,7 +111,7 @@ resource "helm_release" "main" {
 
   set {
     name = "container_commands.args"
-    value = var.container_commands_args
+    value = "{${join(",", var.container_commands_args)}}"
   }
 
   set {
