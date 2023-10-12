@@ -381,3 +381,10 @@ variable "efs_role" {
   type        = string
   description = "EFS IAM Role for Pods"
 }
+
+variable "container_commands_args" {
+  type        = list(any)
+  description = "A list of args for container image at startup"
+  default     = []
+}
+

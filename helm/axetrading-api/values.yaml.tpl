@@ -143,3 +143,6 @@ efsProvisioner:
 
 podAnnotationsstatefulset:
   iam.amazonaws.com/role: $efs_role
+
+container_commands:
+  args: []
