@@ -72,6 +72,10 @@ spec:
               mountPath: /mnt/secrets/
               readOnly: true
            {{- end }}
+           {{- if .Values.persistence.enabled }}
+            - name: {{ include "axetrading-api.fullname" . }}-secrets-store
+              mountPath: {{ .Values.persistence.mountPath }}
+           {{- end }}
            {{- if .Values.logFetcher.enabled }}
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}
@@ -145,4 +149,29 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+volumeClaimTemplates:
+    {{- if .Values.persistence.enabled }}
+    - metadata:
+        name: {{ include "axetrading-api.fullname" . }}-data
+        labels:
+            {{- include "axetrading-api.labels" . | nindent 4 }}
+        {{- if .Values.persistence.annotations }}
+        annotations:
+            {{ toYaml .Values.persistence.annotations | indent 10 }}
+        {{- end }}
+    spec:
+        accessModes:
+            - { { .Values.persistence.accessMode | quote } }
+        resources:
+            requests:
+                storage: { { .Values.persistence.storageSize | quote } }
+        {{- if .Values.persistence.storageClass }}
+        {{- if (eq "-" .Values.persistence.storageClass) }}
+        storageClassName: ""
+        {{- else }}
+        storageClassName: "{{ .Values.persistence.storageClass }}"
+        {{- end }}
+        {{- end }}
+    {{- end }}
+
 {{- end }}

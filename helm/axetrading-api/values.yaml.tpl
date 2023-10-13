@@ -134,6 +134,7 @@ persistence:
   accessMode: ReadWriteOnce
   storageSize: 2Gi
   storageClass: efs
+  mountPath: ""
 
 efsProvisioner:
   efsFileSystemId: $efs_filesystem_id
