@@ -73,7 +73,7 @@ spec:
               readOnly: true
            {{- end }}
            {{- if .Values.persistence.enabled }}
-            - name: {{ include "axetrading-api.fullname" . }}-secrets-store
+            - name: {{ include "axetrading-api.fullname" . }}-data
               mountPath: {{ .Values.persistence.mountPath }}
            {{- end }}
            {{- if .Values.logFetcher.enabled }}
