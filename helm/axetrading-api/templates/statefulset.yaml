@@ -154,7 +154,7 @@ spec:
 volumeClaimTemplates:
     {{- if .Values.persistence.enabled }}
     - metadata:
-        name: {{ include "axetrading-api.fullname" . }}-data
+        name: {{ include "axetrading-api.fullname" . }}-pvc
         labels:
             {{- include "axetrading-api.labels" . | nindent 4 }}
         {{- if .Values.persistence.annotations }}
@@ -166,7 +166,7 @@ volumeClaimTemplates:
             - { { .Values.persistence.accessMode | quote } }
         resources:
             requests:
-                storage: { { .Values.persistence.storageSize | quote } }
+                storage: {{ .Values.persistence.storageSize | quote }}
         {{- if .Values.persistence.storageClass }}
         {{- if (eq "-" .Values.persistence.storageClass) }}
         storageClassName: ""

@@ -45,6 +45,11 @@ spec:
       - name: {{ include "axetrading-api.fullname" .}}-app-logs
         emptyDir: {}
       {{- end }}
+      {{- if ..Values.persistence.enabled }}
+      -name: {{ include "axetrading-api.fullname" . }}-pv
+       persistentVolumeClaim:
+         claimName: {{ include "axetrading-api.fullname" . }}-pvc
+      {{- end }}
       containers:
         - name: {{ include "axetrading-api.fullname" . }}
           securityContext:
@@ -73,7 +78,7 @@ spec:
               readOnly: true
            {{- end }}
            {{- if .Values.persistence.enabled }}
-            - name: {{ include "axetrading-api.fullname" . }}-data
+            - name: {{ include "axetrading-api.fullname" . }}-pvc
               mountPath: {{ .Values.persistence.mountPath }}
            {{- end }}
            {{- if .Values.logFetcher.enabled }}
@@ -149,29 +154,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-volumeClaimTemplates:
-    {{- if .Values.persistence.enabled }}
-    - metadata:
-        name: {{ include "axetrading-api.fullname" . }}-data
-        labels:
-            {{- include "axetrading-api.labels" . | nindent 4 }}
-        {{- if .Values.persistence.annotations }}
-        annotations:
-            {{ toYaml .Values.persistence.annotations | indent 10 }}
-        {{- end }}
-    spec:
-        accessModes:
-            - { { .Values.persistence.accessMode | quote } }
-        resources:
-            requests:
-                storage: { { .Values.persistence.storageSize | quote } }
-        {{- if .Values.persistence.storageClass }}
-        {{- if (eq "-" .Values.persistence.storageClass) }}
-        storageClassName: ""
-        {{- else }}
-        storageClassName: "{{ .Values.persistence.storageClass }}"
-        {{- end }}
-        {{- end }}
-    {{- end }}
-
 {{- end }}

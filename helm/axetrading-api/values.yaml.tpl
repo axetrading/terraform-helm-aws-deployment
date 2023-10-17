@@ -131,9 +131,10 @@ statefulset:
 
 persistence:
   enabled: true
-  accessMode: ReadWriteOnce
+  accessMode: ReadWriteMany
   storageSize: 2Gi
   storageClass: efs
+  storageClassName: ""
   mountPath: ""
 
 efsProvisioner:
