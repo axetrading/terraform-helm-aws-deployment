@@ -45,6 +45,11 @@ spec:
       - name: {{ include "axetrading-api.fullname" .}}-app-logs
         emptyDir: {}
       {{- end }}
+      {{- if .Values.persistence.enabled }}
+      -name: {{ include "axetrading-api.fullname" . }}-data
+               persistentVolumeClaim:
+                 claimName: {{ include "axetrading-api.fullname" . }}-pvc
+      {{- end }}
       containers:
         - name: {{ include "axetrading-api.fullname" . }}
           securityContext:
@@ -149,31 +154,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-## create pvc in case of statefulsets
-{{- if .Values.statefulset.enabled }}
-volumeClaimTemplates:
-    {{- if .Values.persistence.enabled }}
-    - metadata:
-        name: {{ include "axetrading-api.fullname" . }}-pvc
-        labels:
-            {{- include "axetrading-api.labels" . | nindent 4 }}
-        {{- if .Values.persistence.annotations }}
-        annotations:
-            {{ toYaml .Values.persistence.annotations | indent 10 }}
-        {{- end }}
-    spec:
-        accessModes:
-            - { { .Values.persistence.accessMode | quote } }
-        resources:
-            requests:
-                storage: {{ .Values.persistence.storageSize | quote }}
-        {{- if .Values.persistence.storageClass }}
-        {{- if (eq "-" .Values.persistence.storageClass) }}
-        storageClassName: ""
-        {{- else }}
-        storageClassName: "{{ .Values.persistence.storageClass }}"
-        {{- end }}
-        {{- end }}
-    {{- end }}
-  {{- end }}
 {{- end }}
