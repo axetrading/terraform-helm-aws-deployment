@@ -46,9 +46,9 @@ spec:
         emptyDir: {}
       {{- end }}
       {{- if .Values.persistence.enabled }}
-      -name: {{ include "axetrading-api.fullname" . }}-data
-               persistentVolumeClaim:
-                 claimName: {{ include "axetrading-api.fullname" . }}-pvc
+      - name: {{ include "axetrading-api.fullname" . }}-data
+        persistentVolumeClaim:
+          claimName: {{ include "axetrading-api.fullname" . }}-pvc
       {{- end }}
       containers:
         - name: {{ include "axetrading-api.fullname" . }}
