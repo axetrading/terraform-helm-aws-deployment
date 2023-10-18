@@ -375,24 +375,6 @@ variable "efs_filesystem_id" {
   default     = ""
 }
 
-variable "aws_region" {
-  type        = string
-  description = "EFS AWS Region"
-  default     = ""
-}
-
-variable "efs_provisioner_domain_name" {
-  type        = string
-  description = "EFS Domain Name "
-  default     = ""
-}
-
-variable "efs_role" {
-  type        = string
-  description = "EFS IAM Role for Pods"
-  default     = ""
-}
-
 variable "container_commands_args" {
   type        = list(any)
   description = "A list of args for container image at startup"

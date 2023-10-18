@@ -139,12 +139,7 @@ persistence:
 
 efsProvisioner:
   efsFileSystemId: $efs_filesystem_id
-  awsRegion: $aws_region
-  provisionerName: $efs_provisioner_domain_name
   reclaimPolicy: retain
-
-podAnnotationsstatefulset:
-  iam.amazonaws.com/role: $efs_role
 
 container_commands:
   args: []
