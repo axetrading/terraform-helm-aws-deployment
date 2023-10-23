@@ -13,8 +13,6 @@ spec:
   accessModes:
     - {{ .Values.persistence.accessMode }}
   storageClassName: {{ .Values.persistence.storageClassName }}
-  volumeMode: Filesystem
-  volumeName: {{ include "axetrading-api.fullname" . }}-pv
   resources:
     requests:
       storage: {{ .Values.persistence.storageSize }}
