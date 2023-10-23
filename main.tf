@@ -120,6 +120,12 @@ resource "helm_release" "main" {
     type  = "string"
   }
 
+  set {
+    name  = "persistence.mountPath"
+    value = var.persistence_mountPath
+    type  = "string"
+  }
+
   dynamic "set" {
     for_each = var.ingress_enabled ? [var.ingress_enabled] : []
     content {

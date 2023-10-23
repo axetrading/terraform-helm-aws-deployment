@@ -131,18 +131,15 @@ statefulset:
 
 persistence:
   enabled: true
-  accessMode: ReadWriteOnce
+  accessMode: ReadWriteMany
   storageSize: 2Gi
   storageClass: efs
+  storageClassName: ""
+  mountPath: ""
 
 efsProvisioner:
   efsFileSystemId: $efs_filesystem_id
-  awsRegion: $aws_region
-  provisionerName: $efs_provisioner_domain_name
   reclaimPolicy: retain
-
-podAnnotationsstatefulset:
-  iam.amazonaws.com/role: $efs_role
 
 container_commands:
   args: []
