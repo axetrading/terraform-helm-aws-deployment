@@ -25,11 +25,14 @@
 
 | Name | Type |
 |------|------|
+| [aws_iam_policy.amazoneks_efs_csi_driver_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.amazoneks_efs_csi_driver_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [helm_release.main](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [aws_iam_policy_document.amazoneks_efs_csi_driver_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [helm_template.main](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/data-sources/template) | data source |
@@ -42,12 +45,15 @@
 | <a name="input_additional_value_files"></a> [additional\_value\_files](#input\_additional\_value\_files) | A list of additional value files. It will work in the same way as helm -f value1.yaml -f value2.yaml | `list(any)` | `[]` | no |
 | <a name="input_assume_role_condition_test"></a> [assume\_role\_condition\_test](#input\_assume\_role\_condition\_test) | Name of the [IAM condition operator](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) to evaluate when assuming the role | `string` | `"StringEquals"` | no |
 | <a name="input_atomic"></a> [atomic](#input\_atomic) | If set, the installation process purges the chart on failure. The wait flag will be set automatically if atomic is used. | `bool` | `false` | no |
+| <a name="input_attach_amazoneks_efs_csi_driver_policy"></a> [attach\_amazoneks\_efs\_csi\_driver\_policy](#input\_attach\_amazoneks\_efs\_csi\_driver\_policy) | Attach a policy that allows the CSI driver’s service account to make calls to AWS APIs on your behalf | `bool` | `false` | no |
 | <a name="input_attach_secrets_policy"></a> [attach\_secrets\_policy](#input\_attach\_secrets\_policy) | Attach a policy that will allow the role to get secrets from AWS Secrets Manager or AWS SSM | `bool` | `true` | no |
 | <a name="input_autoscaling"></a> [autoscaling](#input\_autoscaling) | "A map of autoscaling configuration, containing keys 'min\_replicas', <br>  'max\_replicas', 'target\_cpu\_utilization' and 'target\_memory\_utilization'. | <pre>object({<br>    min_replicas              = number<br>    max_replicas              = number<br>    target_cpu_utilization    = optional(number, 75)<br>    target_memory_utilization = optional(number, 75)<br>  })</pre> | `null` | no |
+| <a name="input_container_commands_args"></a> [container\_commands\_args](#input\_container\_commands\_args) | A list of args for container image at startup | `list(any)` | `[]` | no |
 | <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | If set, Terraform will create the namespace if it does not yet exist. | `bool` | `false` | no |
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role | `bool` | `true` | no |
 | <a name="input_create_service_account"></a> [create\_service\_account](#input\_create\_service\_account) | Whether to create a service account for Kubernetes Deployment | `bool` | `true` | no |
 | <a name="input_deployment_strategy_type"></a> [deployment\_strategy\_type](#input\_deployment\_strategy\_type) | Deployment strategy type. Valid values: RollingUpdate, Recreate | `string` | `"RollingUpdate"` | no |
+| <a name="input_efs_filesystem_id"></a> [efs\_filesystem\_id](#input\_efs\_filesystem\_id) | EFS File System Id | `string` | `""` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `true` | no |
 | <a name="input_health_check_initial_delay_seconds"></a> [health\_check\_initial\_delay\_seconds](#input\_health\_check\_initial\_delay\_seconds) | Number of seconds after the container has started before liveness probes are initiated. | `number` | `30` | no |
 | <a name="input_health_check_path"></a> [health\_check\_path](#input\_health\_check\_path) | Readiness Probe health check path | `string` | `"/healthcheck"` | no |
@@ -65,7 +71,12 @@
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the Helm deployment. | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to install the release into. | `string` | `"default"` | no |
+| <a name="input_node_labels"></a> [node\_labels](#input\_node\_labels) | Map of node labels for pod scheduling. This map must only contain one key-value pair. | `map(list(string))` | `{}` | no |
 | <a name="input_oidc_providers"></a> [oidc\_providers](#input\_oidc\_providers) | Map of OIDC providers where each provider map should contain the `provider`, `provider_arn`, and `namespace_service_accounts` | `any` | `{}` | no |
+| <a name="input_persistence_accessMode"></a> [persistence\_accessMode](#input\_persistence\_accessMode) | Accessmode for persistent storage | `string` | `"ReadWriteOnce"` | no |
+| <a name="input_persistence_enabled"></a> [persistence\_enabled](#input\_persistence\_enabled) | Whether to create persistent storage | `bool` | `false` | no |
+| <a name="input_persistence_mountPath"></a> [persistence\_mountPath](#input\_persistence\_mountPath) | Mount Path for Persistent Storage on Pod | `string` | `""` | no |
+| <a name="input_persistence_storageSize"></a> [persistence\_storageSize](#input\_persistence\_storageSize) | Storage size for persistent storage | `string` | `"2Gi"` | no |
 | <a name="input_policy_name_prefix"></a> [policy\_name\_prefix](#input\_policy\_name\_prefix) | IAM policy name prefix | `string` | `"eks-policy"` | no |
 | <a name="input_prometheus_rule_enabled"></a> [prometheus\_rule\_enabled](#input\_prometheus\_rule\_enabled) | Whether to create prometheus rule | `bool` | `false` | no |
 | <a name="input_prometheus_rules_file_path"></a> [prometheus\_rules\_file\_path](#input\_prometheus\_rules\_file\_path) | Prometheus rules file path | `string` | `"prometheus-rules.yml"` | no |
@@ -83,6 +94,7 @@
 | <a name="input_service_app_port"></a> [service\_app\_port](#input\_service\_app\_port) | Kubernetes Container Port | `number` | `80` | no |
 | <a name="input_service_port"></a> [service\_port](#input\_service\_port) | Kubernetes Service Port | `number` | `80` | no |
 | <a name="input_service_type"></a> [service\_type](#input\_service\_type) | Kubernetes ServiceTypes allow you to specify what kind of Service you want. | `string` | `"ClusterIP"` | no |
+| <a name="input_statefulset_enabled"></a> [statefulset\_enabled](#input\_statefulset\_enabled) | Whether to create statefulset | `bool` | `false` | no |
 | <a name="input_statsd_enabled"></a> [statsd\_enabled](#input\_statsd\_enabled) | Whether to create statsd host environment variables | `bool` | `false` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add the the IAM role | `map(any)` | `{}` | no |
 | <a name="input_target_cpu_utilization"></a> [target\_cpu\_utilization](#input\_target\_cpu\_utilization) | Target CPU utilization in percentage. | `number` | `80` | no |
