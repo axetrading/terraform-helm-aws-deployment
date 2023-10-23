@@ -119,7 +119,7 @@ nodeSelector: {}
 
 tolerations: []
 
-%{~ if nodeLabelKey != "" ~}
+%{ if nodeLabelKey != "" ~}
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -127,8 +127,11 @@ affinity:
       - matchExpressions:
         - key: ${nodeLabelKey}
           operator: In
-          values: ${nodeLabelValues}
-%{~ endif ~}
+          values: 
+          %{ for value in nodeLabelValues ~}
+          - ${value}
+          %{ endfor ~}
+%{ endif ~}
 
 prometheusRule:
   enabled: false
