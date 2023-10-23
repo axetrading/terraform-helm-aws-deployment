@@ -381,4 +381,15 @@ variable "container_commands_args" {
   default     = []
 }
 
+variable "node_labels" {
+  description = "Map of node labels for pod scheduling. This map must only contain one key-value pair."
+  type        = map(list(string))
+  default     = {}
+
+  validation {
+    condition     = length(var.node_labels) <= 1
+    error_message = "The node_labels map must contain exactly one key-value pair."
+  }
+}
+
 

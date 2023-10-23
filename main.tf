@@ -5,6 +5,7 @@ locals {
     templatefile("${path.module}/helm/axetrading-api/values.yaml.tpl", {
       imageRepository         = var.image_repository
       imagePullPolicy         = var.image_pull_policy
+      additionalPorts         = var.additional_ports
       autoscaling             = var.autoscaling
       awsSecrets              = var.secrets
       createServiceAccount    = var.create_service_account
@@ -19,13 +20,14 @@ locals {
       logFetcherEnabled       = var.log_fetcher_enabled
       logFetcherImage         = var.log_fetcher_enabled ? var.log_fetcher_image : ""
       logFetcherLogsPath      = var.log_fetcher_enabled ? var.log_fetcher_logs_path : ""
+      nodeLabelKey            = length(var.node_labels) > 0 ? keys(var.node_labels)[0] : ""
+      nodeLabelValues         = length(var.node_labels) > 0 ? values(var.node_labels)[0] : []
       readinessCheckType      = var.health_check_type
       replicaSetCount         = var.replica_set
       resources               = var.resources
       serviceAppPort          = var.service_app_port
       servicePort             = var.service_port
       serviceType             = var.service_type
-      additionalPorts         = var.additional_ports
       targetCPUUtilization    = var.target_cpu_utilization
       targetGroupARN          = var.target_group_arn
       targetGroupPort         = var.target_group_port
