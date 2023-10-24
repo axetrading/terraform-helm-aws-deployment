@@ -146,7 +146,7 @@ persistence:
   accessMode: ReadWriteMany
   storageSize: 2Gi
   storageClass: efs
-  storageClassName: ""
+  storageClassName: efs-sc
   mountPath: ""
 
 efsProvisioner:
