@@ -133,7 +133,7 @@ resource "helm_release" "main" {
     content {
       name  = "efsProvisioner.efsFileSystemId"
       value = var.efs_filesystem_id
-      type  = string
+      type  = "string"
     }
   }
 
