@@ -129,6 +129,15 @@ resource "helm_release" "main" {
   }
 
   dynamic "set" {
+    for_each = var.persistence_enabled ? [var.persistence_enabled] : []
+    content {
+      name  = "efsProvisioner.efsFileSystemId"
+      value = var.efs_filesystem_id
+      type = string
+    }
+  }
+
+  dynamic "set" {
     for_each = var.ingress_enabled ? [var.ingress_enabled] : []
     content {
       name  = "ingress.annotations.kubernetes\\.io/ingress\\.class"

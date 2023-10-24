@@ -150,7 +150,7 @@ persistence:
   mountPath: ""
 
 efsProvisioner:
-  efsFileSystemId: $efs_filesystem_id
+  efsFileSystemId: ""
   reclaimPolicy: retain
 
 container_commands:
