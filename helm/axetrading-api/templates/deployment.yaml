@@ -112,6 +112,10 @@ spec:
             tcpSocket:
               port: {{ .Values.service.appport }}
             {{- end }}
+            {{- if .Values.readiness.execCmd.enabled }}
+            exec:
+              command: {{ .Values.healthcheck.path }}
+            {{- end }}
             initialDelaySeconds: {{ .Values.initialDelaySeconds }}
             periodSeconds: 1
             timeoutSeconds: 10
