@@ -95,11 +95,23 @@ readiness:
     enabled: true
   tpcCheck:
     enabled: false
+  execCmd:
+    enabled: false
   %{~ endif ~}
   %{~ if readinessCheckType == "tcp" ~}
   httpCheck:
     enabled: false
   tpcCheck:
+    enabled: true
+  execCmd:
+    enabled: false
+  %{~ endif ~}
+  %{~ if readinessCheckType == "exec" ~}
+  httpCheck:
+    enabled: false
+  tpcCheck:
+    enabled: false
+  execCmd:
     enabled: true
   %{~ endif ~}
 

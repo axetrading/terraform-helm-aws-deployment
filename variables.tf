@@ -238,7 +238,7 @@ variable "additional_ports" {
 
 variable "health_check_type" {
   type        = string
-  description = "Readiness Probe health check type : Valid values: http or tcp"
+  description = "Readiness Probe health check type : Valid values: http or tcp or exec"
   default     = "http"
 }
 
