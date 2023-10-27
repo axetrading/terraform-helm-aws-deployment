@@ -309,7 +309,7 @@ variable "health_check_path" {
 }
 
 variable "health_check_exec_commands" {
-  type        = list(string)
+  type        = list(any)
   description = "Readiness Probe health check exec command"
   default     = []
 }
