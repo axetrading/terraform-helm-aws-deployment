@@ -10,7 +10,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   {{- if .Values.strategy.type }}
-  strategy:
+  updateStrategy:
     type: {{ .Values.strategy.type }}
   {{- end }}
   selector:

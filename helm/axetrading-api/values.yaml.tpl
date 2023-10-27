@@ -158,8 +158,12 @@ persistence:
   accessMode: ReadWriteMany
   storageSize: 2Gi
   storageClass: efs
-  storageClassName: efs-sc
+  storageClassName: ""
   mountPath: ""
+
+storageClass:
+  create: false
+  name: ""
 
 efsProvisioner:
   efsFileSystemId: ""

@@ -145,4 +145,20 @@ resource "helm_release" "main" {
       type  = "string"
     }
   }
+
+  dynamic "set" {
+    for_each = var.create_storage_class ? [true] : [false]
+    content {
+      name  = "storageClass.enabled"
+      value = set.value
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.persistence_enabled ? [var.persistence_enabled] : []
+    content {
+      name = "persistence.storageClassName"
+      value = var.storage_class_name
+    }
+  }
 }
