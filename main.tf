@@ -117,6 +117,11 @@ resource "helm_release" "main" {
   }
 
   set {
+    name  = "healthcheck.execCommands"
+    value = "{${join(",", var.health_check_exec_commands)}}"
+  }
+
+  set {
     name  = "persistence.storageSize"
     value = var.persistence_storageSize
     type  = "string"

@@ -123,6 +123,7 @@ logFetcher:
 
 healthcheck:
   path: ${healthCheckPath}
+  execCommands: []
 
 statsd:
   enabled: false

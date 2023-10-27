@@ -114,7 +114,7 @@ spec:
             {{- end }}
             {{- if .Values.readiness.execCmd.enabled }}
             exec:
-              command: {{ .Values.healthcheck.path }}
+              command: {{ .Values.healthcheck.execCommands }}
             {{- end }}
             initialDelaySeconds: {{ .Values.initialDelaySeconds }}
             periodSeconds: 1

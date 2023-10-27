@@ -308,6 +308,12 @@ variable "health_check_path" {
   default     = "/healthcheck"
 }
 
+variable "health_check_exec_commands" {
+  type        = list(string)
+  description = "Readiness Probe health check exec command"
+  default     = []
+}
+
 variable "deployment_strategy_type" {
   type        = string
   description = "Deployment strategy type. Valid values: RollingUpdate, Recreate"
