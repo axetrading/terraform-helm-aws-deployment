@@ -55,5 +55,70 @@ data "helm_template" "main" {
     value = var.prometheus_rule_enabled
   }
 
+  set {
+    name  = "statefulset.enabled"
+    value = var.statefulset_enabled
+  }
 
+  set {
+    name  = "persistence.enabled"
+    value = var.persistence_enabled
+  }
+
+  set {
+    name  = "persistence.accessMode"
+    value = var.persistence_accessMode
+    type  = "string"
+  }
+
+  set {
+    name  = "container_commands.args"
+    value = "{${join(",", var.container_commands_args)}}"
+  }
+
+  set {
+    name  = "persistence.storageSize"
+    value = var.persistence_storageSize
+    type  = "string"
+  }
+
+  set {
+    name  = "persistence.mountPath"
+    value = var.persistence_mountPath
+    type  = "string"
+  }
+
+  dynamic "set" {
+    for_each = var.persistence_enabled ? [var.persistence_enabled] : []
+    content {
+      name  = "efsProvisioner.efsFileSystemId"
+      value = var.efs_filesystem_id
+      type  = "string"
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.ingress_enabled ? [var.ingress_enabled] : []
+    content {
+      name  = "ingress.annotations.kubernetes\\.io/ingress\\.class"
+      value = "nginx"
+      type  = "string"
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.create_storage_class ? [true] : [false]
+    content {
+      name  = "storageClass.create"
+      value = set.value
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.persistence_enabled ? [var.persistence_enabled] : []
+    content {
+      name  = "persistence.storageClassName"
+      value = var.storage_class_name
+    }
+  }
 }
