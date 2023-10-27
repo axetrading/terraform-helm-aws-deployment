@@ -149,7 +149,7 @@ resource "helm_release" "main" {
   dynamic "set" {
     for_each = var.create_storage_class ? [true] : [false]
     content {
-      name  = "storageClass.enabled"
+      name  = "storageClass.create"
       value = set.value
     }
   }
