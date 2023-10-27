@@ -157,7 +157,7 @@ resource "helm_release" "main" {
   dynamic "set" {
     for_each = var.persistence_enabled ? [var.persistence_enabled] : []
     content {
-      name = "persistence.storageClassName"
+      name  = "persistence.storageClassName"
       value = var.storage_class_name
     }
   }

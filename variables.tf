@@ -393,13 +393,13 @@ variable "node_labels" {
 }
 
 variable "create_storage_class" {
-  type = bool
+  type        = bool
   description = "Whether to create storage class"
-  default = false
+  default     = false
 }
 
 variable "storage_class_name" {
-  type = string
+  type        = string
   description = "Name of the storage class"
-  default = "efs-sc"
+  default     = "efs-sc"
 }

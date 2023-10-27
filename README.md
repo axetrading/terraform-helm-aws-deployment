@@ -52,12 +52,13 @@
 | <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | If set, Terraform will create the namespace if it does not yet exist. | `bool` | `false` | no |
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role | `bool` | `true` | no |
 | <a name="input_create_service_account"></a> [create\_service\_account](#input\_create\_service\_account) | Whether to create a service account for Kubernetes Deployment | `bool` | `true` | no |
+| <a name="input_create_storage_class"></a> [create\_storage\_class](#input\_create\_storage\_class) | Whether to create storage class | `bool` | `false` | no |
 | <a name="input_deployment_strategy_type"></a> [deployment\_strategy\_type](#input\_deployment\_strategy\_type) | Deployment strategy type. Valid values: RollingUpdate, Recreate | `string` | `"RollingUpdate"` | no |
 | <a name="input_efs_filesystem_id"></a> [efs\_filesystem\_id](#input\_efs\_filesystem\_id) | EFS File System Id | `string` | `""` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `true` | no |
 | <a name="input_health_check_initial_delay_seconds"></a> [health\_check\_initial\_delay\_seconds](#input\_health\_check\_initial\_delay\_seconds) | Number of seconds after the container has started before liveness probes are initiated. | `number` | `30` | no |
 | <a name="input_health_check_path"></a> [health\_check\_path](#input\_health\_check\_path) | Readiness Probe health check path | `string` | `"/healthcheck"` | no |
-| <a name="input_health_check_type"></a> [health\_check\_type](#input\_health\_check\_type) | Readiness Probe health check type : Valid values: http or tcp | `string` | `"http"` | no |
+| <a name="input_health_check_type"></a> [health\_check\_type](#input\_health\_check\_type) | Readiness Probe health check type : Valid values: http or tcp or exec | `string` | `"http"` | no |
 | <a name="input_image_pull_policy"></a> [image\_pull\_policy](#input\_image\_pull\_policy) | The imagePullPolicy for a container and the tag of the image affect when the kubelet attempts to pull (download) the specified image. | `string` | `"IfNotPresent"` | no |
 | <a name="input_image_repository"></a> [image\_repository](#input\_image\_repository) | Kubernetes Deploymet image for pod's container | `string` | n/a | yes |
 | <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Kubernetes Deployment image tag | `string` | n/a | yes |
@@ -96,6 +97,7 @@
 | <a name="input_service_type"></a> [service\_type](#input\_service\_type) | Kubernetes ServiceTypes allow you to specify what kind of Service you want. | `string` | `"ClusterIP"` | no |
 | <a name="input_statefulset_enabled"></a> [statefulset\_enabled](#input\_statefulset\_enabled) | Whether to create statefulset | `bool` | `false` | no |
 | <a name="input_statsd_enabled"></a> [statsd\_enabled](#input\_statsd\_enabled) | Whether to create statsd host environment variables | `bool` | `false` | no |
+| <a name="input_storage_class_name"></a> [storage\_class\_name](#input\_storage\_class\_name) | Name of the storage class | `string` | `"efs-sc"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add the the IAM role | `map(any)` | `{}` | no |
 | <a name="input_target_cpu_utilization"></a> [target\_cpu\_utilization](#input\_target\_cpu\_utilization) | Target CPU utilization in percentage. | `number` | `80` | no |
 | <a name="input_target_group_arn"></a> [target\_group\_arn](#input\_target\_group\_arn) | The ARN of the target group with which to register targets - this is used by the targetGroupBinding CRD | `string` | `null` | no |
