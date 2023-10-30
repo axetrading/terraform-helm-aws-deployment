@@ -309,9 +309,9 @@ variable "health_check_path" {
 }
 
 variable "health_check_exec_commands" {
-  type        = list(any)
+  type        = string
   description = "Readiness Probe health check exec command"
-  default     = []
+  default     = null
 }
 
 variable "deployment_strategy_type" {
