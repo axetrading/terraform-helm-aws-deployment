@@ -107,8 +107,11 @@ spec:
               port: {{ .Values.service.appport }}
             {{- end }}
             {{- if .Values.readiness.execCmd.enabled }}
+            {{- range .Values.healthcheck.execCommands }}
             exec:
-              command: {{ .Values.healthcheck.execCommands }}
+              command:
+                - {{ . }}
+            {{- end }}
             {{- end }}
             initialDelaySeconds: {{ .Values.initialDelaySeconds}}
             failureThreshold: 3
@@ -124,8 +127,11 @@ spec:
               port: {{ .Values.service.appport }}
             {{- end }}
             {{- if .Values.readiness.execCmd.enabled }}
+            {{- range .Values.healthcheck.execCommands }}
             exec:
-              command: {{ .Values.healthcheck.execCommands }}
+              command:
+                - {{ . }}
+            {{- end }}
             {{- end }}
             initialDelaySeconds: {{ .Values.initialDelaySeconds }}
             periodSeconds: 1

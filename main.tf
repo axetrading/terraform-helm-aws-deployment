@@ -118,8 +118,7 @@ resource "helm_release" "main" {
 
   set {
     name  = "healthcheck.execCommands"
-    value = jsonencode(var.health_check_exec_commands)
-    type  = "string"
+    value = "{${join(",", var.health_check_exec_commands)}}"
   }
 
   set {
