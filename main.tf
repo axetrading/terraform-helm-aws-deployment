@@ -119,7 +119,7 @@ resource "helm_release" "main" {
   set {
     name  = "healthcheck.execCommands"
     value = var.health_check_exec_commands
-    type = "string"
+    type  = "string"
   }
 
   set {
