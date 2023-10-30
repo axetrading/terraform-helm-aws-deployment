@@ -97,8 +97,19 @@ spec:
             {{- end }}
             {{- end }}
           livenessProbe:
+            {{- if .Values.readiness.httpCheck.enabled }}
+            httpGet:
+              path: {{ .Values.healthcheck.path }}
+              port: {{ .Values.service.appport }}
+            {{- end }}
+            {{- if .Values.readiness.tpcCheck.enabled }}
             tcpSocket:
               port: {{ .Values.service.appport }}
+            {{- end }}
+            {{- if .Values.readiness.execCmd.enabled }}
+            exec:
+              command: {{ .Values.healthcheck.execCommands }}
+            {{- end }}
             initialDelaySeconds: {{ .Values.initialDelaySeconds}}
             failureThreshold: 3
             periodSeconds: 1
