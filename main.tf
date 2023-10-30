@@ -113,12 +113,12 @@ resource "helm_release" "main" {
 
   set {
     name  = "container_commands.args"
-    value = "{${join(",", var.container_commands_args)}}"
+    value = join(",", var.container_commands_args)
   }
 
   set {
     name  = "healthcheck.execCommands"
-    value = var.health_check_exec_commands
+    value = join(",", var.health_check_exec_commands)
     type  = "string"
   }
 
