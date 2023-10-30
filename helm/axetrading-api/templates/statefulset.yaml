@@ -125,7 +125,7 @@ spec:
             {{- end }}
             {{- if .Values.readiness.execCmd.enabled }}
             exec:
-              command: {{ .Values.healthcheck.execCommands | mustToJson }}
+              command: {{ .Values.healthcheck.execCommands }}
             {{- end }}
             initialDelaySeconds: {{ .Values.initialDelaySeconds }}
             periodSeconds: 1
