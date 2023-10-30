@@ -123,7 +123,12 @@ logFetcher:
 
 healthcheck:
   path: ${healthCheckPath}
-  execCommands: []
+  %{~ if readinessCheckType == "exec" ~}
+  execCommands: 
+    %{~ for command in healthCheckExecCommands ~}
+    - ${command}
+    %{~ endfor ~}
+  %{~ endif ~}
 
 statsd:
   enabled: false

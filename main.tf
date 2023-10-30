@@ -23,6 +23,7 @@ locals {
       nodeLabelKey            = length(var.node_labels) > 0 ? keys(var.node_labels)[0] : ""
       nodeLabelValues         = length(var.node_labels) > 0 ? values(var.node_labels)[0] : []
       readinessCheckType      = var.health_check_type
+      healthCheckExecCommands = var.health_check_exec_commands
       replicaSetCount         = var.replica_set
       resources               = var.resources
       serviceAppPort          = var.service_app_port
@@ -114,12 +115,6 @@ resource "helm_release" "main" {
   set {
     name  = "container_commands.args"
     value = "{${join(",", var.container_commands_args)}}"
-  }
-
-  set {
-    name  = "healthcheck.execCommands"
-    value = join(",", var.health_check_exec_commands)
-    type  = "string"
   }
 
   set {

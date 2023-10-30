@@ -109,8 +109,8 @@ spec:
             {{- if .Values.readiness.execCmd.enabled }}
             exec:
               command:
-              {{- range (split "," $.Values.healthcheck.execCommands) }}
-                - {{ . }}
+              {{- range $_, $cmd := .Values.healthcheck.execCommands) }}
+                - {{ $cmd }}
               {{- end }}
             {{- end }}
             initialDelaySeconds: {{ .Values.initialDelaySeconds}}
@@ -129,8 +129,8 @@ spec:
             {{- if .Values.readiness.execCmd.enabled }}
             exec:
               command:
-              {{- range (split "," $.Values.healthcheck.execCommands) }}
-                - {{ . }}
+              {{- range $_, $cmd := .Values.healthcheck.execCommands) }}
+                - {{ $cmd }}
               {{- end }}
             {{- end }}
             initialDelaySeconds: {{ .Values.initialDelaySeconds }}
