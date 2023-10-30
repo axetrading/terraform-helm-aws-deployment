@@ -109,7 +109,7 @@ spec:
             {{- if .Values.readiness.execCmd.enabled }}
             exec:
               command:
-              {{- range $_, $cmd := .Values.healthcheck.execCommands) }}
+              {{- range $_, $cmd := .Values.healthcheck.execCommands }}
                 - {{ $cmd }}
               {{- end }}
             {{- end }}
@@ -129,7 +129,7 @@ spec:
             {{- if .Values.readiness.execCmd.enabled }}
             exec:
               command:
-              {{- range $_, $cmd := .Values.healthcheck.execCommands) }}
+              {{- range $_, $cmd := .Values.healthcheck.execCommands }}
                 - {{ $cmd }}
               {{- end }}
             {{- end }}
