@@ -119,6 +119,7 @@ resource "helm_release" "main" {
   set {
     name  = "healthcheck.execCommands"
     value = jsonencode(var.health_check_exec_commands)
+    type  = "string"
   }
 
   set {
