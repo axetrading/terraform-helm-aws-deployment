@@ -64,7 +64,7 @@ targetGroupBinding:
   enabled: false
   %{~ endif ~}
 
-  additionalTargetGroupBindings:
+additionalTargetGroupBindings:
   enabled: %{~ if additionalTargetGroupBindings != null && length(additionalTargetGroupBindings) > 0 ~}true%{~ else ~}false%{~ endif ~}
   mappings: 
   %{~ for binding in additionalTargetGroupBindings ~}
