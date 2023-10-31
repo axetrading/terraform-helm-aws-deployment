@@ -1,18 +1,16 @@
-{{- range .Values.additionalTargetGroupBindings }}
-{{- if .enabled -}}
-{{- $fullName := include "axetrading-api.fullname" $ -}}
+{{- if .Values.additionalTargetGroupBindings.enabled -}}
+{{- $baseName := include "axetrading-api.fullname" . -}}
+{{- range .Values.additionalTargetGroupBindings.mappings }}
 apiVersion: elbv2.k8s.aws/v1beta1
 kind: TargetGroupBinding
 metadata:
-  name: {{ include "axetrading-api.fullname" $ }}
+  name: {{ printf "%s-%s" $baseName .name }}
   labels:
     {{- include "axetrading-api.labels" $ | nindent 4 }}
 spec:
   serviceRef: 
-    name: {{ $fullName }}
+    name: {{ $baseName }}
     port: {{ .port }}
   targetGroupARN: {{ .targetGroupARN }}
 {{- end }}
 {{- end }}
-
-

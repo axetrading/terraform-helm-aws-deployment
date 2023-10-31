@@ -64,6 +64,15 @@ targetGroupBinding:
   enabled: false
   %{~ endif ~}
 
+  additionalTargetGroupBindings:
+  enabled: %{~ if additionalTargetGroupBindings != null && length(additionalTargetGroupBindings) > 0 ~}true%{~ else ~}false%{~ endif ~}
+  mappings: 
+  %{~ for binding in additionalTargetGroupBindings ~}
+    - port: ${binding.port}
+      targetGroupARN: ${binding.targetGroupARN}
+      name: ${binding.name}
+  %{~ endfor ~}
+  
 autoscaling:
   %{~ if autoscaling != null ~}
   enabled: true

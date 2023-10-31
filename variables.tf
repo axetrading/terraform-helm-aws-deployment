@@ -410,7 +410,7 @@ variable "storage_class_name" {
   default     = "efs-sc"
 }
 
-variable "additionalTargetGroupBindings" {
+variable "additional_target_group_bindings" {
   description = "List of additional target group bindings"
   type = list(object({
     name           = string
