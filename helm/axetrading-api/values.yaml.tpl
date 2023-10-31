@@ -65,7 +65,7 @@ targetGroupBinding:
   %{~ endif ~}
 
 additionalTargetGroupBindings:
-  enabled: %{~ if additionalTargetGroupBindings != null && length(additionalTargetGroupBindings) > 0 }true%{~ else }false%{~ endif }
+  enabled: %{ if additionalTargetGroupBindings != null && length(additionalTargetGroupBindings) > 0 }true%{~ else }false%{~ endif }
   mappings: 
   %{~ for binding in additionalTargetGroupBindings ~}
     - port: ${binding.port}
