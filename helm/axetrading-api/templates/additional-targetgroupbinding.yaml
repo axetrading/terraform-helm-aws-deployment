@@ -1,6 +1,7 @@
 {{- if .Values.additionalTargetGroupBindings.enabled -}}
 {{- $baseName := include "axetrading-api.fullname" . -}}
 {{- range .Values.additionalTargetGroupBindings.mappings }}
+---
 apiVersion: elbv2.k8s.aws/v1beta1
 kind: TargetGroupBinding
 metadata:
