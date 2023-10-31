@@ -3,36 +3,37 @@ locals {
   values = [
     var.prometheus_rule_enabled ? file(var.prometheus_rules_file_path) : null,
     templatefile("${path.module}/helm/axetrading-api/values.yaml.tpl", {
-      imageRepository         = var.image_repository
-      imagePullPolicy         = var.image_pull_policy
-      additionalPorts         = var.additional_ports
-      autoscaling             = var.autoscaling
-      awsSecrets              = var.secrets
-      createServiceAccount    = var.create_service_account
-      fullNameOverride        = var.name
-      healthCheckPath         = var.health_check_path
-      imageTag                = var.image_tag
-      ingressEnabled          = var.ingress_enabled
-      ingressHost             = var.ingress_host
-      ingressPath             = var.ingress_path
-      ingressPathType         = var.ingress_path_type
-      initialDelaySeconds     = var.health_check_initial_delay_seconds
-      logFetcherEnabled       = var.log_fetcher_enabled
-      logFetcherImage         = var.log_fetcher_enabled ? var.log_fetcher_image : ""
-      logFetcherLogsPath      = var.log_fetcher_enabled ? var.log_fetcher_logs_path : ""
-      nodeLabelKey            = length(var.node_labels) > 0 ? keys(var.node_labels)[0] : ""
-      nodeLabelValues         = length(var.node_labels) > 0 ? values(var.node_labels)[0] : []
-      readinessCheckType      = var.health_check_type
-      healthCheckExecCommands = var.health_check_exec_commands
-      replicaSetCount         = var.replica_set
-      resources               = var.resources
-      serviceAppPort          = var.service_app_port
-      servicePort             = var.service_port
-      serviceType             = var.service_type
-      targetCPUUtilization    = var.target_cpu_utilization
-      targetGroupARN          = var.target_group_arn
-      targetGroupPort         = var.target_group_port
-      targetMemoryUtilization = var.target_memory_utilization
+      imageRepository               = var.image_repository
+      imagePullPolicy               = var.image_pull_policy
+      additionalPorts               = var.additional_ports
+      additionalTargetGroupBindings = var.additional_target_group_bindings
+      autoscaling                   = var.autoscaling
+      awsSecrets                    = var.secrets
+      createServiceAccount          = var.create_service_account
+      fullNameOverride              = var.name
+      healthCheckPath               = var.health_check_path
+      imageTag                      = var.image_tag
+      ingressEnabled                = var.ingress_enabled
+      ingressHost                   = var.ingress_host
+      ingressPath                   = var.ingress_path
+      ingressPathType               = var.ingress_path_type
+      initialDelaySeconds           = var.health_check_initial_delay_seconds
+      logFetcherEnabled             = var.log_fetcher_enabled
+      logFetcherImage               = var.log_fetcher_enabled ? var.log_fetcher_image : ""
+      logFetcherLogsPath            = var.log_fetcher_enabled ? var.log_fetcher_logs_path : ""
+      nodeLabelKey                  = length(var.node_labels) > 0 ? keys(var.node_labels)[0] : ""
+      nodeLabelValues               = length(var.node_labels) > 0 ? values(var.node_labels)[0] : []
+      readinessCheckType            = var.health_check_type
+      healthCheckExecCommands       = var.health_check_exec_commands
+      replicaSetCount               = var.replica_set
+      resources                     = var.resources
+      serviceAppPort                = var.service_app_port
+      servicePort                   = var.service_port
+      serviceType                   = var.service_type
+      targetCPUUtilization          = var.target_cpu_utilization
+      targetGroupARN                = var.target_group_arn
+      targetGroupPort               = var.target_group_port
+      targetMemoryUtilization       = var.target_memory_utilization
       }
     )
   ]
