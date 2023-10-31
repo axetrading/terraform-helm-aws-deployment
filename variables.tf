@@ -409,3 +409,13 @@ variable "storage_class_name" {
   description = "Name of the storage class"
   default     = "efs-sc"
 }
+
+variable "additionalTargetGroupBindings" {
+  description = "List of additional target group bindings"
+  type = list(object({
+    name           = string
+    targetGroupARN = string
+    port           = number
+  }))
+  default = []
+}
