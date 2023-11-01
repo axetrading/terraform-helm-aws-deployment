@@ -48,9 +48,11 @@ ingress:
 
 initialDelaySeconds: ${initialDelaySeconds}
 
-resources: 
+resources:
+   %{~ if setResourceLimits ~}
    limits:
      memory: ${resources.memory}
+   %{~ endif ~}
    requests:
      cpu: ${resources.cpu}
      memory: ${resources.memory}

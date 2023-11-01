@@ -419,3 +419,9 @@ variable "additional_target_group_bindings" {
   }))
   default = []
 }
+
+variable "set_resource_limits" {
+  type        = bool
+  description = "Whether to add limits for memory resource"
+  default     = true
+}

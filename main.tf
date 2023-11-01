@@ -34,6 +34,7 @@ locals {
       targetGroupARN                = var.target_group_arn
       targetGroupPort               = var.target_group_port
       targetMemoryUtilization       = var.target_memory_utilization
+      setResourceLimits             = var.set_resource_limits
       }
     )
   ]
