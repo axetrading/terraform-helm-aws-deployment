@@ -438,7 +438,7 @@ variable "init_containers_image" {
   default     = ""
 }
 
-variable "init_containers_commands" {
+variable "init_containers_args" {
   type        = list(any)
   description = "A list of args for init container image at startup"
   default     = []

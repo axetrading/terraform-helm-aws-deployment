@@ -194,8 +194,8 @@ container_commands:
 initContainers:
   enabled: ${initContainersEnabled}
   image: ${initContainersImage}
-  commands:
-    %{~ for command in initContainersCommands ~}
-    - ${command}
+  args:
+    %{~ for arg in initContainersArgs ~}
+    - ${arg}
     %{~ endfor ~}
 

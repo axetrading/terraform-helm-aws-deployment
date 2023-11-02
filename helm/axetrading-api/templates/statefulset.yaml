@@ -179,8 +179,8 @@ spec:
     initContainers:
       - name: {{ include "axetrading-api.fullname" . }}-init-service
         image: {{ .Values.initContainers.image }}
-        command:
-        {{ - range $_, $cmd := .Values.initContainers.commands }}
+        args:
+        {{ - range $_, $cmd := .Values.initContainers.args }}
            - {{ $cmd }}
         {{ - end }}
     {{ - end }}
