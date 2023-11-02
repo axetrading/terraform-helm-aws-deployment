@@ -132,7 +132,7 @@ variable "role_arn" {
 
 variable "image_repository" {
   type        = string
-  description = "Kubernetes Deploymet image for pod's container"
+  description = "Kubernetes Deployment image for pod's container"
 }
 
 variable "image_pull_policy" {
@@ -244,7 +244,7 @@ variable "health_check_type" {
 
 variable "log_fetcher_enabled" {
   type        = bool
-  description = "Wheter to enable the log-fetcher sidecar container or not"
+  description = "Whether to enable the log-fetcher sidecar container or not"
   default     = false
 }
 
@@ -418,4 +418,28 @@ variable "additional_target_group_bindings" {
     port           = number
   }))
   default = []
+}
+
+variable "set_resource_limits" {
+  type        = string
+  description = "Whether to add limits for memory resource"
+  default     = null
+}
+
+variable "init_containers_enabled" {
+  type        = bool
+  description = "Whether to enable the init container or not"
+  default     = false
+}
+
+variable "init_containers_image" {
+  type        = string
+  description = "The container image for the init container."
+  default     = ""
+}
+
+variable "init_containers_args" {
+  type        = list(any)
+  description = "A list of args for init container image at startup"
+  default     = []
 }

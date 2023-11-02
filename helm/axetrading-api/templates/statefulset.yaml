@@ -175,4 +175,19 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+    {{- if .Values.initContainers.enabled }}
+    initContainers:
+      - name: {{ include "axetrading-api.fullname" . }}-init-service
+        image: {{ .Values.initContainers.image }}
+        resources:
+          limits:
+            memory: "256Mi"
+          requests:
+            cpu: 100m
+            memory: "128Mi"
+        args:
+        {{ - range $_, $cmd := .Values.initContainers.args }}
+           - {{ $cmd }}
+        {{ - end }}
+    {{ - end }}
 {{- end }}
