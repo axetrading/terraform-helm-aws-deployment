@@ -49,8 +49,10 @@ ingress:
 initialDelaySeconds: ${initialDelaySeconds}
 
 resources:
-   %{~ if setResourceLimits ~}
+   %{~ if setResourceLimits != null ~}
    limits:
+     memory: ${setResourceLimits}
+   %{~ else }
      memory: ${resources.memory}
    %{~ endif ~}
    requests:
@@ -188,3 +190,12 @@ efsProvisioner:
 
 container_commands:
   args: []
+
+initContainers:
+  enabled: ${initContainersEnabled}
+  image: ${initContainersImage}
+  commands:
+    %{~ for command in initContainersCommands ~}
+    - ${command}
+    %{~ endfor ~}
+
