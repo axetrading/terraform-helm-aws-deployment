@@ -186,8 +186,8 @@ spec:
             cpu: 100m
             memory: "128Mi"
         args:
-        {{ - range $_, $cmd := .Values.initContainers.args }}
+        {{- range $_, $cmd := .Values.initContainers.args }}
            - {{ $cmd }}
-        {{ - end }}
-    {{ - end }}
+        {{- end }}
+    {{- end }}
 {{- end }}
