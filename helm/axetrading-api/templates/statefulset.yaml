@@ -71,7 +71,7 @@ spec:
               fieldRef:
                 fieldPath: spec.nodeName
           {{- end }}
-          {{-if .Values.serviceMonitor.enabled }}
+          {{- if .Values.serviceMonitor.enabled }}
           - name: ADDITIONAL_JAVA_OPTS
             value: {{ .Values.serviceMonitor.additionalJavaOpts }}
           {{- end }}
