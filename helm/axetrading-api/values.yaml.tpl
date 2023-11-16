@@ -191,11 +191,7 @@ efsProvisioner:
 container_commands:
   args: []
 
-initContainers:
-  enabled: ${initContainersEnabled}
-  image: ${initContainersImage}
-  args:
-    %{~ for arg in initContainersArgs ~}
-    - ${arg}
-    %{~ endfor ~}
-
+serviceMonitor:
+  enabled: false
+  port: 8088
+  additionalJavaOpts: ""

@@ -420,6 +420,7 @@ variable "additional_target_group_bindings" {
   default = []
 }
 
+
 variable "set_resource_limits" {
   type        = string
   description = "Whether to add limits for memory resource"
@@ -442,4 +443,16 @@ variable "init_containers_args" {
   type        = list(any)
   description = "A list of args for init container image at startup"
   default     = []
+}
+
+variable "service_monitor_enabled" {
+  type        = bool
+  description = "Whether to create service monitor resource"
+  default     = false
+}
+
+variable "service_monitor_port" {
+  type        = number
+  description = "Port for service monitor"
+  default     = 9779
 }
