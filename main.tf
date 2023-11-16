@@ -176,4 +176,13 @@ resource "helm_release" "main" {
       value = var.service_monitor_port
     }
   }
+
+  dynamic "set" {
+    for_each = var.service_monitor_enabled ? [true] : [false]
+    content {
+      name  = "serviceMonitor.additionalJavaOpts"
+      value = var.additional_java_opts
+      type  = "string"
+    }
+  }
 }

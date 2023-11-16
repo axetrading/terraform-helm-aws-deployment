@@ -431,3 +431,9 @@ variable "service_monitor_port" {
   description = "Port for service monitor"
   default     = 9779
 }
+
+variable "additional_java_opts" {
+  type        = string
+  default     = ""
+  description = "Additional java options for JVM"
+}
