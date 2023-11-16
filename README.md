@@ -41,6 +41,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_additional_java_opts"></a> [additional\_java\_opts](#input\_additional\_java\_opts) | Additional java options for JVM | `string` | `""` | no |
 | <a name="input_additional_ports"></a> [additional\_ports](#input\_additional\_ports) | A list of additional ports to expose on the container and service | `list(any)` | `null` | no |
 | <a name="input_additional_target_group_bindings"></a> [additional\_target\_group\_bindings](#input\_additional\_target\_group\_bindings) | List of additional target group bindings | <pre>list(object({<br>    name           = string<br>    targetGroupARN = string<br>    port           = number<br>  }))</pre> | `[]` | no |
 | <a name="input_additional_value_files"></a> [additional\_value\_files](#input\_additional\_value\_files) | A list of additional value files. It will work in the same way as helm -f value1.yaml -f value2.yaml | `list(any)` | `[]` | no |
