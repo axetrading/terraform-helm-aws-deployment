@@ -427,9 +427,9 @@ variable "service_monitor_enabled" {
 }
 
 variable "service_monitor_port" {
-  type        = number
+  type        = string
   description = "Port for service monitor"
-  default     = 9779
+  default     = "svc-9779"
 }
 
 variable "additional_java_opts" {

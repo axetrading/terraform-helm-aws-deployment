@@ -189,5 +189,5 @@ container_commands:
 
 serviceMonitor:
   enabled: false
-  port: 8088
+  port: "svc-9779"
   additionalJavaOpts: ""
