@@ -3,6 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: {{ template "axetrading-api.fullname". }}
+  namespace: {{ .Values.serviceMonitor.namespace }}
   labels:
     {{- include "axetrading-api.labels" . | nindent 4 }}
 spec:
