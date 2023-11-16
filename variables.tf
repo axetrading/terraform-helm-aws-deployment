@@ -419,3 +419,15 @@ variable "additional_target_group_bindings" {
   }))
   default = []
 }
+
+variable "service_monitor_enabled" {
+  type        = bool
+  description = "Whether to create service monitor resource"
+  default     = false
+}
+
+variable "service_monitor_port" {
+  type        = number
+  description = "Port for service monitor"
+  default     = 9779
+}

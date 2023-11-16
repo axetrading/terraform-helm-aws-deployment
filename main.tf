@@ -163,4 +163,17 @@ resource "helm_release" "main" {
       value = var.storage_class_name
     }
   }
+
+  set {
+    name  = "serviceMonitor.enabled"
+    value = var.service_monitor_enabled
+  }
+
+  dynamic "set" {
+    for_each = var.service_monitor_enabled ? [true] : [false]
+    content {
+      name  = "serviceMonitor.port"
+      value = var.service_monitor_port
+    }
+  }
 }

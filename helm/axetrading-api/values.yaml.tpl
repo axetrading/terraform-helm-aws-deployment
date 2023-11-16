@@ -186,3 +186,8 @@ efsProvisioner:
 
 container_commands:
   args: []
+
+serviceMonitor:
+  enabled: false
+  port: 8088
+  additionalJavaOpts: ""
