@@ -34,10 +34,6 @@ locals {
       targetGroupARN                = var.target_group_arn
       targetGroupPort               = var.target_group_port
       targetMemoryUtilization       = var.target_memory_utilization
-      setResourceLimits             = var.set_resource_limits
-      initContainersImage           = var.init_containers_image
-      initContainersArgs            = var.init_containers_args
-      initContainersEnabled         = var.init_containers_enabled
       }
     )
   ]

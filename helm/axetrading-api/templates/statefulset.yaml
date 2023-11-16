@@ -71,6 +71,10 @@ spec:
               fieldRef:
                 fieldPath: spec.nodeName
           {{- end }}
+          {{-if .Values.serviceMonitor.enabled }}
+          - name: ADDITIONAL_JAVA_OPTS
+            value: {{ .Values.serviceMonitor.additionalJavaOpts }}
+          {{- end }}
           volumeMounts:
            {{- if .Values.secretsStore.enabled }}
             - name: {{ include "axetrading-api.fullname" . }}-secrets-store
@@ -175,19 +179,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-    {{- if .Values.initContainers.enabled }}
-    initContainers:
-      - name: {{ include "axetrading-api.fullname" . }}-init-service
-        image: {{ .Values.initContainers.image }}
-        resources:
-          limits:
-            memory: "256Mi"
-          requests:
-            cpu: 100m
-            memory: "128Mi"
-        args:
-        {{- range $_, $cmd := .Values.initContainers.args }}
-           - {{ $cmd }}
-        {{- end }}
-    {{- end }}
 {{- end }}

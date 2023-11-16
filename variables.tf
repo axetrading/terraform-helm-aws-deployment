@@ -420,31 +420,6 @@ variable "additional_target_group_bindings" {
   default = []
 }
 
-
-variable "set_resource_limits" {
-  type        = string
-  description = "Whether to add limits for memory resource"
-  default     = null
-}
-
-variable "init_containers_enabled" {
-  type        = bool
-  description = "Whether to enable the init container or not"
-  default     = false
-}
-
-variable "init_containers_image" {
-  type        = string
-  description = "The container image for the init container."
-  default     = ""
-}
-
-variable "init_containers_args" {
-  type        = list(any)
-  description = "A list of args for init container image at startup"
-  default     = []
-}
-
 variable "service_monitor_enabled" {
   type        = bool
   description = "Whether to create service monitor resource"
