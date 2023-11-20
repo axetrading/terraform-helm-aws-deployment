@@ -57,3 +57,16 @@ resource "aws_iam_role_policy_attachment" "amazoneks_efs_csi_driver_policy_attac
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.amazoneks_efs_csi_driver_policy[0].arn
 }
+
+resource "aws_iam_policy" "custom" {
+  count       = var.create_role && var.custom_policy != "" ? 1 : 0
+  name_prefix = "${var.policy_name_prefix}Custom-"
+  path        = var.role_path
+  policy      = var.custom_policy
+}
+
+resource "aws_iam_role_policy_attachment" "custom" {
+  count      = var.create_role && var.custom_policy != "" ? 1 : 0
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.custom[0].arn
+}

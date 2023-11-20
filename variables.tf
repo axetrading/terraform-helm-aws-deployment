@@ -437,3 +437,9 @@ variable "module_opts" {
   default     = ""
   description = "Additional java options for JVM"
 }
+
+variable "custom_policy" {
+  type        = string
+  description = "Custom IAM policy document to attach to the role"
+  default     = ""
+}
