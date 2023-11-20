@@ -137,8 +137,8 @@ data "helm_template" "main" {
   dynamic "set" {
     for_each = var.service_monitor_enabled ? [true] : [false]
     content {
-      name  = "serviceMonitor.additionalJavaOpts"
-      value = var.additional_java_opts
+      name  = "serviceMonitor.moduleOpts"
+      value = var.module_opts
       type  = "string"
     }
   }

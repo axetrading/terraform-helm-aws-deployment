@@ -191,4 +191,4 @@ serviceMonitor:
   enabled: false
   namespace: monitoring
   port: "svc-9779"
-  additionalJavaOpts: ""
+  moduleOpts: ""

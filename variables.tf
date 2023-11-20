@@ -432,7 +432,7 @@ variable "service_monitor_port" {
   default     = "svc-9779"
 }
 
-variable "additional_java_opts" {
+variable "module_opts" {
   type        = string
   default     = ""
   description = "Additional java options for JVM"

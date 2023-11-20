@@ -72,8 +72,8 @@ spec:
                 fieldPath: spec.nodeName
           {{- end }}
           {{- if .Values.serviceMonitor.enabled }}
-          - name: ADDITIONAL_JAVA_OPTS
-            value: {{ .Values.serviceMonitor.additionalJavaOpts }}
+          - name: MODULE_OPTS
+            value: {{ .Values.serviceMonitor.moduleOpts }}
           {{- end }}
           volumeMounts:
            {{- if .Values.secretsStore.enabled }}
