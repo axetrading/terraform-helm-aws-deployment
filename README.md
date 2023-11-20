@@ -41,7 +41,6 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_additional_java_opts"></a> [additional\_java\_opts](#input\_additional\_java\_opts) | Additional java options for JVM | `string` | `""` | no |
 | <a name="input_additional_ports"></a> [additional\_ports](#input\_additional\_ports) | A list of additional ports to expose on the container and service | `list(any)` | `null` | no |
 | <a name="input_additional_target_group_bindings"></a> [additional\_target\_group\_bindings](#input\_additional\_target\_group\_bindings) | List of additional target group bindings | <pre>list(object({<br>    name           = string<br>    targetGroupARN = string<br>    port           = number<br>  }))</pre> | `[]` | no |
 | <a name="input_additional_value_files"></a> [additional\_value\_files](#input\_additional\_value\_files) | A list of additional value files. It will work in the same way as helm -f value1.yaml -f value2.yaml | `list(any)` | `[]` | no |
@@ -73,6 +72,7 @@
 | <a name="input_log_fetcher_image"></a> [log\_fetcher\_image](#input\_log\_fetcher\_image) | The container image for the log-fetcher sidecar container. | `string` | `""` | no |
 | <a name="input_log_fetcher_logs_path"></a> [log\_fetcher\_logs\_path](#input\_log\_fetcher\_logs\_path) | The path on the host where the logs will be stored, to be mounted as a volume for the log-fetcher container. | `string` | `""` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `null` | no |
+| <a name="input_module_opts"></a> [module\_opts](#input\_module\_opts) | Additional java options for JVM | `string` | `""` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the Helm deployment. | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to install the release into. | `string` | `"default"` | no |
 | <a name="input_node_labels"></a> [node\_labels](#input\_node\_labels) | Map of node labels for pod scheduling. This map must only contain one key-value pair. | `map(list(string))` | `{}` | no |
