@@ -100,7 +100,7 @@
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | A list of AWS Secret Manager Secrets that will be mounted as volumes on your containers | `list(any)` | `null` | no |
 | <a name="input_service_app_port"></a> [service\_app\_port](#input\_service\_app\_port) | Kubernetes Container Port | `number` | `80` | no |
 | <a name="input_service_monitor_enabled"></a> [service\_monitor\_enabled](#input\_service\_monitor\_enabled) | Whether to create service monitor resource | `bool` | `false` | no |
-| <a name="input_service_monitors"></a> [service\_monitors](#input\_service\_monitors) | List of service monitors. Port is string because of this issue, which is not yet resolved: https://github.com/prometheus-operator/prometheus-operator/issues/2515 | <pre>list(object({<br>    name = string<br>    port = string<br>    metricsPath = string<br>    }))</pre> | `[]` | no |
+| <a name="input_service_monitors"></a> [service\_monitors](#input\_service\_monitors) | List of service monitors. Port is string because of this issue, which is not yet resolved: https://github.com/prometheus-operator/prometheus-operator/issues/2515 | <pre>list(object({<br>    name        = string<br>    port        = string<br>    metricsPath = string<br>  }))</pre> | `[]` | no |
 | <a name="input_service_port"></a> [service\_port](#input\_service\_port) | Kubernetes Service Port | `number` | `80` | no |
 | <a name="input_service_type"></a> [service\_type](#input\_service\_type) | Kubernetes ServiceTypes allow you to specify what kind of Service you want. | `string` | `"ClusterIP"` | no |
 | <a name="input_statefulset_enabled"></a> [statefulset\_enabled](#input\_statefulset\_enabled) | Whether to create statefulset | `bool` | `false` | no |

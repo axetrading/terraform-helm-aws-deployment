@@ -440,10 +440,10 @@ variable "service_monitor_enabled" {
 
 variable "service_monitors" {
   type = list(object({
-    name = string
-    port = string
+    name        = string
+    port        = string
     metricsPath = string
-    }))
-    default = []
-    description = "List of service monitors. Port is string because of this issue, which is not yet resolved: https://github.com/prometheus-operator/prometheus-operator/issues/2515"
+  }))
+  default     = []
+  description = "List of service monitors. Port is string because of this issue, which is not yet resolved: https://github.com/prometheus-operator/prometheus-operator/issues/2515"
 }
