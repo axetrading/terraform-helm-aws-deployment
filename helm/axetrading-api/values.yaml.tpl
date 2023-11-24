@@ -195,4 +195,5 @@ serviceMonitor
       port: ${target.port}
       metricsPath: ${target.metricsPath}
   %{~ endfor ~}
+  namespace: monitoring
   moduleOpts: ""
