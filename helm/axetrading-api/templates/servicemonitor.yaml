@@ -17,7 +17,7 @@ spec:
     scrapeTimeout: 10s
   namespaceSelector:
     matchNames:
-    - {{ .Release.Namespace }}
+    - {{ $.Release.Namespace }}
   selector:
     matchLabels:
     {{- include "axetrading-api.selectorLabels" $ | nindent 6 }}
