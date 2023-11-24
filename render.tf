@@ -8,6 +8,7 @@ data "helm_template" "main" {
   wait             = var.wait
 
   values = local.deployment_values
+
   set {
     name  = "podAnnotations.cluster-autoscaler\\.kubernetes\\.io/safe-to-evict"
     value = var.safe_to_evict_enabled
