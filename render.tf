@@ -122,11 +122,6 @@ data "helm_template" "main" {
     }
   }
 
-  set {
-    name  = "serviceMonitor.enabled"
-    value = var.service_monitor_enabled
-  }
-
   dynamic "set" {
     for_each = var.service_monitor_enabled ? [true] : [false]
     content {
