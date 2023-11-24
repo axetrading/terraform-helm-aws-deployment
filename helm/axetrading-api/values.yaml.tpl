@@ -189,11 +189,11 @@ container_commands:
 
 serviceMonitor:
   enabled: %{ if serviceMonitorsEnabled && length(serviceMonitors) > 0 }true%{~ else }false%{~ endif }
+  namespace: monitoring
+  moduleOpts: ""
   targets:
   %{~ for target in serviceMonitors ~}
     - name: ${target.name}
       port: ${target.port}
       metricsPath: ${target.metricsPath}
   %{~ endfor ~}
-  namespace: monitoring
-  moduleOpts: ""
