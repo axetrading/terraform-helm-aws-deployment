@@ -187,7 +187,7 @@ efsProvisioner:
 container_commands:
   args: []
 
-serviceMonitor
+serviceMonitor:
   enabled: %{ if serviceMonitorsEnabled && length(serviceMonitors) > 0 }true%{~ else }false%{~ endif }
   targets:
   %{~ for target in serviceMonitors ~}
