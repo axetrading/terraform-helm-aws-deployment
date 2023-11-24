@@ -8,7 +8,7 @@ metadata:
   name: {{ printf "%s-%s" $serviceMonitor .name | trunc 63 | trimSuffix "-" }}
   namespace: {{ $.Values.serviceMonitor.namespace }}
   labels:
-    {{- include "axetrading-api.labels" . | nindent 4 }}
+    {{- include "axetrading-api.labels" $ | nindent 4 }}
 spec:
   endpoints:
   - port: {{ .port }}
@@ -20,6 +20,6 @@ spec:
     - {{ .Release.Namespace }}
   selector:
     matchLabels:
-    {{- include "axetrading-api.selectorLabels" . | nindent 6 }}
+    {{- include "axetrading-api.selectorLabels" $ | nindent 6 }}
 {{- end }}
 {{- end }}
