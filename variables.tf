@@ -420,18 +420,6 @@ variable "additional_target_group_bindings" {
   default = []
 }
 
-variable "service_monitor_enabled" {
-  type        = bool
-  description = "Whether to create service monitor resource"
-  default     = false
-}
-
-variable "service_monitor_port" {
-  type        = string
-  description = "Port for service monitor"
-  default     = "svc-9779"
-}
-
 variable "module_opts" {
   type        = string
   default     = ""
@@ -442,4 +430,20 @@ variable "custom_policy" {
   type        = string
   description = "Custom IAM policy document to attach to the role"
   default     = ""
+}
+
+variable "service_monitor_enabled" {
+  type        = bool
+  description = "Whether to create service monitor resource"
+  default     = false
+}
+
+variable "service_monitors" {
+  type = list(object({
+    name = string
+    port = string
+    metricsPath = string
+    }))
+    default = []
+    description = "List of service monitors. Port is string because of this issue, which is not yet resolved: https://github.com/prometheus-operator/prometheus-operator/issues/2515"
 }

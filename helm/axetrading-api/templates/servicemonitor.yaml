@@ -1,15 +1,18 @@
 {{- if .Values.serviceMonitor.enabled -}}
+{{- $baseName := include "axetrading-api.fullname". -}}
+{{- range .Values.serviceMonitor.targets}}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ template "axetrading-api.fullname". }}
+  name: {{ printf "%s-%s" $baseName .name | trunc 63 | trimSuffix "-" }}
   namespace: {{ .Values.serviceMonitor.namespace }}
   labels:
     {{- include "axetrading-api.labels" . | nindent 4 }}
 spec:
   endpoints:
-  - port: {{ .Values.serviceMonitor.port }}
-    path: /metrics
+  - port: {{ .port }}
+    path: {{ .metricsPath }}
     interval: 10s
     scrapeTimeout: 10s
   namespaceSelector:
@@ -18,4 +21,5 @@ spec:
   selector:
     matchLabels:
     {{- include "axetrading-api.selectorLabels" . | nindent 6 }}
+{{- end }}
 {{- end }}

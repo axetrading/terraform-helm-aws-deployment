@@ -187,8 +187,12 @@ efsProvisioner:
 container_commands:
   args: []
 
-serviceMonitor:
-  enabled: false
-  namespace: monitoring
-  port: "svc-9779"
+serviceMonitor
+  enabled: %{ if serviceMonitorsEnabled && length(serviceMonitors) > 0 }true%{~ else }false%{~ endif }
+  targets:
+  %{~ for target in serviceMonitors ~}
+    - name: ${target.name}
+      port: ${target.port}
+      metricsPath: ${target.metricsPath}
+  %{~ endfor ~}
   moduleOpts: ""

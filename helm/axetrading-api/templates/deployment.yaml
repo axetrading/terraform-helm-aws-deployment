@@ -142,10 +142,10 @@ spec:
                   fieldPath: metadata.namespace
           resources:
             limits:
-              memory: "64Mi"
+              memory: "100Mi"
             requests:
               cpu: 100m
-              memory: "32Mi"
+              memory: "100Mi"
           volumeMounts:
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}

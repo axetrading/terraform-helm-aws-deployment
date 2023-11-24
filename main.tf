@@ -11,6 +11,7 @@ locals {
       awsSecrets                    = var.secrets
       createServiceAccount          = var.create_service_account
       fullNameOverride              = var.name
+      healthCheckExecCommands       = var.health_check_exec_commands
       healthCheckPath               = var.health_check_path
       imageTag                      = var.image_tag
       ingressEnabled                = var.ingress_enabled
@@ -24,10 +25,11 @@ locals {
       nodeLabelKey                  = length(var.node_labels) > 0 ? keys(var.node_labels)[0] : ""
       nodeLabelValues               = length(var.node_labels) > 0 ? values(var.node_labels)[0] : []
       readinessCheckType            = var.health_check_type
-      healthCheckExecCommands       = var.health_check_exec_commands
       replicaSetCount               = var.replica_set
       resources                     = var.resources
       serviceAppPort                = var.service_app_port
+      serviceMonitors               = var.service_monitors
+      serviceMonitorsEnabled        = var.service_monitor_enabled
       servicePort                   = var.service_port
       serviceType                   = var.service_type
       targetCPUUtilization          = var.target_cpu_utilization
@@ -161,19 +163,6 @@ resource "helm_release" "main" {
     content {
       name  = "persistence.storageClassName"
       value = var.storage_class_name
-    }
-  }
-
-  set {
-    name  = "serviceMonitor.enabled"
-    value = var.service_monitor_enabled
-  }
-
-  dynamic "set" {
-    for_each = var.service_monitor_enabled ? [true] : [false]
-    content {
-      name  = "serviceMonitor.port"
-      value = var.service_monitor_port
     }
   }
 
