@@ -6,7 +6,7 @@ metadata:
   {{- include "axetrading-api.labels" . | nindent 4 }}
 rules:
 - apiGroups:
-  - ""
+  - "*"
   resources:
   - pods
   - jobs
