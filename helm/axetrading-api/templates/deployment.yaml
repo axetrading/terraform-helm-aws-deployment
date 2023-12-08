@@ -62,6 +62,8 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.name
+          - name: NAMESPACE
+            value: {{ .Release.Namespace }}
           - name: METRIC_PREFIX
             value: {{ .Release.Namespace }}.{{ include "axetrading-api.fullname" . }}
           ## if statsd is enabled, set the env vars
