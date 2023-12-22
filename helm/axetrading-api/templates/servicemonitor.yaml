@@ -6,7 +6,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: {{ printf "%s-%s" $serviceMonitor .name | trunc 63 | trimSuffix "-" }}
-  namespace: {{ $.Values.serviceMonitor.namespace }}
+  namespace: {{ $.Release.Namespace }}
   labels:
     {{- include "axetrading-api.labels" $ | nindent 4 }}
 spec:
