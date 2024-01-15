@@ -36,6 +36,8 @@ locals {
       targetGroupARN                = var.target_group_arn
       targetGroupPort               = var.target_group_port
       targetMemoryUtilization       = var.target_memory_utilization
+      cronJobCommands               = var.cron_job_commands
+      cronJobSchedule               = var.cron_job_schedule
       }
     )
   ]

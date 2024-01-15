@@ -197,3 +197,11 @@ serviceMonitor:
       port: ${target.port}
       metricsPath: ${target.metricsPath}
   %{~ endfor ~}
+
+cronJob:
+  create: %{ if cronJobCommands && length(cronJobCommands) > 0 && cronJobSchedule != null }true%{~ else }false%{~ endif }
+  cronJobSchedule: ${cronJobSchedule}
+  Commands:
+    %{~ for command in cronJobCommands ~}
+    - ${command}
+    %{~ endfor ~}

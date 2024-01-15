@@ -447,3 +447,15 @@ variable "service_monitors" {
   default     = []
   description = "List of service monitors. Port is string because of this issue, which is not yet resolved: https://github.com/prometheus-operator/prometheus-operator/issues/2515"
 }
+
+variable "cron_job_commands" {
+  type        = list(any)
+  description = "Commands for cron job"
+  default     = []
+}
+
+variable "cron_job_schedule" {
+  type        = string
+  description = "The cron job schedule which follow https://en.wikipedia.org/wiki/Cron"
+  default     = null
+}
