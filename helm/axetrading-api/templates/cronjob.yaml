@@ -1,0 +1,25 @@
+{{- if and .Values.cronJob.create }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "axetrading-api.fullname" . }}
+  labels:
+    {{- include "axetrading-api.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.cronJob.cronJobSchedule }}
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cronjob
+              image: cronjob-image:latest
+              command:
+              {{- range $_, $cmd := .Values.cronJob.Commands }}
+                - {{ $cmd }}
+              {{- end }}
+          restartPolicy: Never
+{{- end }}
