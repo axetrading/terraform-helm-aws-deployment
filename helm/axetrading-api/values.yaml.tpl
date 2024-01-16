@@ -201,6 +201,7 @@ serviceMonitor:
 cronJob:
   create: %{ if cronJobCommands && length(cronJobCommands) > 0 && cronJobSchedule != null }true%{~ else }false%{~ endif }
   cronJobSchedule: ${cronJobSchedule}
+  cronJobImageTag: ${cronJobImageTag}
   Commands:
     %{~ for command in cronJobCommands ~}
     - ${command}

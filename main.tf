@@ -38,6 +38,7 @@ locals {
       targetMemoryUtilization       = var.target_memory_utilization
       cronJobCommands               = var.cron_job_commands
       cronJobSchedule               = var.cron_job_schedule
+      cronJobImageTag               = var.cron_job_image_tag
       }
     )
   ]

@@ -16,7 +16,7 @@ spec:
         spec:
           containers:
             - name: cronjob
-              image: cronjob-image:latest
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
               command:
               {{- range $_, $cmd := .Values.cronJob.Commands }}
                 - {{ $cmd }}

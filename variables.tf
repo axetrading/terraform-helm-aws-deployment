@@ -459,3 +459,9 @@ variable "cron_job_schedule" {
   description = "The cron job schedule which follow https://en.wikipedia.org/wiki/Cron"
   default     = null
 }
+
+variable "cron_job_image_tag" {
+  type        = string
+  description = "Kubernetes Cron job image tag"
+  default     = "latest"
+}
