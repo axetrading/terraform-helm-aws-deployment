@@ -21,5 +21,17 @@ spec:
               {{- range $_, $cmd := .Values.cronJob.Commands }}
                 - {{ $cmd }}
               {{- end }}
+              volumeMounts:
+               {{- if .Values.persistence.enabled }}
+                - name: {{ include "axetrading-api.fullname" . }}-data
+                  mountPath: {{ .Values.persistence.mountPath }}
+               {{- end }}
           restartPolicy: Never
+          serviceAccountName: {{ include "axetrading-api.serviceAccountName" . }}
+          volumes:
+          {{- if .Values.persistence.enabled }}
+          - name: {{ include "axetrading-api.fullname" . }}-data
+            persistentVolumeClaim:
+              claimName: {{ include "axetrading-api.fullname" . }}-pvc
+          {{- end }}
 {{- end }}
