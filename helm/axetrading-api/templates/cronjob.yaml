@@ -27,7 +27,7 @@ spec:
                   mountPath: {{ .Values.persistence.mountPath }}
                {{- end }}
           restartPolicy: Never
-          serviceAccountName: {{ include "axetrading-api.serviceAccountName" . }}
+          serviceAccountName: {{ include "axetrading-api.serviceAccountName" . }}-cron
           volumes:
           {{- if .Values.persistence.enabled }}
           - name: {{ include "axetrading-api.fullname" . }}-data

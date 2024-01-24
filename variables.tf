@@ -457,7 +457,7 @@ variable "cron_job_commands" {
 variable "cron_job_schedule" {
   type        = string
   description = "The cron job schedule which follow https://en.wikipedia.org/wiki/Cron"
-  default     = null
+  default     = ""
 }
 
 variable "cron_job_image_tag" {
