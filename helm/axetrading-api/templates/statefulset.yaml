@@ -97,7 +97,7 @@ spec:
               mountPath: {{ .Values.logFetcher.logsPath }}
            {{- end }}
            {{- if .Values.extraVolumes.enabled }}
-           {{- range. Values.extraVolumes.volumes }}
+           {{- range .Values.extraVolumes.volumes }}
             - name: {{ .name }}
               mountPath: {{ .mountPath }}
            {{- end }}
