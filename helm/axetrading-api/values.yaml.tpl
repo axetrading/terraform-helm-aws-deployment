@@ -196,7 +196,7 @@ serviceMonitor:
       metricsPath: ${target.metricsPath}
   %{~ endfor ~}
 
-  extraVolumes:
+extraVolumes:
   enabled: %{ if extraVolumes != null && length(extraVolumes) > 0 }true%{~ else }false%{~ endif }
   volumes: 
   %{~ for volume in extraVolumes ~}
