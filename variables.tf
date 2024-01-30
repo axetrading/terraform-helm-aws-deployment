@@ -481,9 +481,9 @@ variable "render_enabled" {
 variable "extra_volumes" {
   description = "List of additional target group bindings"
   type = list(object({
-    name      = string
+    name           = string
     pvc_claim_name = string
-    mount_path = number
+    mount_path     = number
   }))
   default = []
 }

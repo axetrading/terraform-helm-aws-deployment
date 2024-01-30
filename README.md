@@ -59,7 +59,7 @@
 | <a name="input_custom_policy"></a> [custom\_policy](#input\_custom\_policy) | Custom IAM policy document to attach to the role | `string` | `""` | no |
 | <a name="input_deployment_strategy_type"></a> [deployment\_strategy\_type](#input\_deployment\_strategy\_type) | Deployment strategy type. Valid values: RollingUpdate, Recreate | `string` | `"RollingUpdate"` | no |
 | <a name="input_efs_filesystem_id"></a> [efs\_filesystem\_id](#input\_efs\_filesystem\_id) | EFS File System Id | `string` | `""` | no |
-| <a name="input_extra_volumes"></a> [extra\_volumes](#input\_extra\_volumes) | List of additional target group bindings | <pre>list(object({<br>    name      = string<br>    pvc_claim_name = string<br>    mount_path = number<br>  }))</pre> | `[]` | no |
+| <a name="input_extra_volumes"></a> [extra\_volumes](#input\_extra\_volumes) | List of additional target group bindings | <pre>list(object({<br>    name           = string<br>    pvc_claim_name = string<br>    mount_path     = number<br>  }))</pre> | `[]` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `true` | no |
 | <a name="input_health_check_exec_commands"></a> [health\_check\_exec\_commands](#input\_health\_check\_exec\_commands) | Readiness Probe health check exec command | `list(any)` | `[]` | no |
 | <a name="input_health_check_initial_delay_seconds"></a> [health\_check\_initial\_delay\_seconds](#input\_health\_check\_initial\_delay\_seconds) | Number of seconds after the container has started before liveness probes are initiated. | `number` | `30` | no |
