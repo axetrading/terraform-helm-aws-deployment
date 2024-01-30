@@ -50,6 +50,13 @@ spec:
         persistentVolumeClaim:
           claimName: {{ include "axetrading-api.fullname" . }}-pvc
       {{- end }}
+      {{- if .Values.extraVolumes.enabled }}
+      {{- range .Values.extraVolumes.volumes }}
+      - name: {{ .name }}
+        persistentVolumeClaim:
+          claimName: {{ .claimName }}
+      {{- end }}
+      {{- end }}
       containers:
         - name: {{ include "axetrading-api.fullname" . }}
           securityContext:
@@ -87,6 +94,12 @@ spec:
             - name: {{ include "axetrading-api.fullname" . }}-data
               mountPath: {{ .Values.persistence.mountPath }}
            {{- end }}
+           {{- if .Values.extraVolumes.enabled }}
+           {{- range. Values.extraVolumes.volumes }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+           {{- end }}
+           {{- end }}
            {{- if .Values.logFetcher.enabled }}
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}
@@ -103,8 +116,22 @@ spec:
             {{- end }}
             {{- end }}
           livenessProbe:
+            {{- if .Values.readiness.httpCheck.enabled }}
+            httpGet:
+              path: {{ .Values.healthcheck.path }}
+              port: {{ .Values.service.appport }}
+            {{- end }}
+            {{- if .Values.readiness.tpcCheck.enabled }}
             tcpSocket:
               port: {{ .Values.service.appport }}
+            {{- end }}
+            {{- if .Values.readiness.execCmd.enabled }}
+            exec:
+              command:
+              {{- range $_, $cmd := .Values.healthcheck.execCommands }}
+                - {{ $cmd }}
+              {{- end }}
+            {{- end }}
             initialDelaySeconds: {{ .Values.initialDelaySeconds}}
             failureThreshold: 3
             periodSeconds: 1
@@ -120,7 +147,10 @@ spec:
             {{- end }}
             {{- if .Values.readiness.execCmd.enabled }}
             exec:
-              command: {{ .Values.healthcheck.execCommands }}
+              command:
+              {{- range $_, $cmd := .Values.healthcheck.execCommands }}
+                - {{ $cmd }}
+              {{- end }}
             {{- end }}
             initialDelaySeconds: {{ .Values.initialDelaySeconds }}
             periodSeconds: 1

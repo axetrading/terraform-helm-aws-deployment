@@ -1,4 +1,5 @@
 data "helm_template" "main" {
+  count            = var.render_enabled ? 1 : 0
   name             = var.name
   chart            = "${path.module}/helm/axetrading-api"
   atomic           = var.atomic
@@ -67,8 +68,13 @@ data "helm_template" "main" {
   }
 
   set {
+    name  = "sftp.enabled"
+    value = var.persistence_enabled
+  }
+
+  set {
     name  = "persistence.accessMode"
-    value = var.persistence_accessMode
+    value = var.persistence_access_mode
     type  = "string"
   }
 
@@ -79,21 +85,36 @@ data "helm_template" "main" {
 
   set {
     name  = "persistence.storageSize"
-    value = var.persistence_storageSize
+    value = var.persistence_storage_size
     type  = "string"
   }
 
   set {
     name  = "persistence.mountPath"
-    value = var.persistence_mountPath
+    value = var.persistence_mount_path
+    type  = "string"
+  }
+  set {
+    name  = "sftp.mountPath"
+    value = var.sftp_mount_path
     type  = "string"
   }
 
   dynamic "set" {
-    for_each = var.persistence_enabled ? [var.persistence_enabled] : []
+    for_each = var.persistence_enabled ? [true] : []
     content {
-      name  = "efsProvisioner.efsFileSystemId"
+      name  = "persistence.efsFileSystemId"
       value = var.efs_filesystem_id
+      type  = "string"
+    }
+  }
+
+
+  dynamic "set" {
+    for_each = var.sftp_enabled ? [true] : []
+    content {
+      name  = "sftp.efsFileSystemId"
+      value = var.sftp_efs_filesystem_id
       type  = "string"
     }
   }
@@ -122,6 +143,16 @@ data "helm_template" "main" {
       value = var.storage_class_name
     }
   }
+
+
+  dynamic "set" {
+    for_each = var.sftp_enabled ? [true] : []
+    content {
+      name  = "persistence.storageClassName"
+      value = var.sftp_storage_class_name
+    }
+  }
+
 
   dynamic "set" {
     for_each = var.service_monitor_enabled ? [true] : [false]
