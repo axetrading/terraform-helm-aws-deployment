@@ -72,7 +72,8 @@ additionalTargetGroupBindings:
       targetGroupARN: ${binding.targetGroupARN}
       name: ${binding.name}
   %{~ endfor ~}
-  
+
+
 autoscaling:
   %{~ if autoscaling != null ~}
   enabled: true
@@ -169,20 +170,17 @@ statefulset:
   enabled: false
 
 persistence:
-  enabled: true
+  enabled: false
   accessMode: ReadWriteMany
   storageSize: 2Gi
-  storageClass: efs
   storageClassName: ""
   mountPath: ""
+  efsFileSystemId: ""
+  reclaimPolicy: retain
 
 storageClass:
   create: false
   name: ""
-
-efsProvisioner:
-  efsFileSystemId: ""
-  reclaimPolicy: retain
 
 container_commands:
   args: []
@@ -196,4 +194,13 @@ serviceMonitor:
     - name: ${target.name}
       port: ${target.port}
       metricsPath: ${target.metricsPath}
+  %{~ endfor ~}
+
+  extraVolumes:
+  enabled: %{ if extraVolumes != null && length(extraVolumes) > 0 }true%{~ else }false%{~ endif }
+  volumes: 
+  %{~ for volume in extraVolumes ~}
+    - name: ${volume.name}
+      claimName: ${volume.pvc_claim_name}
+      mountPath: ${volume.mount_path}
   %{~ endfor ~}

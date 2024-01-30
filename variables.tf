@@ -344,19 +344,31 @@ variable "persistence_enabled" {
   default     = false
 }
 
-variable "persistence_accessMode" {
+variable "sftp_enabled" {
+  type        = bool
+  description = "Whether to create persistent storage for SFTP"
+  default     = false
+}
+
+variable "persistence_access_mode" {
   type        = string
   description = "Accessmode for persistent storage"
   default     = "ReadWriteOnce"
 }
 
-variable "persistence_storageSize" {
+variable "persistence_storage_size" {
   type        = string
   description = "Storage size for persistent storage"
   default     = "2Gi"
 }
 
-variable "persistence_mountPath" {
+variable "persistence_mount_path" {
+  type        = string
+  description = "Mount Path for Persistent Storage on Pod that will be used by the SFTP Server"
+  default     = ""
+}
+
+variable "sftp_mount_path" {
   type        = string
   description = "Mount Path for Persistent Storage on Pod"
   default     = ""
@@ -378,6 +390,12 @@ variable "attach_amazoneks_efs_csi_driver_policy" {
 variable "efs_filesystem_id" {
   type        = string
   description = "EFS File System Id"
+  default     = ""
+}
+
+variable "sft_efs_filesystem_id" {
+  type        = string
+  description = "EFS File System Id for SFTP"
   default     = ""
 }
 
@@ -408,6 +426,12 @@ variable "storage_class_name" {
   type        = string
   description = "Name of the storage class"
   default     = "efs-sc"
+}
+
+variable "sftp_storage_class_name" {
+  type        = string
+  description = "Name of the storage class"
+  default     = "sftp-efs-sc"
 }
 
 variable "additional_target_group_bindings" {
@@ -446,4 +470,20 @@ variable "service_monitors" {
   }))
   default     = []
   description = "List of service monitors. Port is string because of this issue, which is not yet resolved: https://github.com/prometheus-operator/prometheus-operator/issues/2515"
+}
+
+variable "render_enabled" {
+  type        = bool
+  description = "Whether to render the helm chart or not"
+  default     = false
+}
+
+variable "extra_volumes" {
+  description = "List of additional target group bindings"
+  type = list(object({
+    name      = string
+    pvc_claim_name = string
+    mount_path = number
+  }))
+  default = []
 }

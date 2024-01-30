@@ -59,6 +59,7 @@
 | <a name="input_custom_policy"></a> [custom\_policy](#input\_custom\_policy) | Custom IAM policy document to attach to the role | `string` | `""` | no |
 | <a name="input_deployment_strategy_type"></a> [deployment\_strategy\_type](#input\_deployment\_strategy\_type) | Deployment strategy type. Valid values: RollingUpdate, Recreate | `string` | `"RollingUpdate"` | no |
 | <a name="input_efs_filesystem_id"></a> [efs\_filesystem\_id](#input\_efs\_filesystem\_id) | EFS File System Id | `string` | `""` | no |
+| <a name="input_extra_volumes"></a> [extra\_volumes](#input\_extra\_volumes) | List of additional target group bindings | <pre>list(object({<br>    name      = string<br>    pvc_claim_name = string<br>    mount_path = number<br>  }))</pre> | `[]` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `true` | no |
 | <a name="input_health_check_exec_commands"></a> [health\_check\_exec\_commands](#input\_health\_check\_exec\_commands) | Readiness Probe health check exec command | `list(any)` | `[]` | no |
 | <a name="input_health_check_initial_delay_seconds"></a> [health\_check\_initial\_delay\_seconds](#input\_health\_check\_initial\_delay\_seconds) | Number of seconds after the container has started before liveness probes are initiated. | `number` | `30` | no |
@@ -80,13 +81,14 @@
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to install the release into. | `string` | `"default"` | no |
 | <a name="input_node_labels"></a> [node\_labels](#input\_node\_labels) | Map of node labels for pod scheduling. This map must only contain one key-value pair. | `map(list(string))` | `{}` | no |
 | <a name="input_oidc_providers"></a> [oidc\_providers](#input\_oidc\_providers) | Map of OIDC providers where each provider map should contain the `provider`, `provider_arn`, and `namespace_service_accounts` | `any` | `{}` | no |
-| <a name="input_persistence_accessMode"></a> [persistence\_accessMode](#input\_persistence\_accessMode) | Accessmode for persistent storage | `string` | `"ReadWriteOnce"` | no |
+| <a name="input_persistence_access_mode"></a> [persistence\_access\_mode](#input\_persistence\_access\_mode) | Accessmode for persistent storage | `string` | `"ReadWriteOnce"` | no |
 | <a name="input_persistence_enabled"></a> [persistence\_enabled](#input\_persistence\_enabled) | Whether to create persistent storage | `bool` | `false` | no |
-| <a name="input_persistence_mountPath"></a> [persistence\_mountPath](#input\_persistence\_mountPath) | Mount Path for Persistent Storage on Pod | `string` | `""` | no |
-| <a name="input_persistence_storageSize"></a> [persistence\_storageSize](#input\_persistence\_storageSize) | Storage size for persistent storage | `string` | `"2Gi"` | no |
+| <a name="input_persistence_mount_path"></a> [persistence\_mount\_path](#input\_persistence\_mount\_path) | Mount Path for Persistent Storage on Pod that will be used by the SFTP Server | `string` | `""` | no |
+| <a name="input_persistence_storage_size"></a> [persistence\_storage\_size](#input\_persistence\_storage\_size) | Storage size for persistent storage | `string` | `"2Gi"` | no |
 | <a name="input_policy_name_prefix"></a> [policy\_name\_prefix](#input\_policy\_name\_prefix) | IAM policy name prefix | `string` | `"eks-policy"` | no |
 | <a name="input_prometheus_rule_enabled"></a> [prometheus\_rule\_enabled](#input\_prometheus\_rule\_enabled) | Whether to create prometheus rule | `bool` | `false` | no |
 | <a name="input_prometheus_rules_file_path"></a> [prometheus\_rules\_file\_path](#input\_prometheus\_rules\_file\_path) | Prometheus rules file path | `string` | `"prometheus-rules.yml"` | no |
+| <a name="input_render_enabled"></a> [render\_enabled](#input\_render\_enabled) | Whether to render the helm chart or not | `bool` | `false` | no |
 | <a name="input_replica_set"></a> [replica\_set](#input\_replica\_set) | The number of replica set for the helm deployment | `number` | `1` | no |
 | <a name="input_resources"></a> [resources](#input\_resources) | "A map of resource for the main app container, containing keys 'cpu' and 'memory'. <br>  This is following the Kubernetes resource best practices, which states that no limits for the CPU should be set and the memory limit should always be equal with memory request.<br>  In this way, we can prevent OOMKill (talk with the devs about cpu/memory requirements)." | <pre>object({<br>    memory = string<br>    cpu    = string<br>  })</pre> | <pre>{<br>  "cpu": "250m",<br>  "memory": "512Mi"<br>}</pre> | no |
 | <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | Existing role ARN | `string` | `null` | no |
@@ -103,6 +105,10 @@
 | <a name="input_service_monitors"></a> [service\_monitors](#input\_service\_monitors) | List of service monitors. Port is string because of this issue, which is not yet resolved: https://github.com/prometheus-operator/prometheus-operator/issues/2515 | <pre>list(object({<br>    name        = string<br>    port        = string<br>    metricsPath = string<br>  }))</pre> | `[]` | no |
 | <a name="input_service_port"></a> [service\_port](#input\_service\_port) | Kubernetes Service Port | `number` | `80` | no |
 | <a name="input_service_type"></a> [service\_type](#input\_service\_type) | Kubernetes ServiceTypes allow you to specify what kind of Service you want. | `string` | `"ClusterIP"` | no |
+| <a name="input_sft_efs_filesystem_id"></a> [sft\_efs\_filesystem\_id](#input\_sft\_efs\_filesystem\_id) | EFS File System Id for SFTP | `string` | `""` | no |
+| <a name="input_sftp_enabled"></a> [sftp\_enabled](#input\_sftp\_enabled) | Whether to create persistent storage for SFTP | `bool` | `false` | no |
+| <a name="input_sftp_mount_path"></a> [sftp\_mount\_path](#input\_sftp\_mount\_path) | Mount Path for Persistent Storage on Pod | `string` | `""` | no |
+| <a name="input_sftp_storage_class_name"></a> [sftp\_storage\_class\_name](#input\_sftp\_storage\_class\_name) | Name of the storage class | `string` | `"sftp-efs-sc"` | no |
 | <a name="input_statefulset_enabled"></a> [statefulset\_enabled](#input\_statefulset\_enabled) | Whether to create statefulset | `bool` | `false` | no |
 | <a name="input_statsd_enabled"></a> [statsd\_enabled](#input\_statsd\_enabled) | Whether to create statsd host environment variables | `bool` | `false` | no |
 | <a name="input_storage_class_name"></a> [storage\_class\_name](#input\_storage\_class\_name) | Name of the storage class | `string` | `"efs-sc"` | no |
