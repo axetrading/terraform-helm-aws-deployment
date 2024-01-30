@@ -95,7 +95,7 @@ spec:
               mountPath: {{ .Values.persistence.mountPath }}
            {{- end }}
            {{- if .Values.extraVolumes.enabled }}
-           {{- range. Values.extraVolumes.volumes }}
+           {{- range .Values.extraVolumes.volumes }}
             - name: {{ .name }}
               mountPath: {{ .mountPath }}
            {{- end }}
