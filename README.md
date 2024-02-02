@@ -120,11 +120,11 @@
 | <a name="input_timeout"></a> [timeout](#input\_timeout) | The time, in seconds, that Terraform will wait for a Helm release to create resources. | `number` | `150` | no |
 | <a name="input_volume_provisioner_access_mode"></a> [volume\_provisioner\_access\_mode](#input\_volume\_provisioner\_access\_mode) | Accessmode for persistent storage | `string` | `"ReadWriteOnce"` | no |
 | <a name="input_volume_provisioner_dynamic_provisioning"></a> [volume\_provisioner\_dynamic\_provisioning](#input\_volume\_provisioner\_dynamic\_provisioning) | Whether to enable dynamic provisioning | `bool` | `false` | no |
-| <a name="input_volume_provisioner_efs_filesystem_id"></a> [volume\_provisioner\_efs\_filesystem\_id](#input\_volume\_provisioner\_efs\_filesystem\_id) | EFS File System Id | `string` | `""` | no |
 | <a name="input_volume_provisioner_enabled"></a> [volume\_provisioner\_enabled](#input\_volume\_provisioner\_enabled) | Whether to create volume provisioner resource | `bool` | `false` | no |
 | <a name="input_volume_provisioner_mount_path"></a> [volume\_provisioner\_mount\_path](#input\_volume\_provisioner\_mount\_path) | Mount Path for Persistent Storage on Pod | `string` | `""` | no |
 | <a name="input_volume_provisioner_storage_class_name"></a> [volume\_provisioner\_storage\_class\_name](#input\_volume\_provisioner\_storage\_class\_name) | Name of the storage class | `string` | `"efs-sc"` | no |
 | <a name="input_volume_provisioner_storage_size"></a> [volume\_provisioner\_storage\_size](#input\_volume\_provisioner\_storage\_size) | Storage size for persistent storage | `string` | `"2Gi"` | no |
+| <a name="input_volume_provisioner_volume_handle"></a> [volume\_provisioner\_volume\_handle](#input\_volume\_provisioner\_volume\_handle) | Volume handle for persistent storage, in AWS EFS case it is the file system id | `string` | `""` | no |
 | <a name="input_wait"></a> [wait](#input\_wait) | If set, Terraform will wait for the Helm release to complete before continuing. | `bool` | `true` | no |
 
 ## Outputs

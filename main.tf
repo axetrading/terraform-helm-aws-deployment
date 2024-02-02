@@ -230,14 +230,6 @@ resource "helm_release" "main" {
   dynamic "set" {
     for_each = var.volume_provisioner_enabled ? [true] : []
     content {
-      name  = "volume-provisioner.storage.storageSize"
-      value = var.volume_provisioner_storage_size
-    }
-  }
-
-  dynamic "set" {
-    for_each = var.volume_provisioner_enabled ? [true] : []
-    content {
       name  = "volume-provisioner.storage.volumeHandle"
       value = var.volume_provisioner_volume_handle
     }

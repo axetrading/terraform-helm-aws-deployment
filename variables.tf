@@ -501,9 +501,9 @@ variable "volume_provisioner_storage_class_name" {
   default     = "efs-sc"
 }
 
-variable "volume_provisioner_efs_filesystem_id" {
+variable "volume_provisioner_volume_handle" {
   type        = string
-  description = "EFS File System Id"
+  description = "Volume handle for persistent storage, in AWS EFS case it is the file system id"
   default     = ""
 }
 
