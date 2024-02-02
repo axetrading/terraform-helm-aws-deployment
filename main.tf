@@ -207,7 +207,7 @@ resource "helm_release" "main" {
   }
 
   set {
-    name = "volume-provisioner.enabled"
+    name  = "volume-provisioner.enabled"
     value = var.volume_provisioner_enabled
   }
 
