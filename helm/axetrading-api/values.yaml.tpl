@@ -204,3 +204,19 @@ extraVolumes:
       claimName: ${volume.pvc_claim_name}
       mountPath: ${volume.mount_path}
   %{~ endfor ~}
+
+
+volume-provisioner:
+  enabled: false
+  storage:
+    dynamic: false
+    volumeName: ""
+    mounthPath: ""
+    pvc:
+      size: "2Gi"
+      accessModes: ["ReadWriteMany"]
+    pv:
+      size: "5Gi"
+      accessModes: ["ReadWriteMany"]
+      reclaimPolicy: "Retain"
+      volumeHandle: ""  

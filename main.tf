@@ -205,4 +205,42 @@ resource "helm_release" "main" {
       type  = "string"
     }
   }
+
+  set {
+    name = "volume-provisioner.enabled"
+    value = var.volume_provisioner_enabled
+  }
+
+  dynamic "set" {
+    for_each = var.volume_provisioner_enabled ? [true] : []
+    content {
+      name  = "volume-provisioner.storage.dynamic"
+      value = var.dynamic_provisioning
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.volume_provisioner_enabled ? [true] : []
+    content {
+      name  = "volume-provisioner.storage.storageClass"
+      value = var.volume_provisioner_storage_class_name
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.volume_provisioner_enabled ? [true] : []
+    content {
+      name  = "volume-provisioner.storage.storageSize"
+      value = var.volume_provisioner_storage_size
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.volume_provisioner_enabled ? [true] : []
+    content {
+      name  = "volume-provisioner.storage.volumeHandle"
+      value = var.volume_provisioner_volume_handle
+    }
+  }
+
 }

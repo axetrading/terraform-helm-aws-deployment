@@ -487,3 +487,47 @@ variable "extra_volumes" {
   }))
   default = []
 }
+
+## Volume Provisioner
+variable "volume_provisioner_enabled" {
+  type        = bool
+  description = "Whether to create volume provisioner resource"
+  default     = false
+}
+
+variable "volume_provisioner_storage_class_name" {
+  type        = string
+  description = "Name of the storage class"
+  default     = "efs-sc"
+}
+
+variable "volume_provisioner_efs_filesystem_id" {
+  type        = string
+  description = "EFS File System Id"
+  default     = ""
+}
+
+variable "volume_provisioner_storage_size" {
+  type        = string
+  description = "Storage size for persistent storage"
+  default     = "2Gi"
+}
+
+variable "volume_provisioner_access_mode" {
+  type        = string
+  description = "Accessmode for persistent storage"
+  default     = "ReadWriteOnce"
+}
+
+variable "volume_provisioner_mount_path" {
+  type        = string
+  description = "Mount Path for Persistent Storage on Pod"
+  default     = ""
+}
+
+variable "volume_provisioner_dynamic_provisioning" {
+  type        = bool
+  description = "Whether to enable dynamic provisioning"
+  default     = false
+}
+

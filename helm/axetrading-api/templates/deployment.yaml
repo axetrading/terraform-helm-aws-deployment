@@ -57,6 +57,11 @@ spec:
           claimName: {{ .claimName }}
       {{- end }}
       {{- end }}
+      {{- if .Values.volume-provisioner.storage.enabled }}
+      - name: {{ .Values.volume-provisioner.storage.volumeName }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.volume-provisioner.storage.volumeName }}-pvc
+      {{- end }}
       containers:
         - name: {{ include "axetrading-api.fullname" . }}
           securityContext:
@@ -104,6 +109,10 @@ spec:
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}
            {{- end }}
+           {{- if .Values.volume-provisioner.storage.enabled }}
+            - name: {{ .Values.volume-provisioner.storage.volumeName }}
+              mountPath: {{ .Values.volume-provisioner.storage.mountPath }}
+            {{- end }}
           ports:
             - name: appport
               containerPort: {{ .Values.service.appport }}

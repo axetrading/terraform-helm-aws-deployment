@@ -1,0 +1,18 @@
+{{- if not .Values.storage.dynamic }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.storage.volumeName }}-pv
+  labels: {{- include "volume-provisioner.labels" . | nindent 4 }}
+spec:
+  capacity:
+    storage: {{ .Values.storage.pv.size }}
+  volumeMode: Filesystem
+  accessModes:
+    {{- toYaml .Values.storage.pv.accessModes | nindent 4 }}
+  persistentVolumeReclaimPolicy: {{ .Values.storage.pv.reclaimPolicy }}
+  storageClassName: {{ .Values.storage.storageClassName }}
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: {{ .Values.storage.volumeHandle }}
+{{- end }}
