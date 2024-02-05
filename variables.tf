@@ -507,6 +507,12 @@ variable "volume_provisioner_volume_handle" {
   default     = ""
 }
 
+variable "volume_provisioner_volume_name" {
+  type        = string
+  description = "Volume name for persistent storage"
+  default     = ""
+}
+
 variable "volume_provisioner_storage_size" {
   type        = string
   description = "Storage size for persistent storage"

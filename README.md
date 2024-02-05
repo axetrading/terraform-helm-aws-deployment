@@ -125,6 +125,7 @@
 | <a name="input_volume_provisioner_storage_class_name"></a> [volume\_provisioner\_storage\_class\_name](#input\_volume\_provisioner\_storage\_class\_name) | Name of the storage class | `string` | `"efs-sc"` | no |
 | <a name="input_volume_provisioner_storage_size"></a> [volume\_provisioner\_storage\_size](#input\_volume\_provisioner\_storage\_size) | Storage size for persistent storage | `string` | `"2Gi"` | no |
 | <a name="input_volume_provisioner_volume_handle"></a> [volume\_provisioner\_volume\_handle](#input\_volume\_provisioner\_volume\_handle) | Volume handle for persistent storage, in AWS EFS case it is the file system id | `string` | `""` | no |
+| <a name="input_volume_provisioner_volume_name"></a> [volume\_provisioner\_volume\_name](#input\_volume\_provisioner\_volume\_name) | Volume name for persistent storage | `string` | `""` | no |
 | <a name="input_wait"></a> [wait](#input\_wait) | If set, Terraform will wait for the Helm release to complete before continuing. | `bool` | `true` | no |
 
 ## Outputs
