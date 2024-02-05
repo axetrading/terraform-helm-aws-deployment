@@ -20,6 +20,6 @@ output "helm_release_namespace" {
 }
 
 output "helm_manifests_out" {
-  value       = var.render_enabled ? data.helm_template.main[0].manifests : ""
+  value       = var.render_enabled ? data.helm_template.main[0].manifests : {}
   description = "Helm Release Manifest"
 }
