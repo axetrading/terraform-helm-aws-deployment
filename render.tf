@@ -181,7 +181,7 @@ data "helm_template" "main" {
     for_each = var.volume_provisioner_enabled ? [true] : []
     content {
       name  = "volume-provisioner.storage.dynamic"
-      value = var.dynamic_provisioning
+      value = var.volume_provisioner_dynamic_provisioning
     }
   }
 
