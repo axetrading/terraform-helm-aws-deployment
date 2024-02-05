@@ -211,7 +211,7 @@ resource "helm_release" "main" {
     value = var.volume_provisioner_enabled
   }
 
-  dynamic {
+  dynamic "set" {
     for_each = var.volume_provisioner_enabled ? [true] : []
     content {
       name  = "volume-provisioner.storage.volumeName"
