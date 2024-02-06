@@ -1,20 +1,20 @@
 {{- if .Values.volumeProvisioner.enabled }}
-{{- if not .Values.storage.dynamic }}
+{{- if not .Values.volumeProvisioner.storage.dynamic }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ .Values.storage.volumeName }}-pv
+  name: {{ .Values.volumeProvisioner.storage.volumeName }}-pv
   labels: {{- include "axetrading-api.labels" . | nindent 4 }}
 spec:
   capacity:
-    storage: {{ .Values.storage.pv.size }}
+    storage: {{ .Values.volumeProvisioner.storage.pv.size }}
   volumeMode: Filesystem
   accessModes:
-    {{- toYaml .Values.storage.pv.accessModes | nindent 4 }}
-  persistentVolumeReclaimPolicy: {{ .Values.storage.pv.reclaimPolicy }}
-  storageClassName: {{ .Values.storage.storageClassName }}
+    {{- toYaml .Values.volumeProvisioner.storage.pv.accessModes | nindent 4 }}
+  persistentVolumeReclaimPolicy: {{ .Values.volumeProvisioner.storage.pv.reclaimPolicy }}
+  storageClassName: {{ .Values.volumeProvisioner.storage.storageClassName }}
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: {{ .Values.storage.volumeHandle }}
+    volumeHandle: {{ .Values.volumeProvisioner.storage.volumeHandle }}
 {{- end }}
 {{- end }}

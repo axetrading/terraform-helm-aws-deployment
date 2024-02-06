@@ -2,15 +2,15 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: {{ .Values.storage.storageClassName }}
+  name: {{ .Values.volumeProvisioner.storage.storageClassName }}
 provisioner: efs.csi.aws.com
-{{- if .Values.storage.dynamic }}
+{{- if .Values.volumeProvisioner.storage.dynamic }}
 parameters:
   provisioningMode: efs-ap
-  fileSystemId: {{ .Values.storage.volumeHandle }}
-  directoryPerms: {{ .Values.storage.directoryPerms }}
-  gidRangeStart: {{ .Values.storage.gidRangeStart }}
-  gidRangeEnd: {{ .Values.storage.gidRangeEnd }}
+  fileSystemId: {{ .Values.volumeProvisioner.storage.volumeHandle }}
+  directoryPerms: {{ .Values.volumeProvisioner.storage.directoryPerms }}
+  gidRangeStart: {{ .Values.volumeProvisioner.storage.gidRangeStart }}
+  gidRangeEnd: {{ .Values.volumeProvisioner.storage.gidRangeEnd }}
 {{- else }}
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
