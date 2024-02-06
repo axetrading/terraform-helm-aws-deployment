@@ -207,14 +207,14 @@ resource "helm_release" "main" {
   }
 
   set {
-    name  = "volume-provisioner.enabled"
+    name  = "volumeProvisioner.enabled"
     value = var.volume_provisioner_enabled
   }
 
   dynamic "set" {
     for_each = var.volume_provisioner_enabled ? [true] : []
     content {
-      name  = "volume-provisioner.storage.volumeName"
+      name  = "volumeProvisioner.storage.volumeName"
       value = var.volume_provisioner_volume_name
     }
 
@@ -223,7 +223,7 @@ resource "helm_release" "main" {
   dynamic "set" {
     for_each = var.volume_provisioner_enabled ? [true] : []
     content {
-      name  = "volume-provisioner.storage.dynamic"
+      name  = "volumeProvisioner.storage.dynamic"
       value = var.volume_provisioner_dynamic_provisioning
     }
   }
@@ -231,7 +231,7 @@ resource "helm_release" "main" {
   dynamic "set" {
     for_each = var.volume_provisioner_enabled ? [true] : []
     content {
-      name  = "volume-provisioner.storage.storageClass"
+      name  = "volumeProvisioner.storage.storageClass"
       value = var.volume_provisioner_storage_class_name
     }
   }
@@ -239,7 +239,7 @@ resource "helm_release" "main" {
   dynamic "set" {
     for_each = var.volume_provisioner_enabled ? [true] : []
     content {
-      name  = "volume-provisioner.storage.volumeHandle"
+      name  = "volumeProvisioner.storage.volumeHandle"
       value = var.volume_provisioner_volume_handle
     }
   }

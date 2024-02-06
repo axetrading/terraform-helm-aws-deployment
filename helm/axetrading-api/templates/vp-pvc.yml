@@ -1,9 +1,10 @@
+{{- if .Values.volumeProvisioner.enabled}}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Values.storage.volumeName }}-pvc
   labels:
-      {{- include "volume-provisioner.labels" . | nindent 4 }}
+      {{- include "axetrading-api.labels" . | nindent 4 }}
 spec:
   accessModes:
     {{- toYaml .Values.storage.pvc.accessModes | nindent 4 }}
@@ -11,3 +12,4 @@ spec:
     requests:
       storage: {{ .Values.storage.pvc.size }}
   storageClassName: {{ .Values.storage.storageClassName }}
+{{- end}}

@@ -206,17 +206,26 @@ extraVolumes:
   %{~ endfor ~}
 
 
-volume-provisioner:
+volumeProvisioner:
   enabled: false
   storage:
-    dynamic: false
+  # Enable dynamic provisioning
+    dynamic: false 
+  # Name of the StorageClass to be created
+    storageClassName: efs-sc # Name of the StorageClass to be created
+  # EFS FileSystem ID for dynamic provisioning
+    volumeHandle: "" 
+  # Directory permissions for dynamic provisioning
     volumeName: ""
     mounthPath: ""
+    directoryPerms: "700" 
+  # GIDRange for dynamic provisioning
+    gidRangeStart: "1000"
+    gidRangeEnd: "2000"
     pvc:
+      accessModes: [ "ReadWriteMany" ]
       size: "2Gi"
-      accessModes: ["ReadWriteMany"]
     pv:
       size: "5Gi"
-      accessModes: ["ReadWriteMany"]
-      reclaimPolicy: "Retain"
-      volumeHandle: ""  
+      accessModes: [ "ReadWriteMany" ]
+      reclaimPolicy: Retain

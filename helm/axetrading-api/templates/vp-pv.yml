@@ -1,9 +1,10 @@
+{{- if .Values.volumeProvisioner.enabled }}
 {{- if not .Values.storage.dynamic }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{ .Values.storage.volumeName }}-pv
-  labels: {{- include "volume-provisioner.labels" . | nindent 4 }}
+  labels: {{- include "axetrading-api.labels" . | nindent 4 }}
 spec:
   capacity:
     storage: {{ .Values.storage.pv.size }}
@@ -15,4 +16,5 @@ spec:
   csi:
     driver: efs.csi.aws.com
     volumeHandle: {{ .Values.storage.volumeHandle }}
+{{- end }}
 {{- end }}
