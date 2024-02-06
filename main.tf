@@ -244,4 +244,12 @@ resource "helm_release" "main" {
     }
   }
 
+  dynamic "set" {
+    for_each = var.volume_provisioner_enabled ? [true] : []
+    content {
+      name  = "volumeProvisioner.storage.mountPath"
+      value = var.volume_provisioner_mount_path
+    }
+  }
+
 }
