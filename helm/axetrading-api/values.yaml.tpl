@@ -212,7 +212,7 @@ volumeProvisioner:
   # Enable dynamic provisioning
     dynamic: false 
   # Name of the StorageClass to be created
-    storageClassName: efs-sc # Name of the StorageClass to be created
+    storageClassName: efs-sc
   # EFS FileSystem ID for dynamic provisioning
     volumeHandle: "" 
   # Directory permissions for dynamic provisioning

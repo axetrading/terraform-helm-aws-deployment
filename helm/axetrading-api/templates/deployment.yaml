@@ -57,7 +57,7 @@ spec:
           claimName: {{ .claimName }}
       {{- end }}
       {{- end }}
-      {{- if .Values.volumeProvisioner.storage.enabled }}
+      {{- if .Values.volumeProvisioner.enabled }}
       - name: {{ .Values.volumeProvisioner.storage.volumeName  }}
         persistentVolumeClaim:
           claimName: {{ .Values.volumeProvisioner.storage.volumeName }}-pvc
@@ -109,7 +109,7 @@ spec:
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}
            {{- end }}
-           {{- if .Values.volumeProvisioner.storage.enabled  }}
+           {{- if .Values.volumeProvisioner.enabled  }}
             - name: {{ .Values.volumeProvisioner.storage.volumeName }}
               mountPath: {{ .Values.volumeProvisioner.storage.mountPath }}
             {{- end }}

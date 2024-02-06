@@ -1,4 +1,4 @@
-{{- if .Values.volumeProvisioner.enabled}}
+{{- if .Values.volumeProvisioner.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
