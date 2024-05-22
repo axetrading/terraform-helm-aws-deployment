@@ -320,6 +320,12 @@ variable "deployment_strategy_type" {
   default     = "RollingUpdate"
 }
 
+variable "pod_management_policy" {
+  type        = string
+  description = "Pod management policy. Valid values: OrderedReady, Parallel"
+  default     = "OrderedReady"
+}
+
 variable "statsd_enabled" {
   type        = bool
   description = "Whether to create statsd host environment variables"

@@ -200,4 +200,13 @@ data "helm_template" "main" {
       value = var.volume_provisioner_volume_handle
     }
   }
+
+  dynamic "set" {
+    for_each = var.statefulset_enabled ? [true] : []
+    content {
+      name  = "podManagementPolicy"
+      value = var.pod_management_policy
+      type  = "string"
+    }
+  }
 }

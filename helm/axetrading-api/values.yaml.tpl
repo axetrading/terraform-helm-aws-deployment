@@ -7,6 +7,7 @@ image:
 
 strategy:
   type: ""
+podManagementPolicy: ""
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ${fullNameOverride}

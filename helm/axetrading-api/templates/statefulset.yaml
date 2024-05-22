@@ -13,6 +13,9 @@ spec:
   updateStrategy:
     type: {{ .Values.strategy.type }}
   {{- end }}
+  {{- if .Values.podManagementPolicy }}
+  podManagementPolicy: {{ .Values.podManagementPolicy }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "axetrading-api.selectorLabels" . | nindent 6 }}

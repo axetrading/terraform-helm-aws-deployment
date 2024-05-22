@@ -87,6 +87,15 @@ resource "helm_release" "main" {
   }
 
   dynamic "set" {
+    for_each = var.statefulset_enabled ? [true] : []
+    content {
+      name  = "podManagementPolicy"
+      value = var.pod_management_policy
+      type  = "string"
+    }
+  }
+
+  dynamic "set" {
     for_each = var.statsd_enabled ? [var.statsd_enabled] : []
     content {
       name  = "statsd.enabled"
