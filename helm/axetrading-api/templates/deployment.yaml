@@ -45,6 +45,10 @@ spec:
       - name: {{ include "axetrading-api.fullname" .}}-app-logs
         emptyDir: {}
       {{- end }}
+      {{- if .Values.fileSync.enabled }}
+      - name: {{ include "axetrading-api.fullname" .}}-file-sync
+        emptyDir: {}
+      {{- end }}
       {{- if .Values.persistence.enabled }}
       - name: {{ include "axetrading-api.fullname" . }}-data
         persistentVolumeClaim:
@@ -108,6 +112,10 @@ spec:
            {{- if .Values.logFetcher.enabled }}
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}
+           {{- end }}
+           {{- if .Values.fileSync.enabled }}
+            - name: {{ include "axetrading-api.fullname" .}}-file-sync
+              mountPath: {{ .Values.fileSync.mountPath }}
            {{- end }}
            {{- if .Values.volumeProvisioner.enabled  }}
             - name: {{ .Values.volumeProvisioner.storage.volumeName }}
@@ -197,7 +205,9 @@ spec:
           imagePullPolicy: {{ .Values.fileSync.imagePullPolicy }}
           env:
             - name: SOURCE_PATH
-              value: {{ .Values.fileSync.SOURCE_PATH§ }}
+              value: {{ .Values.fileSync.source }}
+            - name: DESTINATION_PATH
+              value: {{ .Values.fileSync.destination }}
             - name: POD_ID
               valueFrom:
                 fieldRef:
@@ -213,8 +223,12 @@ spec:
               cpu: 100m
               memory: "100Mi"
           volumeMounts:
-            - name: {{ include "axetrading-api.fullname" .}}-app-logs
-              mountPath: {{ .Values.logFetcher.logsPath }}
+            - name: {{ include "axetrading-api.fullname" .}}-file-sync
+              mountPath: {{ .Values.filesync.mountPath }}
+            {{- if .Values.volumeProvisioner.enabled }}
+            - name: {{ .Values.volumeProvisioner.storage.volumeName }}
+              mountPath: {{ .Values.volumeProvisioner.storage.mountPath }}
+            {{- end }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:

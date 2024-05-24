@@ -537,3 +537,32 @@ variable "volume_provisioner_dynamic_provisioning" {
   default     = false
 }
 
+variable "filesync_enabled" {
+  type        = bool
+  description = "Whether to create filesync resource"
+  default     = false
+}
+
+variable "filesync_image" {
+  type        = string
+  description = "The container image for the filesync sidecar container."
+  default     = ""
+}
+
+variable "filesync_source_path" {
+  type        = string
+  description = "The path on the host where the source files are located, to be mounted as a volume for the filesync container."
+  default     = ""
+}
+
+variable "filesync_destination_path" {
+  type        = string
+  description = "The path on the host where the filesync container will write the files to."
+  default     = ""
+}
+
+variable "filesync_mount_path" {
+  type        = string
+  description = "The path on the container where the filesync container will write the files to."
+  default     = ""
+}
