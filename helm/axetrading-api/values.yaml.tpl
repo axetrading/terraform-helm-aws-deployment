@@ -132,6 +132,13 @@ logFetcher:
   imagePullPolicy: IfNotPresent
   logsPath: ${logFetcherLogsPath}
 
+fileSync:
+  enabled: false
+  source: ""
+  destination: ""
+  imagePullPolicy: IfNotPresent
+  image: ""
+
 healthcheck:
   path: ${healthCheckPath}
   %{~ if readinessCheckType == "exec" ~}

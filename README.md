@@ -60,6 +60,11 @@
 | <a name="input_deployment_strategy_type"></a> [deployment\_strategy\_type](#input\_deployment\_strategy\_type) | Deployment strategy type. Valid values: RollingUpdate, Recreate | `string` | `"RollingUpdate"` | no |
 | <a name="input_efs_filesystem_id"></a> [efs\_filesystem\_id](#input\_efs\_filesystem\_id) | EFS File System Id | `string` | `""` | no |
 | <a name="input_extra_volumes"></a> [extra\_volumes](#input\_extra\_volumes) | List of additional target group bindings | <pre>list(object({<br>    name           = string<br>    pvc_claim_name = string<br>    mount_path     = number<br>  }))</pre> | `[]` | no |
+| <a name="input_filesync_destination_path"></a> [filesync\_destination\_path](#input\_filesync\_destination\_path) | The path on the host where the filesync container will write the files to. | `string` | `""` | no |
+| <a name="input_filesync_enabled"></a> [filesync\_enabled](#input\_filesync\_enabled) | Whether to create filesync resource | `bool` | `false` | no |
+| <a name="input_filesync_image"></a> [filesync\_image](#input\_filesync\_image) | The container image for the filesync sidecar container. | `string` | `""` | no |
+| <a name="input_filesync_mount_path"></a> [filesync\_mount\_path](#input\_filesync\_mount\_path) | The path on the container where the filesync container will write the files to. | `string` | `""` | no |
+| <a name="input_filesync_source_path"></a> [filesync\_source\_path](#input\_filesync\_source\_path) | The path on the host where the source files are located, to be mounted as a volume for the filesync container. | `string` | `""` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `true` | no |
 | <a name="input_health_check_exec_commands"></a> [health\_check\_exec\_commands](#input\_health\_check\_exec\_commands) | Readiness Probe health check exec command | `list(any)` | `[]` | no |
 | <a name="input_health_check_initial_delay_seconds"></a> [health\_check\_initial\_delay\_seconds](#input\_health\_check\_initial\_delay\_seconds) | Number of seconds after the container has started before liveness probes are initiated. | `number` | `30` | no |
