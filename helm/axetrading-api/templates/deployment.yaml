@@ -224,7 +224,7 @@ spec:
               memory: "100Mi"
           volumeMounts:
             - name: {{ include "axetrading-api.fullname" .}}-file-sync
-              mountPath: {{ .Values.filesync.mountPath }}
+              mountPath: {{ .Values.fileSync.mountPath }}
             {{- if .Values.volumeProvisioner.enabled }}
             - name: {{ .Values.volumeProvisioner.storage.volumeName }}
               mountPath: {{ .Values.volumeProvisioner.storage.mountPath }}
