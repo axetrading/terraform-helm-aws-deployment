@@ -134,6 +134,7 @@ logFetcher:
 
 fileSync:
   enabled: false
+  mountPath: ""
   source: ""
   destination: ""
   imagePullPolicy: IfNotPresent
