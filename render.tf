@@ -209,4 +209,51 @@ data "helm_template" "main" {
       type  = "string"
     }
   }
+  dynamic "set" {
+    for_each = var.filesync_enabled ? [true] : []
+    content {
+      name  = "fileSync.enabled"
+      value = var.filesync_enabled
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.filesync_enabled ? [true] : []
+    content {
+      name  = "fileSync.image"
+      value = var.filesync_image
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.filesync_enabled ? [true] : []
+    content {
+      name  = "fileSync.mountPath"
+      value = var.filesync_mount_path
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.filesync_enabled ? [true] : []
+    content {
+      name  = "fileSync.source"
+      value = var.filesync_source_path
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.filesync_enabled ? [true] : []
+    content {
+      name  = "fileSync.destination"
+      value = var.filesync_destination_path
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.filesync_enabled ? [true] : []
+    content {
+      name  = "fileSync.syncExports"
+      value = var.filesync_sync_exports
+    }
+  }
 }
