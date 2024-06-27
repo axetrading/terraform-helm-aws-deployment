@@ -572,3 +572,15 @@ variable "filesync_mount_path" {
   description = "The path on the container where the filesync container will write the files to."
   default     = ""
 }
+
+variable "filesync_sync_exports" {
+  type        = bool
+  description = "Whether to sync the files to the destination path"
+  default     = false
+}
+
+variable "filesync_sync_interval" {
+  type        = number
+  description = "The interval in seconds at which the filesync container will sync the files"
+  default     = 60
+}

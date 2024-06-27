@@ -208,6 +208,10 @@ spec:
               value: {{ .Values.fileSync.source }}
             - name: DESTINATION_PATH
               value: {{ .Values.fileSync.destination }}
+            - name: SYNC_EXPORTS
+              value: {{ .Values.fileSync.syncExports }}
+            - name: SYNC_INTERVAL
+              value: {{ .Values.fileSync.syncInterval }}
             - name: POD_ID
               valueFrom:
                 fieldRef:
