@@ -66,7 +66,6 @@
 | <a name="input_filesync_mount_path"></a> [filesync\_mount\_path](#input\_filesync\_mount\_path) | The path on the container where the filesync container will write the files to. | `string` | `""` | no |
 | <a name="input_filesync_source_path"></a> [filesync\_source\_path](#input\_filesync\_source\_path) | The path on the host where the source files are located, to be mounted as a volume for the filesync container. | `string` | `""` | no |
 | <a name="input_filesync_sync_exports"></a> [filesync\_sync\_exports](#input\_filesync\_sync\_exports) | Whether to sync the files to the destination path | `bool` | `false` | no |
-| <a name="input_filesync_sync_interval"></a> [filesync\_sync\_interval](#input\_filesync\_sync\_interval) | The interval in seconds at which the filesync container will sync the files | `number` | `60` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `true` | no |
 | <a name="input_health_check_exec_commands"></a> [health\_check\_exec\_commands](#input\_health\_check\_exec\_commands) | Readiness Probe health check exec command | `list(any)` | `[]` | no |
 | <a name="input_health_check_initial_delay_seconds"></a> [health\_check\_initial\_delay\_seconds](#input\_health\_check\_initial\_delay\_seconds) | Number of seconds after the container has started before liveness probes are initiated. | `number` | `30` | no |

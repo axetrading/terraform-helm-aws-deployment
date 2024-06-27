@@ -139,8 +139,7 @@ fileSync:
   destination: ""
   imagePullPolicy: IfNotPresent
   image: ""
-  syncExports: ""
-  syncInterval: ""
+  syncExports: false
 
 healthcheck:
   path: ${healthCheckPath}

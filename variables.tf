@@ -578,9 +578,3 @@ variable "filesync_sync_exports" {
   description = "Whether to sync the files to the destination path"
   default     = false
 }
-
-variable "filesync_sync_interval" {
-  type        = number
-  description = "The interval in seconds at which the filesync container will sync the files"
-  default     = 60
-}

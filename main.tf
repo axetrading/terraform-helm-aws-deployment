@@ -304,14 +304,6 @@ resource "helm_release" "main" {
   dynamic "set" {
     for_each = var.filesync_enabled ? [true] : []
     content {
-      name  = "fileSync.syncInterval"
-      value = var.filesync_sync_interval
-    }
-  }
-
-  dynamic "set" {
-    for_each = var.filesync_enabled ? [true] : []
-    content {
       name  = "fileSync.syncExports"
       value = var.filesync_sync_exports
     }
