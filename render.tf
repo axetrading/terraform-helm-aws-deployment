@@ -249,11 +249,4 @@ data "helm_template" "main" {
     }
   }
 
-  dynamic "set" {
-    for_each = var.filesync_enabled ? [true] : []
-    content {
-      name  = "fileSync.syncExports"
-      value = var.filesync_sync_exports
-    }
-  }
 }

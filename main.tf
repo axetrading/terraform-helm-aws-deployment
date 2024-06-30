@@ -300,12 +300,4 @@ resource "helm_release" "main" {
       value = var.filesync_destination_path
     }
   }
-
-  dynamic "set" {
-    for_each = var.filesync_enabled ? [true] : []
-    content {
-      name  = "fileSync.syncExports"
-      value = var.filesync_sync_exports
-    }
-  }
 }
