@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.5.2](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.1...v2.5.2) (2024-08-19)
+
+
+### Bug Fixes
+
+* fixing statefulset log fetcher | fixing render.tf ([56c3b49](https://github.com/axetrading/terraform-helm-aws-deployment/commit/56c3b491c40837d23522e21519a8e60aac19b740))
+
 ### [2.5.1](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.0...v2.5.1) (2024-08-19)
 
 
