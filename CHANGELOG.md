@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.5.1](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.0...v2.5.1) (2024-08-19)
+
+
+### Bug Fixes
+
+* persistence for log-fetcher container ([0eb0fb8](https://github.com/axetrading/terraform-helm-aws-deployment/commit/0eb0fb8cdf3c93de570939aa5179b203b876f20d))
+* persistence for log-fetcher container ([59b98d8](https://github.com/axetrading/terraform-helm-aws-deployment/commit/59b98d829dd400420342be5c4e8f8546f4515a42))
+
 ## [2.5.0](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.4.4...v2.5.0) (2024-07-01)
 
 
