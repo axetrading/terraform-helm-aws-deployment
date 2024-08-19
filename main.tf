@@ -20,8 +20,6 @@ locals {
       ingressPath                   = var.ingress_path
       ingressPathType               = var.ingress_path_type
       initialDelaySeconds           = var.health_check_initial_delay_seconds
-      logFetcherEnabled             = var.log_fetcher_enabled
-      logFetcherImage               = var.log_fetcher_enabled ? var.log_fetcher_image : ""
       logFetcherLogsPath            = var.log_fetcher_enabled ? var.log_fetcher_logs_path : ""
       nodeLabelKey                  = length(var.node_labels) > 0 ? keys(var.node_labels)[0] : ""
       nodeLabelValues               = length(var.node_labels) > 0 ? values(var.node_labels)[0] : []
@@ -150,6 +148,33 @@ resource "helm_release" "main" {
     name  = "sftp.mountPath"
     value = var.sftp_mount_path
     type  = "string"
+  }
+
+  dynamic "set" {
+    for_each = var.log_fetcher_enabled ? [true] : []
+    content {
+      name  = "logFetcher.enabled"
+      value = set.value
+      type  = "string"
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.log_fetcher_enabled ? [true] : []
+    content {
+      name  = "logFetcher.image"
+      value = var.log_fetcher_image
+      type  = "string"
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.log_fetcher_enabled ? [true] : []
+    content {
+      name  = "logFetcher.logsPath"
+      value = var.log_fetcher_logs_path
+      type  = "string"
+    }
   }
 
   dynamic "set" {

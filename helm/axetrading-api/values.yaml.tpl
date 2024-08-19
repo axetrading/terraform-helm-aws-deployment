@@ -127,10 +127,10 @@ readiness:
   %{~ endif ~}
 
 logFetcher:
-  enabled: ${logFetcherEnabled}
-  image: ${logFetcherImage}
+  enabled: false
+  image: ""
   imagePullPolicy: IfNotPresent
-  logsPath: ${logFetcherLogsPath}
+  logsPath: ""
   persistence:
     enabled: false
 
