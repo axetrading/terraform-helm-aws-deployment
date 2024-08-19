@@ -260,6 +260,12 @@ variable "log_fetcher_logs_path" {
   default     = ""
 }
 
+variable "log_fetcher_persistence_enabled" {
+  type        = bool
+  description = "Whether to use an existing persistent storage for log-fetcher"
+  default     = false
+}
+
 variable "resources" {
   type = object({
     memory = string

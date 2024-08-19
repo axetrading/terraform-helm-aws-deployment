@@ -131,6 +131,7 @@ logFetcher:
   image: ${logFetcherImage}
   imagePullPolicy: IfNotPresent
   logsPath: ${logFetcherLogsPath}
+  persistence: false
 
 fileSync:
   enabled: false

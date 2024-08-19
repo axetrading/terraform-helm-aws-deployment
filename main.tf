@@ -153,6 +153,15 @@ resource "helm_release" "main" {
   }
 
   dynamic "set" {
+    for_each = var.log_fetcher_persistence_enabled ? [true] : []
+    content {
+      name  = "logFetcher.persistence.enabled"
+      value = set.value
+      type  = "string"
+    }
+  }
+
+  dynamic "set" {
     for_each = var.persistence_enabled ? [true] : []
     content {
       name  = "persistence.efsFileSystemId"
@@ -160,8 +169,7 @@ resource "helm_release" "main" {
       type  = "string"
     }
   }
-
-
+  
   dynamic "set" {
     for_each = var.sftp_enabled ? [true] : []
     content {
