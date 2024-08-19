@@ -249,4 +249,13 @@ data "helm_template" "main" {
     }
   }
 
+  dynamic "set" {
+    for_each = var.log_fetcher_persistence_enabled ? [true] : []
+    content {
+      name  = "logFetcher.persistence.enabled"
+      value = set.value
+      type  = "string"
+    }
+  }
+
 }
