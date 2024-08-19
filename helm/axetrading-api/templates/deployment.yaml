@@ -41,7 +41,7 @@ spec:
           volumeAttributes:
             secretProviderClass: {{ include "axetrading-api.fullname" . }}-secrets
       {{- end }}
-      {{- if .Values.logFetcher.enabled (not .Values.logFetcher.persistence.enabled) }}
+      {{- if and .Values.logFetcher.enabled (not .Values.logFetcher.persistence.enabled) }}
       - name: {{ include "axetrading-api.fullname" .}}-app-logs
         emptyDir: {}
       {{- end }}
@@ -109,7 +109,7 @@ spec:
               mountPath: {{ .mountPath }}
            {{- end }}
            {{- end }}
-           {{- if .Values.logFetcher.enabled (not .Values.logFetcher.persistence.enabled) }}
+           {{- if and .Values.logFetcher.enabled (not .Values.logFetcher.persistence.enabled) }}
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}
            {{- end }}
@@ -196,7 +196,7 @@ spec:
               cpu: 100m
               memory: "100Mi"
           volumeMounts:
-          {{- if .Values.logFetcher.enabled (not .Values.logFetcher.persistence.enabled) }}
+          {{- if and .Values.logFetcher.enabled (not .Values.logFetcher.persistence.enabled) }}
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
               mountPath: {{ .Values.logFetcher.logsPath }}
           {{- end }}
