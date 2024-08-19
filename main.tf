@@ -169,7 +169,7 @@ resource "helm_release" "main" {
       type  = "string"
     }
   }
-  
+
   dynamic "set" {
     for_each = var.sftp_enabled ? [true] : []
     content {

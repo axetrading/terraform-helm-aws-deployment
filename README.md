@@ -80,6 +80,7 @@
 | <a name="input_log_fetcher_enabled"></a> [log\_fetcher\_enabled](#input\_log\_fetcher\_enabled) | Whether to enable the log-fetcher sidecar container or not | `bool` | `false` | no |
 | <a name="input_log_fetcher_image"></a> [log\_fetcher\_image](#input\_log\_fetcher\_image) | The container image for the log-fetcher sidecar container. | `string` | `""` | no |
 | <a name="input_log_fetcher_logs_path"></a> [log\_fetcher\_logs\_path](#input\_log\_fetcher\_logs\_path) | The path on the host where the logs will be stored, to be mounted as a volume for the log-fetcher container. | `string` | `""` | no |
+| <a name="input_log_fetcher_persistence_enabled"></a> [log\_fetcher\_persistence\_enabled](#input\_log\_fetcher\_persistence\_enabled) | Whether to use an existing persistent storage for log-fetcher | `bool` | `false` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `null` | no |
 | <a name="input_module_opts"></a> [module\_opts](#input\_module\_opts) | Additional java options for JVM | `string` | `""` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the Helm deployment. | `string` | n/a | yes |
