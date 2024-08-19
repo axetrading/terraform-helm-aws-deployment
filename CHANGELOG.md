@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.5.5](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.4...v2.5.5) (2024-08-19)
+
+
+### Bug Fixes
+
+* template ([86f70e5](https://github.com/axetrading/terraform-helm-aws-deployment/commit/86f70e5f7d008d6686711341ed57246fc256fadc))
+
 ### [2.5.4](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.3...v2.5.4) (2024-08-19)
 
 
