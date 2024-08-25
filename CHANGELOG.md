@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.5.7](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.6...v2.5.7) (2024-08-25)
+
+
+### Bug Fixes
+
+* fix chart version ([366bb95](https://github.com/axetrading/terraform-helm-aws-deployment/commit/366bb9519038a197d36887185bb2d7c152938ccf))
+* fix logFetcher resources template for deployment and sts ([cf071a4](https://github.com/axetrading/terraform-helm-aws-deployment/commit/cf071a4a78393508149a9d148f616079eede9bcb))
+
 ### [2.5.6](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.5...v2.5.6) (2024-08-25)
 
 
