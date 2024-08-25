@@ -173,7 +173,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-          {{- toYaml .Values.logFetcher.resources | nindent 12 }}
+          resources:
+            limits:
+              memory: {{ .Values.logFetcher.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.logFetcher.resources.requests.cpu }}
+              memory: {{ .Values.logFetcher.resources.requests.memory }}
           volumeMounts:
           {{- if and .Values.logFetcher.enabled (not .Values.logFetcher.persistence.enabled) }}
             - name: {{ include "axetrading-api.fullname" .}}-app-logs
