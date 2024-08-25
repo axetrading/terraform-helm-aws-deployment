@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.5.6](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.5...v2.5.6) (2024-08-25)
+
+
+### Bug Fixes
+
+* fix logFetcher resources allocation - adding the resources config in tf helm sets ([47ddb43](https://github.com/axetrading/terraform-helm-aws-deployment/commit/47ddb431b121c33a71482f0e000964071730bb65))
+* logfetcher resources ([d7d7c83](https://github.com/axetrading/terraform-helm-aws-deployment/commit/d7d7c831b1ab25c0091d69a584f81002c2433ee4))
+
 ### [2.5.5](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.4...v2.5.5) (2024-08-19)
 
 
