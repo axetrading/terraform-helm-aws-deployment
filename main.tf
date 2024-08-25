@@ -178,6 +178,33 @@ resource "helm_release" "main" {
   }
 
   dynamic "set" {
+    for_each = var.log_fetcher_enabled ? [true] : []
+    content {
+      name  = "logFetcher.resources.requests.cpu"
+      value = var.log_fetcher_resources_cpu
+      type  = "string"
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.log_fetcher_enabled ? [true] : []
+    content {
+      name  = "logFetcher.resources.requests.memory"
+      value = var.log_fetcher_resources_memory
+      type  = "string"
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.log_fetcher_enabled ? [true] : []
+    content {
+      name  = "logFetcher.resources.limits.memory"
+      value = var.log_fetcher_resources_memory
+      type  = "string"
+    }
+  }
+
+  dynamic "set" {
     for_each = var.log_fetcher_persistence_enabled ? [true] : []
     content {
       name  = "logFetcher.persistence.enabled"

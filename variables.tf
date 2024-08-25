@@ -578,3 +578,15 @@ variable "filesync_mount_path" {
   description = "The path on the container where the filesync container will write the files to."
   default     = ""
 }
+
+variable "log_fetcher_resources_memory" {
+  type        = string
+  description = "The memory request for the log-fetcher sidecar container."
+  default     = "128Mi"
+}
+
+variable "log_fetcher_resources_cpu" {
+  type        = string
+  description = "The CPU request for the log-fetcher sidecar container."
+  default     = "100m"
+}

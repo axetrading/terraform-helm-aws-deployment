@@ -133,6 +133,12 @@ logFetcher:
   logsPath: ""
   persistence:
     enabled: false
+  resources:
+    limits:
+      memory: "128Mi"
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
 
 fileSync:
   enabled: false
