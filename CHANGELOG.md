@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.6.0](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.7...v2.6.0) (2024-09-04)
+
+
+### Features
+
+* adding timezone variable for containers ([37de1a9](https://github.com/axetrading/terraform-helm-aws-deployment/commit/37de1a99fdc726945a78cd77086a6b57abc3fac6))
+
 ### [2.5.7](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.6...v2.5.7) (2024-08-25)
 
 
