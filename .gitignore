@@ -55,3 +55,4 @@ override.tf.json
 .idea/
 *.tmproj
 .vscode/
+**/helm/axetrading-api/values.yaml

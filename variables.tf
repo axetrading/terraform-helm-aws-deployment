@@ -590,3 +590,9 @@ variable "log_fetcher_resources_cpu" {
   description = "The CPU request for the log-fetcher sidecar container."
   default     = "100m"
 }
+
+variable "timezone" {
+  type        = string
+  description = "Timezone for the container"
+  default     = null
+}

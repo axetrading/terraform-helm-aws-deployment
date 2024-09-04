@@ -360,4 +360,12 @@ resource "helm_release" "main" {
       value = var.filesync_destination_path
     }
   }
+
+  dynamic "set" {
+    for_each = var.timezone != null ? [true] : []
+    content {
+      name  = "timezone"
+      value = var.timezone
+    }
+  }
 }

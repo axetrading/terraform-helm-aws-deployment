@@ -104,7 +104,7 @@ readiness:
   %{~ if readinessCheckType == "http" ~}
   httpCheck:
     enabled: true
-  tpcCheck:
+  tcpCheck:
     enabled: false
   execCmd:
     enabled: false
@@ -112,7 +112,7 @@ readiness:
   %{~ if readinessCheckType == "tcp" ~}
   httpCheck:
     enabled: false
-  tpcCheck:
+  tcpCheck:
     enabled: true
   execCmd:
     enabled: false
@@ -120,7 +120,7 @@ readiness:
   %{~ if readinessCheckType == "exec" ~}
   httpCheck:
     enabled: false
-  tpcCheck:
+  tcpCheck:
     enabled: false
   execCmd:
     enabled: true
@@ -246,3 +246,5 @@ volumeProvisioner:
       size: "5Gi"
       accessModes: [ "ReadWriteMany" ]
       reclaimPolicy: Retain
+
+timezone: ""
