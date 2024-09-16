@@ -596,3 +596,9 @@ variable "timezone" {
   description = "Timezone for the container"
   default     = null
 }
+
+variable "priorityClassName" {
+  type = string
+  description = "Priorityclass for pod"
+  default = null
+}
