@@ -265,7 +265,6 @@ resource "helm_release" "main" {
     }
   }
 
-
   dynamic "set" {
     for_each = var.service_monitor_enabled ? [true] : [false]
     content {
