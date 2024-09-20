@@ -597,8 +597,8 @@ variable "timezone" {
   default     = null
 }
 
-variable "priorityClassName" {
-  type = string
-  description = "Priorityclass for pod"
-  default = null
+variable "priority_class_name" {
+  type        = string
+  description = "The name of the PriorityClass to be used for the pod spec. The PriorityClass must already exist in the cluster."
+  default     = null
 }

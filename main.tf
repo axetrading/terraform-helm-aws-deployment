@@ -35,7 +35,6 @@ locals {
       targetGroupARN                = var.target_group_arn
       targetGroupPort               = var.target_group_port
       targetMemoryUtilization       = var.target_memory_utilization
-      priorityClassName             = var.priorityClassName
       }
     )
   ]
@@ -367,6 +366,14 @@ resource "helm_release" "main" {
     content {
       name  = "timezone"
       value = var.timezone
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.priority_class_name != null ? [true] : []
+    content {
+      name  = "priorityClassName"
+      value = var.priority_class_name
     }
   }
 }
