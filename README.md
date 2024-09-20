@@ -95,6 +95,7 @@
 | <a name="input_persistence_storage_size"></a> [persistence\_storage\_size](#input\_persistence\_storage\_size) | Storage size for persistent storage | `string` | `"2Gi"` | no |
 | <a name="input_pod_management_policy"></a> [pod\_management\_policy](#input\_pod\_management\_policy) | Pod management policy. Valid values: OrderedReady, Parallel | `string` | `"OrderedReady"` | no |
 | <a name="input_policy_name_prefix"></a> [policy\_name\_prefix](#input\_policy\_name\_prefix) | IAM policy name prefix | `string` | `"eks-policy"` | no |
+| <a name="input_priority_class_name"></a> [priority\_class\_name](#input\_priority\_class\_name) | The name of the PriorityClass to be used for the pod spec. The PriorityClass must already exist in the cluster. | `string` | `null` | no |
 | <a name="input_prometheus_rule_enabled"></a> [prometheus\_rule\_enabled](#input\_prometheus\_rule\_enabled) | Whether to create prometheus rule | `bool` | `false` | no |
 | <a name="input_prometheus_rules_file_path"></a> [prometheus\_rules\_file\_path](#input\_prometheus\_rules\_file\_path) | Prometheus rules file path | `string` | `"prometheus-rules.yml"` | no |
 | <a name="input_render_enabled"></a> [render\_enabled](#input\_render\_enabled) | Whether to render the helm chart or not | `bool` | `false` | no |

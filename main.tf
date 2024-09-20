@@ -265,7 +265,6 @@ resource "helm_release" "main" {
     }
   }
 
-
   dynamic "set" {
     for_each = var.service_monitor_enabled ? [true] : [false]
     content {
@@ -366,6 +365,14 @@ resource "helm_release" "main" {
     content {
       name  = "timezone"
       value = var.timezone
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.priority_class_name != null ? [true] : []
+    content {
+      name  = "priorityClassName"
+      value = var.priority_class_name
     }
   }
 }

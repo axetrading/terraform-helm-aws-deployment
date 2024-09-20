@@ -248,3 +248,4 @@ volumeProvisioner:
       reclaimPolicy: Retain
 
 timezone: ""
+priorityClassName: ""
