@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.6.1](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.6.0...v2.6.1) (2024-09-20)
+
+
+### Bug Fixes
+
+* added priorityclassName field in deplloyment.yaml and statefulsets.yaml ([#20](https://github.com/axetrading/terraform-helm-aws-deployment/issues/20)) ([af52ee9](https://github.com/axetrading/terraform-helm-aws-deployment/commit/af52ee99e4eaa35967a0e5b1c3b17f5bba2b514b))
+
 ## [2.6.0](https://github.com/axetrading/terraform-helm-aws-deployment/compare/v2.5.7...v2.6.0) (2024-09-04)
 
 
