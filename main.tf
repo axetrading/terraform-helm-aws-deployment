@@ -3,34 +3,23 @@ locals {
   values = [
     var.prometheus_rule_enabled ? file(var.prometheus_rules_file_path) : null,
     templatefile("${path.module}/helm/axetrading-api/values.yaml.tpl", {
-      imageRepository               = var.image_repository
-      imagePullPolicy               = var.image_pull_policy
       additionalPorts               = var.additional_ports
       additionalTargetGroupBindings = var.additional_target_group_bindings
-      autoscaling                   = var.autoscaling
       awsSecrets                    = var.secrets
-      createServiceAccount          = var.create_service_account
-      fullNameOverride              = var.name
       extraVolumes                  = var.extra_volumes
       healthCheckExecCommands       = var.health_check_exec_commands
       healthCheckPath               = var.health_check_path
-      imageTag                      = var.image_tag
       ingressEnabled                = var.ingress_enabled
       ingressHost                   = var.ingress_host
       ingressPath                   = var.ingress_path
       ingressPathType               = var.ingress_path_type
-      initialDelaySeconds           = var.health_check_initial_delay_seconds
       logFetcherLogsPath            = var.log_fetcher_enabled ? var.log_fetcher_logs_path : ""
       nodeLabelKey                  = length(var.node_labels) > 0 ? keys(var.node_labels)[0] : ""
       nodeLabelValues               = length(var.node_labels) > 0 ? values(var.node_labels)[0] : []
       readinessCheckType            = var.health_check_type
-      replicaSetCount               = var.replica_set
       resources                     = var.resources
-      serviceAppPort                = var.service_app_port
       serviceMonitors               = var.service_monitors
       serviceMonitorsEnabled        = var.service_monitor_enabled
-      servicePort                   = var.service_port
-      serviceType                   = var.service_type
       targetCPUUtilization          = var.target_cpu_utilization
       targetGroupARN                = var.target_group_arn
       targetGroupPort               = var.target_group_port
@@ -57,6 +46,11 @@ resource "helm_release" "main" {
     type  = "string"
   }
 
+  set {
+    name  = "serviceAccount.create"
+    value = var.create_service_account
+  }
+
   dynamic "set" {
     for_each = var.create_role && var.create_service_account ? [aws_iam_role.this[0].arn] : [var.role_arn]
     content {
@@ -64,6 +58,11 @@ resource "helm_release" "main" {
       value = set.value
       type  = "string"
     }
+  }
+
+  set {
+    name  = "fullNameOverride"
+    value = var.name
   }
 
   set {
@@ -76,6 +75,16 @@ resource "helm_release" "main" {
     name  = "image.tag"
     value = var.image_tag
     type  = "string"
+  }
+
+  set {
+    name  = "initialDelaySeconds"
+    value = var.health_check_initial_delay_seconds
+  }
+
+  set {
+    name  = "image.pullPolicy"
+    value = var.image_pull_policy
   }
 
   set {
@@ -100,6 +109,37 @@ resource "helm_release" "main" {
       value = set.value
       type  = "string"
     }
+  }
+
+  set {
+    name  = "resources.limits.memory"
+    value = var.resources.memory
+  }
+
+  set {
+    name  = "resources.requests.cpu"
+    value = var.resources.cpu
+  }
+
+  set {
+    name  = "resources.requests.memory"
+    value = var.resources.memory
+  }
+
+  set {
+    name  = "service.type"
+    value = var.service_type
+    type  = "string"
+  }
+
+  set {
+    name  = "service.port"
+    value = var.service_port
+  }
+
+  set {
+    name  = "service.appport"
+    value = var.service_app_port
   }
 
   set {
@@ -275,6 +315,11 @@ resource "helm_release" "main" {
   }
 
   set {
+    name  = "replicaCount"
+    value = var.replica_set
+  }
+
+  set {
     name  = "volumeProvisioner.enabled"
     value = var.volume_provisioner_enabled
   }
@@ -373,6 +418,51 @@ resource "helm_release" "main" {
     content {
       name  = "priorityClassName"
       value = var.priority_class_name
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.autoscaling != null ? [true] : []
+
+    content {
+      name  = "autoscaling.enabled"
+      value = "true"
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.autoscaling != null ? [true] : []
+
+    content {
+      name  = "autoscaling.minReplicas"
+      value = var.autoscaling.min_replicas
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.autoscaling != null ? [true] : []
+
+    content {
+      name  = "autoscaling.maxReplicas"
+      value = var.autoscaling.max_replicas
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.autoscaling != null && contains(keys(var.autoscaling), "target_cpu_utilization") ? [true] : []
+
+    content {
+      name  = "autoscaling.targetCPUUtilizationPercentage"
+      value = var.autoscaling.target_cpu_utilization
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.autoscaling != null && contains(keys(var.autoscaling), "target_memory_utilization") ? [true] : []
+
+    content {
+      name  = "autoscaling.targetMemoryUtilizationPercentage"
+      value = var.autoscaling.target_memory_utilization
     }
   }
 }

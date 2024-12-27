@@ -1,19 +1,19 @@
-replicaCount: ${replicaSetCount}
+replicaCount: 1
 
 image:
   repository: ""
-  pullPolicy: ${imagePullPolicy}
+  pullPolicy: "IfNotPresent"
   tag: ""
 
 strategy:
-  type: ""
-podManagementPolicy: ""
+  type: "RollingUpdate"
+podManagementPolicy: "OrderedReady"
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ${fullNameOverride}
+fullnameOverride: ""
 
 serviceAccount:
-  create: ${createServiceAccount}
+  create: false
   annotations: {}
   name: ""
 
@@ -23,9 +23,9 @@ podSecurityContext: {}
 
 securityContext: {}
 service:
-  type: ${serviceType}
-  port: ${servicePort}
-  appport: ${serviceAppPort}
+  type: ClusterIP
+  port: 80
+  appport: 80
   %{~ if additionalPorts != null ~}
   additionalPorts: 
     %{~ for port in additionalPorts ~}
@@ -47,14 +47,15 @@ ingress:
     %{~ endif ~}
   tls: []
 
-initialDelaySeconds: ${initialDelaySeconds}
+initialDelaySeconds: 30
 
 resources:
    limits:
-     memory: ${resources.memory}
+     memory: 512Mi
    requests:
-     cpu: ${resources.cpu}
-     memory: ${resources.memory}
+     cpu: 100m
+     memory: 512Mi
+
 targetGroupBinding:
   %{~ if targetGroupARN != null ~} 
   enabled: true
@@ -76,16 +77,11 @@ additionalTargetGroupBindings:
 
 
 autoscaling:
-  %{~ if autoscaling != null ~}
-  enabled: true
-  minReplicas: ${autoscaling.min_replicas}
-  maxReplicas: ${autoscaling.max_replicas}
-  targetCPUUtilizationPercentage: ${autoscaling.target_cpu_utilization}
-  targetMemoryUtilizationPercentage: ${autoscaling.target_memory_utilization}
-  %{~ endif ~}
-  %{~ if autoscaling == null ~}
   enabled: false
-  %{~ endif ~}
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 75
+  targetMemoryUtilizationPercentage: 75
 
 secretsStore:
   %{~ if awsSecrets != null ~}
